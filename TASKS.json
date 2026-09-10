@@ -1,0 +1,11 @@
+{
+  "current_project": null,
+  "checklist": {
+    "novelty_report_written": false,
+    "core_implementation_done": false,
+    "tests_passing": false,
+    "readme_written": false,
+    "control_check_passed": false
+  },
+  "notes": "Agent fills this in once it picks a project."
+}

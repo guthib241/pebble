@@ -29,11 +29,14 @@ Two fixed rules govern every project, in addition to everything below:
   every project you build or create. Copy it into any new repository you
   create. Do not select or generate a different license under Section 23 -
   Section 23's selection guidance is superseded by this fixed choice.
-* **New projects live in new repositories**: when starting a new project,
-  create a new repository in this GitHub account/org using `gh repo create`,
-  rather than building inside this control repository. Follow the naming
-  rules in Section 13 for the new repo's name. Copy `LICENSE.txt` into it as
-  the first commit, alongside the README required by Section 21.
+* **New projects live in folders inside this repository, not new
+  repositories**: when starting a new project, create it as a
+  self-contained folder inside this repository, named per the rules in
+  Section 13 (e.g. `/pebble-timer/`), with its own README, its own copy of
+  `LICENSE.txt`, its own `NOVELTY_REPORT.md`, and its own tests, all inside
+  that folder. Do not run `gh repo create` and do not create any repository
+  other than this one. The user will manually create separate GitHub repos
+  from these folders themselves when they want to.
 * **Commit frequently, not just at the end**: your session can be cut off
   without warning if the usage allowance runs out mid-task - you will not
   get a chance to save anything at that point. Commit and push after every
@@ -85,8 +88,13 @@ checklist.
   using the actual repository/branch state as the source of truth over your
   own assumptions.
 * **Only if `current_project` is null, or its checklist is fully checked and
-  the project has been published**, proceed to Section 4 to select a new
-  project.
+  the project has been published**, mark `current_project` as `null` in
+  `TASKS.json` and proceed to Section 4 to select a new project.
+
+When proceeding to Section 4, the prior-art search in Section 6 must include
+this repository's own existing project folders, not only external sources.
+A previously published project folder in this repository counts as prior
+art against a new candidate the same way any external project would.
 
 Treat this check as a hard gate, not a preference. Picking a new project
 while unfinished work exists in `TASKS.json` is a protocol violation, not a

@@ -45,9 +45,13 @@ infrastructure config are outside its scope.
 
 ## Install
 
+This project currently lives inside the `pebble` repository, under
+`projects/backfire/`, because repository creation was unavailable to the session that built
+it (see `PROGRESS.md` at that repository's root). It is self-contained and moves unchanged.
+
 ```bash
-git clone https://github.com/guthib241/backfire
-cd backfire
+git clone https://github.com/guthib241/pebble
+cd pebble/projects/backfire
 pip install .
 ```
 

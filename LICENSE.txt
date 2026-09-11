@@ -1,6 +1,6 @@
 Custom License — Attribution, Non-Commercial, Contact for Commercial Use
 
-Copyright (c) 2026 ACHANTI SRI VARDHAN
+Copyright (c) 2026 Achanti Sri Vardhan
 
 Permission is granted, free of charge, to any person obtaining a copy of this
 software and associated files (the "Software"), to use, copy, and modify the
@@ -9,8 +9,9 @@ conditions:
 
 1. ATTRIBUTION REQUIRED
    Any use, copy, or modified version of the Software must retain this
-   notice and give clear, visible credit to ACHANTI SRI VARDHAN, including in the
-   README, in-app credits, or public listing of any project that uses it.
+   notice and give clear, visible credit to Achanti Sri Vardhan, including
+   in the README, in-app credits, or public listing of any project that
+   uses it.
 
 2. NO COMMERCIAL USE WITHOUT PERMISSION
    Commercial use of the Software, or of any derivative or substantially
@@ -19,15 +20,16 @@ conditions:
    or indirectly - including selling, sublicensing, offering as a paid or
    ad-supported service, or use inside a for-profit organization's internal
    operations. Anyone wishing to use the Software commercially must first
-   contact [YOUR EMAIL] to obtain a separate written commercial license.
+   contact achantivardhan@gmail.com to obtain a separate written commercial
+   license.
 
 3. DERIVATIVE AND SIMILAR WORKS
    Creating a new project that is substantially similar to this one, or
    built on its ideas, structure, or code, requires clear, visible
-   attribution to this project and to ACHANTI SRI VARDHAN - including a credit or
-   tag such as "based on / inspired by PROJECTS by ACHANTI SRI VARDHAN" in
-   the derivative project's README and any public listing (e.g. GitHub,
-   package registry, app store page).
+   attribution to this project and to Achanti Sri Vardhan - including a
+   credit or tag such as "based on / inspired by [PROJECT NAME] by Achanti
+   Sri Vardhan" in the derivative project's README and any public listing
+   (e.g. GitHub, package registry, app store page).
 
 4. NO WARRANTY
    The Software is provided "as is", without warranty of any kind, express
@@ -36,7 +38,7 @@ conditions:
    shall the author be liable for any claim, damages, or other liability
    arising from the Software or its use.
 
-For commercial licensing inquiries, contact: ACHANTIVARDHAN@GMAIL.COM
+For commercial licensing inquiries, contact: achantivardhan@gmail.com
 
 ---
 This is a plain-language draft, not a lawyer-reviewed legal document. If

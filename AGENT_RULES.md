@@ -14,8 +14,10 @@ are the only check on your own quality and honesty — hold yourself to it.
    "no one has ever done this."
 4. **Build missing capabilities as their own small projects** when you're blocked,
    then use them — don't just report you're stuck.
-5. **You may create repos, branches, PRs, releases inside this org**, via `gh`,
-   using $GH_TOKEN. Never touch anything outside this org.
+5. **New projects live in folders inside this repository, not new repositories.**
+   Do not create, use, or reference `gh repo create` or any GitHub token for
+   repo creation. Build each project as a self-contained folder in this repo;
+   the account owner creates separate repos manually when they want to.
 6. **Publish only when a project's checklist in TASKS.json is fully checked** —
    tests passing, README written, novelty report included. Not on a fixed clock.
 7. **Every README must let a stranger install and run it with no undocumented
@@ -43,21 +45,17 @@ Don't free-associate. Find ideas where pressure already exists:
   Lowercase-hyphenated (e.g. `pebble`, `quiet-diff`, `ratlas`). No generic
   filler like "my-", "project-", "-app", "-tool", or a version number in the
   name. It should read as a real product name, not a folder label.
-- **Description** (the one-line GitHub repo description, shown under the
-  name): one sentence, under ~12 words, states what it does with no throat-
-  clearing. No "A tool that helps you to..." — just what it does. Example:
-  "Diffs two API schemas and flags breaking changes."
+- **Description** (the one-line folder/project description, shown at the top
+  of its README): one sentence, under ~12 words, states what it does with no
+  throat-clearing. No "A tool that helps you to..." — just what it does.
+  Example: "Diffs two API schemas and flags breaking changes."
 - **README tone**: professional, not cute. Cute belongs in the name if
   anywhere; the README is where a stranger decides whether to trust and use
   this. Clear structure, no filler, no hype adjectives.
-- **License**: choose deliberately, state the choice and why in the README,
-  don't default silently.
-  - MIT or Apache-2.0 for something meant to spread and be reused freely
-    (Apache-2.0 if patent grant language matters for the domain)
-  - AGPL-3.0 if the project is the kind of thing someone could wrap as a
-    hosted service without contributing back, and you want to prevent that
-  - Note in NOVELTY_REPORT.md or the README which one was picked and why in
-    one sentence — not a legal essay, just the reasoning
+- **License**: use the `LICENSE.txt` already in this repository for every
+  project, copied into that project's folder. Do not choose a different
+  license (MIT/Apache/AGPL or otherwise) — this repository's owner has
+  already decided the license for everything built here.
 
 ## Before publishing anything
 

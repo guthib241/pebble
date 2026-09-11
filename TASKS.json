@@ -1,11 +1,26 @@
 {
-  "current_project": null,
+  "current_project": "backfire",
+  "location": "projects/backfire/",
+  "description": "Finds retry amplification and timeout blowups in Python codebases.",
   "checklist": {
-    "novelty_report_written": false,
-    "core_implementation_done": false,
-    "tests_passing": false,
-    "readme_written": false,
-    "control_check_passed": false
+    "novelty_report_written": true,
+    "core_implementation_done": true,
+    "tests_passing": true,
+    "readme_written": true,
+    "control_check_passed": true
   },
-  "notes": "Agent fills this in once it picks a project."
+  "novelty_confidence": "Medium",
+  "published_to_own_repo": false,
+  "notes": "Complete and validated: 85 tests pass; run against psf/requests (dae7ef6), openai/openai-python (d7c41ef) and PrefectHQ/prefect (d82220b) with numbers recorded in PROGRESS.md and the project README. Control checks: two single-layer-retry codebases report no amplification, and repeat runs are byte-identical. published_to_own_repo is false because repository creation is blocked in this environment (403 from both the GitHub App token and $GH_TOKEN); the project is self-contained and can be moved unchanged. Rejected candidate this run: a crontab linter, dropped after finding materially equivalent tools (CronLens, cron-doctor, cronlint).",
+  "rejected_candidates": [
+    {
+      "name": "cron linter (DST, day-of-month/day-of-week, % escaping)",
+      "reason": "materially equivalent prior art",
+      "prior_art": [
+        "https://github.com/SNO7E-G/CronLens",
+        "https://github.com/HeytalePazguato/cron-doctor",
+        "https://github.com/zbcdo/cronlint"
+      ]
+    }
+  ]
 }

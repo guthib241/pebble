@@ -29,10 +29,70 @@ are the only check on your own quality and honesty — hold yourself to it.
    steps.**
 8. **Before ending a run, update PROGRESS.md and TASKS.json** so the next run
    knows exactly where to resume, even if you're mid-task.
-9. **You're running on a shared subscription usage allowance, not a metered API
+9. **Record every idea in `IDEAS.md`, forever.** Every candidate you consider goes
+   in, filed by outcome: rejected on the rules, already done by someone else, passed
+   the rules but failed the hook, or selected. Read it during intake before
+   generating candidates. Two runs have already wasted usage independently
+   generating and rejecting the same idea; that must not happen again.
+10. **You're running on a shared subscription usage allowance, not a metered API
    budget.** Keep runs efficient (don't re-read files you already have, don't
    re-run searches you already ran this session) so you don't crowd out the
    account owner's own use of Claude.
+
+## Take as long as you need to choose. Never rush the decision
+
+Searching is not a delay before the work. **Choosing the right project is the
+highest-leverage thing you ever do**, and it is nearly free compared to building
+the wrong one. A day spent finding a project worth months is a day well spent. A
+month spent building something nobody remembers is a month gone.
+
+**A run that produces no code and one excellent decision is a successful run.**
+Say so plainly in `PROGRESS.md` and stop. Do not manufacture an implementation to
+make the run look productive — that is the exact failure mode Section 0 warns
+about, and it is worse here than anywhere else, because a rushed choice commits
+every future run to it.
+
+The durations mentioned anywhere in these rules are references for scale, not
+targets. Nothing needs to take three months and nothing needs to take a day. Some
+projects take a week; some take one afternoon and are still worth remembering.
+Length is a consequence of what the idea requires, never a goal to hit.
+
+### Deciding is allowed to span runs
+
+Selection may take several runs. When a run ends still deciding, record in
+`PROGRESS.md`:
+
+* every candidate considered, and where each one currently stands;
+* what was searched, so the next run does not repeat it;
+* what specifically is unresolved — the open question blocking the choice;
+* the next concrete step of the search.
+
+Then write every candidate into `IDEAS.md` under the right heading, whatever its
+status. Nothing is lost between runs, and no search is ever run twice.
+
+### Signals that you are rushing
+
+Stop and go back to generating candidates if any of these are true:
+
+- The hook sentence needed several attempts and still feels flat.
+- You are arguing yourself into an idea rather than being pulled toward it.
+- The strongest argument for it is that you cannot find prior art.
+- It resembles something already in this repository and you are searching for a
+  reason why that is fine.
+- You cannot picture the ten-second demo.
+- You are choosing it because it is clearly finishable.
+
+That last one is the most common and the most costly. Finishability is not a
+virtue in a candidate; it is a property to establish *after* the idea earns
+selection, by decomposing it under Gate D.
+
+### The bar
+
+Do not settle for the best candidate on your current list. Settle only when a
+candidate is good enough that you would be genuinely disappointed to see someone
+else ship it first. If nothing on the list reaches that, the list is too short —
+keep generating, keep searching, and spend another run on it if that is what it
+takes.
 
 ## Long projects are allowed, and are the point
 

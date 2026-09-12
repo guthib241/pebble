@@ -60,8 +60,15 @@ Before writing code, read these files completely, in this order:
 1. `AGENT_RULES.md`
 2. `PROGRESS.md`
 3. `TASKS.json`
+4. `IDEAS.md`
 
 Do not skim them.
+
+`IDEAS.md` is the permanent record of every idea this repository has considered and
+what happened to it. Read it before generating any candidate. An idea already
+recorded as rejected or as done by someone else must not be re-generated or
+re-searched; an idea recorded under "not hyped" may be reconsidered if a genuine
+hook can now be written for it.
 
 For `TASKS.json`:
 
@@ -270,6 +277,24 @@ what you are permitted to claim about it, and passing Gate E never licenses a
 stronger novelty claim than the recorded search evidence supports.
 
 When two candidates both clear Gates A through D, select the more original one.
+
+### Selection is not time-boxed
+
+Take as long as the decision needs, across multiple runs if necessary. A run whose
+entire output is a well-documented search and one excellent decision is a
+successful run; record it as such in `PROGRESS.md` and stop. Do not implement
+something merely to make a run look productive — a rushed choice commits every
+later run to it, which is far more expensive than another run spent searching.
+
+Every candidate considered, at any stage, must be written to `IDEAS.md` under the
+heading matching its outcome, with its date, its hook-sentence attempt, what was
+searched, and the specific reason. This applies to candidates rejected in seconds
+as much as to the one selected. Failing to record a rejected candidate is a
+protocol violation: it guarantees a future run repeats the work.
+
+Do not settle for the best candidate currently on the list. Settle when a candidate
+is strong enough that you would be disappointed to see someone else ship it first.
+If none reaches that, generate more.
 
 ### Gate F — Memorability
 
@@ -831,6 +856,7 @@ complete in `TASKS.json` until the definition of done is actually reached.
 * [ ] `AGENT_RULES.md` was read completely.
 * [ ] `PROGRESS.md` was read completely.
 * [ ] `TASKS.json` was read completely and parsed.
+* [ ] `IDEAS.md` was read before any candidate was generated.
 * [ ] Repository state was inspected.
 
 ### Novelty
@@ -887,6 +913,8 @@ complete in `TASKS.json` until the definition of done is actually reached.
 
 * [ ] `PROGRESS.md` was updated accurately.
 * [ ] `TASKS.json` was updated accurately where required.
+* [ ] `IDEAS.md` records every candidate considered this run, including those
+      rejected immediately, under the correct heading and with its reason.
 * [ ] No unfinished work is represented as completed.
 * [ ] No invented numbers, benchmark results, search results, or claims exist.
 

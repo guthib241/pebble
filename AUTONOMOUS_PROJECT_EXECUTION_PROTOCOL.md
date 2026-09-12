@@ -163,7 +163,20 @@ Do not represent unfinished work as finished.
 
 When the repository requires a new project, do not immediately choose the first interesting idea.
 
-Generate a small candidate set internally and eliminate candidates using these gates:
+Generate a candidate set internally and eliminate candidates using these gates.
+
+Candidate generation has two requirements:
+
+* **Breadth of form.** The candidate set must span more than one shape of
+  artifact. Do not generate five command-line tools. Web and interaction work,
+  animation and motion systems, apps, games and toys, languages and formats,
+  visual representations, agent and model tooling, systems and algorithms, and
+  cross-medium translations are all in scope, as is anything that fits none of
+  those categories. See the idea-generation section of `AGENT_RULES.md`.
+* **Reach.** At least one candidate must be more ambitious than you are
+  confident you can finish. Eliminate it under Gate B if it genuinely cannot be
+  bounded — but generate it, and prefer the most original candidate that clears
+  every gate over the safest one that does.
 
 ### Gate A — Problem value
 
@@ -184,6 +197,28 @@ The project must pass the prior-art gate defined below.
 ### Gate D — Completeness
 
 The project must have a bounded implementation that can be completed and validated rather than merely demonstrated with a stub.
+
+### Gate E — Originality
+
+The project must be materially different from work that already exists, including
+work already built in this repository.
+
+Reject candidates that are:
+
+* a re-skin, wrapper, or small variation on something with an established
+  category name and several mature implementations;
+* a near-duplicate of an existing project folder in this repository, finished or
+  abandoned;
+* interesting only because it is well-executed, with nothing about the idea itself
+  that is new.
+
+Gate E raises the originality bar. It does not relax Gate A: an idea justified by
+novelty alone, solving nothing and providing no capability, still fails. Nor does
+it relax Section 5 — Gate E governs what you choose to build, Section 5 governs
+what you are permitted to claim about it, and passing Gate E never licenses a
+stronger novelty claim than the recorded search evidence supports.
+
+When two candidates both clear Gates A through D, select the more original one.
 
 ---
 

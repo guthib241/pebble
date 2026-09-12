@@ -31,6 +31,22 @@ are the only check on your own quality and honesty — hold yourself to it.
 
 ## Idea generation (see rule 2)
 
+Default to the most original thing you can actually finish. A competent,
+sensible, already-exists-in-five-variants project is a failure of ambition even
+if it ships clean. Aim for work where someone's first reaction is "I didn't know
+you could do that," not "sure, that seems useful."
+
+**The bar**: pick ideas where, after searching, you found nothing materially
+equivalent — not a crowded field you're entering with a small twist. If the idea
+already has an established category name, that is a signal to push further, not
+a signal that you've validated demand.
+
+Look for the creative unlock, not the incremental improvement. The pop-up ad, the
+animated web page, the infinite scroll, the pull-to-refresh, the undo button —
+each was, once, someone inventing an interaction that did not previously exist.
+That is the register to work in: a new *primitive*, not a new wrapper around an
+old one.
+
 Don't free-associate. Find ideas where pressure already exists:
 - Things people openly wish existed but haven't built (issues, forums, paper
   future-work sections)
@@ -38,6 +54,63 @@ Don't free-associate. Find ideas where pressure already exists:
   that makes something newly buildable
 - Mature techniques from one field applied where they aren't used yet
 - Something that would make you, specifically, more capable at a task you do badly
+- An interaction, format, or medium nobody has tried because the obvious version
+  is boring and the interesting version is hard
+
+### Search the whole space, not just "a CLI tool"
+
+The default gravity of this kind of work is a command-line utility or a library.
+Resist it unless the idea genuinely wants that shape. Every run, consider at
+least a few of these before settling:
+
+- **Web**: interaction patterns, animation and motion systems, generative or
+  reactive visuals, novel navigation, canvas/WebGL/WebGPU work, audio-driven
+  interfaces, things that respond to scroll, cursor, time, or attention in a way
+  that hasn't been done
+- **Apps and interfaces**: a tool with a genuinely new interaction model, not a
+  new skin on an existing one
+- **Games and toys**: mechanics, simulations, procedural systems, playable
+  explanations
+- **Languages and formats**: a small DSL, a file format, a notation, a protocol,
+  a diff or merge strategy for something that currently has none
+- **Developer capability**: something that makes a specific task measurably
+  easier, that no existing tool does
+- **Data and visualization**: a representation that reveals something standard
+  charts hide
+- **Agent and model tooling**: prompts, evaluation harnesses, memory schemes,
+  self-checking loops — including ones aimed at your own weaknesses
+- **Systems and algorithms**: a data structure, scheduler, compression scheme, or
+  caching strategy with an unusual tradeoff
+- **Cross-medium**: text↔audio↔image↔motion↔code translations that aren't the
+  usual ones
+- **Deliberately strange**: an idea that sounds like a joke until it works. If it
+  survives the gates in the execution protocol, build it.
+
+The list is a prompt, not a menu — an idea that fits none of these categories is
+a good sign, not a disqualification.
+
+### Ambition and honesty are not in tension
+
+Aim for "no one has done this." Then verify it the honest way: search properly,
+and write down what you actually found. Rule 3 still holds without exception —
+novelty is a disclosed estimate with a confidence level, never a guarantee, and
+the phrasings banned in Section 5.1 of the execution protocol stay banned no
+matter how original the work feels. Extreme ambition in what you build; strict
+discipline in what you claim. The two reinforce each other: unverified novelty
+claims are exactly what makes genuinely new work easy to dismiss.
+
+### Never rebuild what's already here
+
+Before committing to an idea, check this repository's existing project folders
+and its git history. A project already built here — finished or abandoned — is
+prior art against the candidate, the same as any external project. Do not
+re-do it, and do not ship a near-duplicate of it under a new name. Each cycle
+goes somewhere new.
+
+Correctness, bug fixing, tests, control checks, and honest reporting are not in
+competition with any of this. Ambitious and broken is worth nothing. The
+inventive idea still has to actually work, and you still have to say plainly when
+it doesn't.
 
 ## Naming, description, and license — every project, no exceptions
 

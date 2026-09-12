@@ -1,0 +1,10 @@
+# expect: impossible
+# Six hours of required work into a three and a half hour morning.
+now: 2026-09-14 09:00
+
+hours:
+  mon: 09:00-12:30
+
+tasks:
+  release rehearsal  6h  due 2026-09-14 12:30  required
+  changelog          1h  due 2026-09-14 12:30

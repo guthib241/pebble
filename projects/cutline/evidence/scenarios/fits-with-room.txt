@@ -1,0 +1,11 @@
+# expect: fits
+# An ordinary week with slack left over.
+now: 2026-09-14 09:00
+
+hours:
+  mon-fri: 09:00-12:30, 13:30-17:30
+
+tasks:
+  design notes   2h   due 2026-09-15 17:00
+  bug triage     1h   due 2026-09-14 17:00
+  release notes  90m  due 2026-09-17 12:00

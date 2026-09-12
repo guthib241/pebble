@@ -11,6 +11,9 @@ rejected it, because neither could see the other's work.
 **Read this file during Phase 1 intake, before generating any candidate.** It is
 part of the repository's memory, not an appendix.
 
+Every project referenced below exists on `main` under `projects/`, so a candidate can
+be compared against the real code rather than against a description of it.
+
 ## How to use it
 
 * Every candidate that gets as far as being considered goes in, whatever happens
@@ -88,7 +91,7 @@ wording: the boring application was hiding a primitive worth building on its own
 Record for each: the hook attempts that failed, and what would have to be true for
 it to become hyped.
 
-### backfire (already built, 2026-09-11) — belongs here by today's rules
+### backfire (built 2026-09-11, `projects/backfire/`) — belongs here by today's rules
 "Finds retry amplification and timeout blowups in Python codebases." Genuinely
 useful, honestly validated, 85 tests. Fails Gate F: a category label, no demo, and
 inside the shape ban. What would make it hyped: the composed-retry-multiplication
@@ -96,7 +99,7 @@ result shown **visually** — a diagram or animation of one click fanning out in
 thirty requests across the call graph. The engine is interesting; the CLI report
 hides it.
 
-### orbiter (already built, 2026-09-12) — belongs here by today's rules
+### orbiter (built 2026-09-12, `projects/orbiter/`) — belongs here by today's rules
 "Flags Python code that mixes units, like milliseconds passed as seconds." Strong
 validation, 151 tests, real controls. Fails Gate F for the same reasons. What
 would make it hyped: unit inference as something you can *see* — units propagating
@@ -111,7 +114,7 @@ Each entry keeps its hook sentence verbatim, its status, and a link to its folde
 An entry stays here after completion; this doubles as the repository's back
 catalogue.
 
-### cutline (built 2026-09-12) — partially qualifies
+### cutline (built 2026-09-12, `projects/cutline/`) — partially qualifies
 Shipped as: "Reads one plain-text plan and decides whether everything fits."
 Contains a genuinely strong idea that was not surfaced: an engine that **proves**
 a set of commitments cannot all be met, emits a certificate you can check by hand,

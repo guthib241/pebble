@@ -1,0 +1,12 @@
+# expect: cut docs pass, quick fix
+# One cut is not enough: the day is short by two and a half hours.
+now: 2026-09-14 09:00
+
+hours:
+  mon: 09:00-12:30, 13:30-17:30
+
+tasks:
+  audit response  5h     due 2026-09-14 17:30  weight 5
+  vendor review   2h30m  due 2026-09-14 17:30  weight 4
+  docs pass       1h30m  due 2026-09-14 17:30  weight 1
+  quick fix       1h     due 2026-09-14 17:30  weight 1

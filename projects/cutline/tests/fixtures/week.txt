@@ -1,0 +1,18 @@
+# Everything cutline needs: when you can work, and what you have promised.
+now: 2026-09-14 09:00
+
+hours:
+  mon-fri: 09:00-12:30, 13:30-17:30
+  sat: 10:00-13:00
+
+off: 2026-09-16
+
+busy:
+  2026-09-14 11:00-12:00  standup
+  2026-09-15 14:00-15:30  dentist
+
+tasks:
+  spec draft        6h    due 2026-09-15 12:00  weight 3
+  migration script  5h    due 2026-09-15 17:30  required
+  code review       2h    due 2026-09-14 17:30  earliest 2026-09-14 13:30
+  slides            3h    due 2026-09-15 17:30  weight 0.5

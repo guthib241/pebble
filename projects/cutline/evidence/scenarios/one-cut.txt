@@ -1,0 +1,11 @@
+# expect: cut slides
+# Two hours too much work for one day; the cheapest fix is to drop the slides.
+now: 2026-09-14 09:00
+
+hours:
+  mon: 09:00-12:30, 13:30-17:30
+
+tasks:
+  incident writeup  4h  due 2026-09-14 17:30  weight 3
+  customer reply    3h  due 2026-09-14 17:30  weight 2
+  slides            2h  due 2026-09-14 17:30  weight 1

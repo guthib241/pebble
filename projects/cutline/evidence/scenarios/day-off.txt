@@ -1,0 +1,12 @@
+# expect: cut conference talk
+# Tuesday is off, so the Wednesday deadline has one working day behind it.
+now: 2026-09-14 09:00
+
+off: 2026-09-15
+
+hours:
+  mon-fri: 09:00-12:30, 13:30-17:30
+
+tasks:
+  quarterly numbers  7h  due 2026-09-16 09:00  weight 3
+  conference talk    3h  due 2026-09-16 09:00  weight 1

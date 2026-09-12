@@ -1,11 +1,96 @@
 {
   "current_project": null,
+  "definition_of_done": null,
+  "milestones": [],
   "checklist": {
+    "hook_sentence_written": false,
+    "demo_exists": false,
     "novelty_report_written": false,
     "core_implementation_done": false,
     "tests_passing": false,
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "Agent fills this in once it picks a project."
+  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "completed_projects": [
+    {
+      "name": "backfire",
+      "path": "projects/backfire/",
+      "description": "Finds retry amplification and timeout blowups in Python codebases.",
+      "completed": "2026-09-11",
+      "built_on_branch": "claude/eloquent-newton-p3qht6",
+      "checklist": {
+        "novelty_report_written": true,
+        "core_implementation_done": true,
+        "tests_passing": true,
+        "readme_written": true,
+        "control_check_passed": true
+      },
+      "evidence": {
+        "tests": "85 tests pass: python3 -m pytest (from projects/backfire/, requires pytest)",
+        "real_corpora": "psf/requests dae7ef6, openai/openai-python d7c41ef, PrefectHQ/prefect d82220b",
+        "controls": "two single-layer-retry codebases report no amplification; repeat runs byte-identical",
+        "novelty_confidence": "Medium"
+      },
+      "meets_current_rules": false,
+      "fails_because": "Gate F: category-label hook, no ten-second demo, and inside the shape ban. Recorded in IDEAS.md section 3 with what would make it land."
+    },
+    {
+      "name": "orbiter",
+      "path": "projects/orbiter/",
+      "description": "Flags Python code that mixes units, like milliseconds passed as seconds.",
+      "completed": "2026-09-12",
+      "built_on_branch": "claude/optimistic-pasteur-metblz",
+      "checklist": {
+        "novelty_report_written": true,
+        "core_implementation_done": true,
+        "tests_passing": true,
+        "readme_written": true,
+        "control_check_passed": true
+      },
+      "evidence": {
+        "tests": "151 tests pass: python3 -m unittest discover -s tests -t . (from projects/orbiter/)",
+        "benchmark": "19 of 19 seeded mistakes reported, 0 findings on unmarked lines, 2 documented known misses",
+        "corpora": "0 findings and 0 unreadable files on /usr/lib/python3.11 (669 files) and /usr/lib/python3/dist-packages (1079 files)",
+        "controls": "null control (unit tokens stripped) 0 findings; determinism control identical across runs; paired correct/incorrect twins",
+        "reproduce": "python3 evidence/run_evidence.py > evidence/results.md",
+        "novelty_confidence": "Medium"
+      },
+      "meets_current_rules": false,
+      "fails_because": "Gate F: category-label hook, no ten-second demo, and inside the shape ban. Recorded in IDEAS.md section 3 with what would make it land."
+    },
+    {
+      "name": "cutline",
+      "path": "projects/cutline/",
+      "description": "Reads one plain-text plan and decides whether everything fits.",
+      "completed": "2026-09-12",
+      "built_on_branch": "claude/optimistic-pasteur-metblz",
+      "checklist": {
+        "novelty_report_written": true,
+        "core_implementation_done": true,
+        "tests_passing": true,
+        "readme_written": true,
+        "control_check_passed": true
+      },
+      "evidence": {
+        "tests": "120 tests pass: python3 -m unittest discover -s tests -t . (from projects/cutline/), including a fresh-virtualenv install check",
+        "controls": "both feasibility methods agreed on 500 of 500 random plans; cut matched exhaustive enumeration 200 of 200; verdict stable under task reordering and a one-week shift, 200 of 200 each; 10 of 10 scenarios byte-identical on re-run",
+        "known_limitation": "worst-case timing row reports 'not proven minimal' because it exhausts the node budget",
+        "novelty_confidence": "Medium"
+      },
+      "meets_current_rules": false,
+      "fails_because": "Shipped the wrapper, not the primitive: it contains a verified minimal-cut-set solver that generalises well beyond day planning. Recorded in IDEAS.md section 4 as the worked example of that rule."
+    }
+  ],
+  "consolidated": {
+    "date": "2026-09-12",
+    "what": "All three project folders moved onto main under projects/, from three separate branches that could not see each other.",
+    "why": "Two runs independently generated, searched and rejected the same cron-linter candidate because neither could see the other's work. Multi-run projects also require shared state on main to continue a milestone ladder across runs.",
+    "verified": "All three suites re-run after the move: backfire 85, orbiter 151, cutline 120. All pass.",
+    "branches_kept": [
+      "claude/eloquent-newton-p3qht6",
+      "claude/optimistic-pasteur-metblz",
+      "claude/clever-cannon-pmg737"
+    ]
+  }
 }

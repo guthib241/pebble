@@ -1,0 +1,13 @@
+# A week that fits, with room to spare.
+now: 2026-09-14 09:00
+
+hours:
+  mon-fri: 09:00-12:30, 13:30-17:30
+
+busy:
+  2026-09-14 11:00-12:00  standup
+
+tasks:
+  spec draft    4h    due 2026-09-15 17:00  weight 3
+  code review   45m   due 2026-09-14 17:00  earliest 2026-09-14 13:30
+  slides        2h    due 2026-09-18

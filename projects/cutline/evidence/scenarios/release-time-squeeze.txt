@@ -1,0 +1,10 @@
+# expect: cut vendor call prep
+# Both tasks only become available after lunch, and four hours remain.
+now: 2026-09-14 09:00
+
+hours:
+  mon: 09:00-12:30, 13:30-17:30
+
+tasks:
+  data arrives at noon  3h30m  due 2026-09-14 17:30  earliest 2026-09-14 13:30  weight 5
+  vendor call prep      2h     due 2026-09-14 17:30  earliest 2026-09-14 13:30  weight 1

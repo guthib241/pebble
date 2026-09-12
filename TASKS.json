@@ -1,11 +1,13 @@
 {
-  "current_project": null,
+  "current_project": "orbiter",
+  "project_path": "orbiter/",
+  "description": "Flags Python code that mixes units, like milliseconds passed as seconds.",
   "checklist": {
-    "novelty_report_written": false,
+    "novelty_report_written": true,
     "core_implementation_done": false,
     "tests_passing": false,
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "Agent fills this in once it picks a project."
+  "notes": "Static analyzer: infers unit+scale from identifier names, typing.Annotated metadata, and a stdlib call-convention table; reports mismatches in call arguments (ORB001), arithmetic/comparison (ORB002), assignments (ORB003), returns (ORB004). Stdlib only, Python 3.11. Novelty confidence Medium; closest prior art Phys/Phriky-Units (C++/ROS)."
 }

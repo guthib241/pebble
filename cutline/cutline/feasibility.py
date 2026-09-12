@@ -161,6 +161,20 @@ def violated_windows(tasks: Sequence[Task], calendar: Calendar) -> List[Window]:
     if not items:
         return []
     found: List[Window] = []
+    for item in items:
+        if item.release >= item.due:
+            # No time exists for this task at all. The parser rejects such plans, but
+            # a caller building tasks directly can still produce one, and both
+            # feasibility methods must agree about it.
+            found.append(
+                Window(
+                    start=item.release,
+                    end=item.due,
+                    tasks=(item.name,),
+                    work=item.estimate,
+                    capacity=0,
+                )
+            )
     starts = sorted({0} | {item.release for item in items})
     for start in starts:
         candidates = sorted(

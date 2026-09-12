@@ -1,0 +1,11 @@
+# expect: cut deep work
+# Dropping one big cheap task beats dropping two small expensive ones.
+now: 2026-09-14 09:00
+
+hours:
+  mon: 09:00-12:30, 13:30-17:30
+
+tasks:
+  deep work     6h  due 2026-09-14 17:30  weight 2
+  review one    2h  due 2026-09-14 17:30  weight 1.25
+  review two    2h  due 2026-09-14 17:30  weight 1.25

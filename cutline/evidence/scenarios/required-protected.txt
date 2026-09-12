@@ -1,0 +1,10 @@
+# expect: cut nice to have
+# The required task is never cut, even though cutting it would be cheapest.
+now: 2026-09-14 09:00
+
+hours:
+  mon: 09:00-12:30, 13:30-17:30
+
+tasks:
+  ship the release  6h  due 2026-09-14 17:30  weight 1  required
+  nice to have      3h  due 2026-09-14 17:30  weight 9

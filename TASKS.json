@@ -1,13 +1,13 @@
 {
-  "current_project": "cutline",
+  "current_project": null,
   "checklist": {
-    "novelty_report_written": true,
+    "novelty_report_written": false,
     "core_implementation_done": false,
     "tests_passing": false,
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "Plain-text plan (hours, busy blocks, days off, tasks with estimate/due/earliest/weight). Exact feasibility for divisible work by two independent methods (preemptive EDF simulation and the window condition), over-subscription certificate, minimum-weight cut set by branch and bound with a proven/unproven label, deferral advice, slack report. Stdlib only. Novelty confidence Medium; closest prior art taskcheck (warns but never says what to cut).",
+  "notes": "Checklist above is the template for the next project. See completed_projects for finished work.",
   "completed_projects": [
     {
       "name": "orbiter",
@@ -29,8 +29,27 @@
         "reproduce": "python3 evidence/run_evidence.py > evidence/results.md",
         "novelty_confidence": "Medium"
       }
+    },
+    {
+      "name": "cutline",
+      "path": "cutline/",
+      "description": "Decides whether your task list fits its deadlines, and what to cut.",
+      "completed": "2026-09-12",
+      "checklist": {
+        "novelty_report_written": true,
+        "core_implementation_done": true,
+        "tests_passing": true,
+        "readme_written": true,
+        "control_check_passed": true
+      },
+      "evidence": {
+        "tests": "120 unittest cases, all passing: python3 -m unittest discover -s tests -t . (run from cutline/)",
+        "scenarios": "10 of 10 scenario files matched the outcome declared in the file",
+        "controls": "500/500 random plans agreed between the two feasibility methods; 200/200 cuts matched exhaustive enumeration; 200/200 invariant under task reordering and under a one-week shift; 10/10 scenarios byte-identical on re-run",
+        "timing": "40 tasks 0.035s/234 nodes; 80 tasks 1.968s/10427 nodes; worst case 20 identical tasks exhausts the 200000-node budget and is reported as not proven minimal",
+        "reproduce": "python3 evidence/run_evidence.py > evidence/results.md",
+        "novelty_confidence": "Medium"
+      }
     }
-  ],
-  "project_path": "cutline/",
-  "description": "Decides whether your task list fits its deadlines, and what to cut."
+  ]
 }

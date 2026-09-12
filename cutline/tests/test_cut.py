@@ -217,3 +217,42 @@ class DeferralAdviceTest(unittest.TestCase):
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
+
+
+class ScenarioExpectationTest(unittest.TestCase):
+    """The scenario files in evidence/ must match their declared outcomes.
+
+    This keeps the numbers quoted in README.md honest: if behaviour changes, the
+    documented scenario results change with it and this test fails.
+    """
+
+    def test_scenarios_match_their_expect_lines(self):
+        import re
+        from pathlib import Path
+
+        from cutline.analysis import analyse
+        from cutline.plan import load_plan
+
+        root = Path(__file__).resolve().parents[1] / "evidence" / "scenarios"
+        pattern = re.compile(r"#\s*expect:\s*(.+)")
+        files = sorted(root.glob("*.txt"))
+        self.assertEqual(len(files), 10)
+        for path in files:
+            expected = None
+            for line in path.read_text(encoding="utf-8").splitlines():
+                match = pattern.search(line)
+                if match:
+                    expected = match.group(1).strip()
+                    break
+            self.assertIsNotNone(expected, f"{path.name} has no expect line")
+            analysis = analyse(load_plan(str(path)), source=str(path))
+            self.assertTrue(analysis.methods_agree, path.name)
+            if analysis.feasible:
+                actual = "fits"
+            elif analysis.cut.impossible:
+                actual = "impossible"
+            else:
+                actual = "cut " + ", ".join(analysis.cut.dropped)
+            self.assertEqual(actual, expected, path.name)
+            if actual.startswith("cut"):
+                self.assertTrue(analysis.cut.proven_minimal, path.name)

@@ -1,0 +1,10 @@
+# expect: fits
+# Monday is filled to the minute: 3h30m before lunch, 4h after.
+now: 2026-09-14 09:00
+
+hours:
+  mon: 09:00-12:30, 13:30-17:30
+
+tasks:
+  morning report  3h30m  due 2026-09-14 12:30
+  afternoon work  4h     due 2026-09-14 17:30

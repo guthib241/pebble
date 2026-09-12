@@ -83,6 +83,41 @@ class ArgumentCheckTest(CheckCase):
             """
         )
 
+    def test_conversion_through_an_upper_case_constant_name(self):
+        self.assertClean(
+            """
+            import time
+            from constants import MS_PER_SECOND
+
+            def wait(timeout_ms):
+                time.sleep(timeout_ms / MS_PER_SECOND)
+            """,
+            extra={"constants.py": "MS_PER_SECOND = 1000\n"},
+        )
+
+    def test_wrong_direction_with_a_conversion_constant_is_reported(self):
+        self.assertCodes(
+            """
+            import time
+            from constants import MS_PER_SECOND
+
+            def wait(timeout_ms):
+                time.sleep(timeout_ms * MS_PER_SECOND)
+            """,
+            ["ORB001"],
+            extra={"constants.py": "MS_PER_SECOND = 1000\n"},
+        )
+
+    def test_rate_named_value_is_treated_as_unknown(self):
+        self.assertClean(
+            """
+            import time
+
+            def wait(bytes_per_second):
+                time.sleep(bytes_per_second)
+            """
+        )
+
     def test_magnitude_arithmetic_is_not_a_conversion(self):
         self.assertCodes(
             """
@@ -876,3 +911,39 @@ class RobustnessTest(CheckCase):
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
+
+
+class BenchmarkExpectationTest(unittest.TestCase):
+    """The seeded-bug benchmark in evidence/ must match its inline markers.
+
+    This keeps the numbers quoted in README.md honest: if behaviour changes, the
+    documented benchmark result changes with it and this test fails.
+    """
+
+    def test_benchmark_markers_match_findings(self):
+        import re
+
+        root = Path(__file__).resolve().parents[1] / "evidence" / "benchmark"
+        expect_re = re.compile(r"#\s*expect:\s*([A-Z0-9,\s]+)")
+        miss_re = re.compile(r"#\s*known-miss:\s*([A-Z0-9,\s]+)")
+        expected = set()
+        known_misses = set()
+        for path in sorted(root.rglob("*.py")):
+            for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+                for pattern, sink in ((expect_re, expected), (miss_re, known_misses)):
+                    match = pattern.search(line)
+                    if match:
+                        for code in re.split(r"[,\s]+", match.group(1).strip()):
+                            if code:
+                                sink.add((path.name, number, code))
+
+        diagnostics, errors = analyze_paths([root], load_config())
+        self.assertEqual(errors, [])
+        actual = {(Path(item.path).name, item.line, item.code) for item in diagnostics}
+        self.assertEqual(expected - actual, set(), "seeded mistakes went undetected")
+        self.assertEqual(actual - expected, set(), "findings on unmarked lines")
+        self.assertEqual(
+            known_misses & actual, set(), "a documented known miss is now reported"
+        )
+        self.assertEqual(len(expected), 19)
+        self.assertEqual(len(known_misses), 2)

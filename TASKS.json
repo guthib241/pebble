@@ -1,13 +1,34 @@
 {
-  "current_project": "orbiter",
-  "project_path": "orbiter/",
-  "description": "Flags Python code that mixes units, like milliseconds passed as seconds.",
+  "current_project": null,
   "checklist": {
-    "novelty_report_written": true,
+    "novelty_report_written": false,
     "core_implementation_done": false,
     "tests_passing": false,
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "Static analyzer: infers unit+scale from identifier names, typing.Annotated metadata, and a stdlib call-convention table; reports mismatches in call arguments (ORB001), arithmetic/comparison (ORB002), assignments (ORB003), returns (ORB004). Stdlib only, Python 3.11. Novelty confidence Medium; closest prior art Phys/Phriky-Units (C++/ROS)."
+  "notes": "Checklist above is the template for the next project. See completed_projects for finished work.",
+  "completed_projects": [
+    {
+      "name": "orbiter",
+      "path": "orbiter/",
+      "description": "Flags Python code that mixes units, like milliseconds passed as seconds.",
+      "completed": "2026-09-12",
+      "checklist": {
+        "novelty_report_written": true,
+        "core_implementation_done": true,
+        "tests_passing": true,
+        "readme_written": true,
+        "control_check_passed": true
+      },
+      "evidence": {
+        "tests": "151 unittest cases, all passing: python3 -m unittest discover -s tests -t . (run from orbiter/)",
+        "benchmark": "19 of 19 seeded mistakes reported, 0 findings on unmarked lines, 2 documented known misses",
+        "corpora": "0 findings and 0 unreadable files on /usr/lib/python3.11 (669 files) and /usr/lib/python3/dist-packages (1079 files)",
+        "controls": "null control (unit tokens stripped) 0 findings; determinism control identical across runs; paired correct/incorrect twins",
+        "reproduce": "python3 evidence/run_evidence.py > evidence/results.md",
+        "novelty_confidence": "Medium"
+      }
+    }
+  ]
 }

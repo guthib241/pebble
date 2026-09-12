@@ -6,6 +6,7 @@ import math
 import unittest
 
 from orbiter.units import (
+    CONVERSION_ONLY_TOKENS,
     LEXICON,
     Quantity,
     Unit,
@@ -18,6 +19,7 @@ from orbiter.units import (
     scale_quantity_by_constant,
     scales_compatible,
     split_identifier,
+    factor_from_name,
     unit_for_scale,
     unit_from_name,
 )
@@ -73,7 +75,6 @@ class UnitFromNameTest(unittest.TestCase):
 
     def test_two_different_units_is_ambiguous(self):
         self.assertIsNone(unit_from_name("ms_to_seconds"))
-        self.assertIsNone(unit_from_name("MS_PER_SECOND"))
 
     def test_same_unit_twice_is_not_ambiguous(self):
         self.assertEqual(unit_from_name("ms_timeout_ms"), MS)
@@ -92,14 +93,51 @@ class UnitFromNameTest(unittest.TestCase):
         self.assertEqual(unit_from_name("seconds"), SECONDS)
 
     def test_ambiguous_tokens_absent_from_lexicon(self):
-        for token in ("m", "min", "h", "d", "w", "nm", "bps"):
+        for token in ("m", "min", "h", "d", "w", "nm", "bps", "mm"):
             self.assertNotIn(token, LEXICON, token)
+
+    def test_singular_calendar_words_are_not_durations(self):
+        # These name an index far more often than a duration in real code; every
+        # finding in the standard-library corpus run came from them.
+        for token in ("second", "minute", "hour", "day", "week", "bit"):
+            self.assertNotIn(token, LEXICON, token)
+            self.assertIsNone(unit_from_name(f"{token}_1"), token)
+        for token in ("seconds", "mins", "hrs", "days", "weeks", "bits", "ms"):
+            self.assertIn(token, LEXICON, token)
+
+    def test_rate_and_conversion_names_are_not_quantities(self):
+        self.assertIsNone(unit_from_name("bytes_per_second"))
+        self.assertIsNone(unit_from_name("MS_PER_SECOND"))
+        self.assertIsNone(unit_from_name("requests_per_minute"))
 
     def test_custom_lexicon(self):
         custom = dict(LEXICON)
         custom["tmo"] = SECONDS
         self.assertEqual(unit_from_name("tmo", custom), SECONDS)
         self.assertIsNone(unit_from_name("tmo"))
+
+
+class FactorFromNameTest(unittest.TestCase):
+    def test_time_factors(self):
+        self.assertAlmostEqual(factor_from_name("MS_PER_SECOND"), 1000.0)
+        self.assertAlmostEqual(factor_from_name("SECONDS_PER_DAY"), 86400.0)
+        self.assertAlmostEqual(factor_from_name("MINUTES_PER_HOUR"), 60.0)
+
+    def test_data_factors(self):
+        self.assertAlmostEqual(factor_from_name("BYTES_PER_MB"), 1e6)
+        self.assertAlmostEqual(factor_from_name("BITS_PER_BYTE"), 8.0)
+
+    def test_cross_dimension_is_not_a_factor(self):
+        self.assertIsNone(factor_from_name("BYTES_PER_SECOND"))
+
+    def test_names_without_two_units_are_not_factors(self):
+        self.assertIsNone(factor_from_name("TIMEOUT"))
+        self.assertIsNone(factor_from_name("ITEMS_PER_PAGE"))
+        self.assertIsNone(factor_from_name("MS_PER_SECOND_PER_DAY"))
+
+    def test_conversion_only_tokens_are_not_in_the_lexicon(self):
+        for token in CONVERSION_ONLY_TOKENS:
+            self.assertNotIn(token, LEXICON, token)
 
 
 class LookupLabelTest(unittest.TestCase):

@@ -179,8 +179,16 @@ _MAJOR = _u(MONEY, 1.0, "dollars")
 #:
 #: Deliberately absent because they are ambiguous in real code: ``m`` (metre or
 #: minute), ``min`` (minute or minimum), ``h``/``d``/``w`` (single letters),
-#: ``us`` is kept but ``nm`` (nanometre or nautical mile) and ``bps`` (bits per
-#: second or basis points) are not.
+#: ``nm`` (nanometre or nautical mile), ``bps`` (bits per second or basis
+#: points), and ``mm`` (millimetre or minute; ``millimeters`` is kept).
+#:
+#: Also absent: the singular calendar words ``second``, ``minute``, ``hour``,
+#: ``day`` and ``week``, and singular ``bit``. In real code these name a position
+#: or an index far more often than a duration or a size (``day_1`` is an ordinal
+#: date, ``week`` a week number, ``bit_offset`` a bit position). Every finding in
+#: the standard-library corpus run recorded in evidence/corpus_run.md came from
+#: those entries, so the plural and abbreviated forms are kept and the singulars
+#: are not.
 LEXICON: Dict[str, Unit] = {
     # time
     "ns": _NS, "nsec": _NS, "nsecs": _NS, "nanos": _NS,
@@ -189,14 +197,13 @@ LEXICON: Dict[str, Unit] = {
     "microsecond": _US, "microseconds": _US,
     "ms": _MS, "msec": _MS, "msecs": _MS, "millis": _MS,
     "millisecond": _MS, "milliseconds": _MS,
-    "s": _SECOND, "sec": _SECOND, "secs": _SECOND,
-    "second": _SECOND, "seconds": _SECOND,
-    "minutes": _MINUTE, "mins": _MINUTE, "minute": _MINUTE,
-    "hours": _HOUR, "hrs": _HOUR, "hour": _HOUR,
-    "days": _DAY, "day": _DAY,
-    "weeks": _WEEK, "week": _WEEK,
+    "s": _SECOND, "sec": _SECOND, "secs": _SECOND, "seconds": _SECOND,
+    "minutes": _MINUTE, "mins": _MINUTE,
+    "hours": _HOUR, "hrs": _HOUR,
+    "days": _DAY,
+    "weeks": _WEEK,
     # data size
-    "bit": _BIT, "bits": _BIT,
+    "bits": _BIT,
     "byte": _BYTE, "bytes": _BYTE,
     "kb": _KB, "kbytes": _KB, "kilobyte": _KB, "kilobytes": _KB,
     "kib": _KIB, "kibibytes": _KIB,
@@ -220,7 +227,7 @@ LEXICON: Dict[str, Unit] = {
     "meter": _METER, "meters": _METER, "metre": _METER, "metres": _METER,
     "km": _KM, "kilometers": _KM, "kilometres": _KM,
     "cm": _CM, "centimeters": _CM, "centimetres": _CM,
-    "mm": _MM, "millimeters": _MM, "millimetres": _MM,
+    "millimeters": _MM, "millimetres": _MM,
     "mile": _MILE, "miles": _MILE,
     "foot": _FOOT, "feet": _FOOT,
     "inch": _INCH, "inches": _INCH,
@@ -238,6 +245,18 @@ SHORT_TOKENS = frozenset({"s"})
 #: level. Code uses "KB" for 1024 bytes routinely, so these are treated as
 #: compatible unless strict checking is requested.
 _BINARY_DECIMAL_RATIOS = (1.024, 1.048576, 1.073741824, 1.099511627776)
+
+#: Singular calendar words, kept out of the main lexicon because they usually name
+#: an index rather than a duration, but unambiguous inside a conversion-constant
+#: name such as ``MS_PER_SECOND`` or ``SECONDS_PER_DAY``.
+CONVERSION_ONLY_TOKENS: Dict[str, Unit] = {
+    "second": _SECOND,
+    "minute": _MINUTE,
+    "hour": _HOUR,
+    "day": _DAY,
+    "week": _WEEK,
+    "bit": _BIT,
+}
 
 _TOKEN_RE = re.compile(r"[A-Z]+(?![a-z])|[A-Z][a-z]*|[a-z]+|[0-9]+")
 
@@ -318,6 +337,10 @@ def unit_from_name(
     table = LEXICON if lexicon is None else lexicon
     tokens = split_identifier(name)
     if not tokens:
+        return None
+    if "per" in tokens:
+        # "bytes_per_second" is a rate and "MS_PER_SECOND" a conversion factor;
+        # neither is a quantity in one unit. Rates are not modelled.
         return None
     hits: List[Tuple[int, Unit]] = [
         (index, table[token]) for index, token in enumerate(tokens) if token in table
@@ -410,3 +433,30 @@ def conversion_hint(found: Quantity, expected: Unit) -> str:
     if factor > 1:
         return f"divide by {format_scale(factor)}"
     return f"multiply by {format_scale(1.0 / factor)}"
+
+
+def factor_from_name(
+    name: str, lexicon: Optional[Dict[str, Unit]] = None
+) -> Optional[float]:
+    """Numeric value of a conversion-constant name such as ``MS_PER_SECOND``.
+
+    Returns the number of left-hand units in one right-hand unit, so
+    ``MS_PER_SECOND`` is 1000 and ``SECONDS_PER_DAY`` is 86400. Both units must
+    share a dimension. Used only for names written in upper case, which by
+    convention are constants rather than measured rates.
+    """
+    base = LEXICON if lexicon is None else lexicon
+    table = {**CONVERSION_ONLY_TOKENS, **base}
+    tokens = split_identifier(name)
+    if tokens.count("per") != 1:
+        return None
+    split_at = tokens.index("per")
+    left_tokens = [token for token in tokens[:split_at] if token in table]
+    right_tokens = [token for token in tokens[split_at + 1:] if token in table]
+    if len(left_tokens) != 1 or len(right_tokens) != 1:
+        return None
+    left = table[left_tokens[0]]
+    right = table[right_tokens[0]]
+    if left.dimension != right.dimension or left.scale == 0:
+        return None
+    return right.scale / left.scale

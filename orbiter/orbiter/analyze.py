@@ -24,6 +24,7 @@ from .knowledge import (
 )
 from .units import (
     RATIO,
+    factor_from_name,
     Quantity,
     Scalar,
     Unit,
@@ -221,6 +222,12 @@ class ModuleAnalyzer:
 
     def name_unit(self, name: str, suffix_only: bool = False) -> Optional[Unit]:
         return unit_from_name(name, self.config.lexicon, suffix_only=suffix_only)
+
+    def constant_factor(self, name: str) -> Optional[float]:
+        """Value of an upper-case conversion constant such as ``MS_PER_SECOND``."""
+        if not name.isupper():
+            return None
+        return factor_from_name(name, self.config.lexicon)
 
     def _dotted(self, node: ast.AST) -> Optional[str]:
         """Resolve an attribute chain to a dotted path, applying import aliases."""
@@ -494,6 +501,9 @@ class ModuleAnalyzer:
             return Scalar(CONSTANTS[dotted])
         if node.id in self.module_constants:
             return Scalar(self.module_constants[node.id])
+        factor = self.constant_factor(node.id)
+        if factor is not None:
+            return Scalar(factor)
         unit = self.name_unit(node.id)
         return Quantity(unit) if unit is not None else None
 
@@ -504,6 +514,9 @@ class ModuleAnalyzer:
             return Scalar(CONSTANTS[dotted])
         if node.attr in ATTRIBUTES:
             return Quantity(ATTRIBUTES[node.attr])
+        factor = self.constant_factor(node.attr)
+        if factor is not None:
+            return Scalar(factor)
         unit = self.name_unit(node.attr)
         return Quantity(unit) if unit is not None else None
 

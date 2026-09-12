@@ -10,7 +10,7 @@ Your job is to:
 2. understand the governing instructions and current work;
 3. identify an appropriate project;
 4. perform a rigorous prior-art investigation before committing to a new project;
-5. build the selected project completely within the current run whenever reasonably bounded;
+5. build the selected project completely within the current run when it is small enough, and otherwise advance it by one working milestone per run across as many runs as it takes;
 6. validate the implementation;
 7. document evidence and limitations;
 8. update repository state accurately before stopping.
@@ -202,9 +202,22 @@ Reject projects whose primary justification is novelty alone.
 
 ### Gate B — Feasibility
 
-The project must be realistically implementable within the available environment and current execution scope.
+The project must be realistically implementable in this environment. Feasibility is
+assessed against the environment's real limits — available tooling, reachable
+datasets, compute, no proprietary systems, no credentials it does not have — and
+**not** against the length of a single run.
 
-Do not select a project whose completion obviously depends on unavailable infrastructure, credentials, proprietary systems, or indefinite external work.
+A project that needs weeks or months of runs passes Gate B provided each step is
+buildable here. Size is not infeasibility. Only these fail:
+
+* the core depends on infrastructure, credentials, hardware, or data this
+  environment cannot reach (verify this before starting, not at milestone four);
+* it depends on indefinite external work — someone else shipping something first;
+* it has no first step, meaning there is no way to begin without the whole design
+  already solved.
+
+Do not reject a candidate because it looks too ambitious to finish. Decompose it
+under Gate D instead.
 
 ### Gate C — Novelty
 
@@ -212,7 +225,29 @@ The project must pass the prior-art gate defined below.
 
 ### Gate D — Completeness
 
-The project must have a bounded implementation that can be completed and validated rather than merely demonstrated with a stub.
+The project must be bounded — it must have a definition of done — and must be
+validated at every stage rather than left as a stub. Bounded does not mean small.
+
+For a project completable in one run, Gate D is satisfied by finishing and
+validating it in that run.
+
+For a longer project, Gate D requires, before implementation starts:
+
+* a definition of done: one paragraph in `TASKS.json` describing the finished
+  thing, specific enough to tell whether it has been reached;
+* a milestone ladder from nothing to done, each rung a working artifact rather
+  than a layer of scaffolding, recorded in `TASKS.json` with per-milestone status;
+* a vertical slice as milestone 1: the real thing done badly, end to end, on one
+  real input, with a demo — not a parser, not a config system, not a plugin
+  architecture;
+* a per-run guarantee: every run leaves the current milestone's demo working and
+  its tests passing, and `PROGRESS.md` states exactly what is unfinished and what
+  comes next.
+
+An open-ended project fails Gate D. "Keep improving it" is not a definition of
+done. A project that cannot produce a working vertical slice as its first
+milestone also fails, because there is then no way to discover early that the idea
+is wrong.
 
 ### Gate E — Originality
 
@@ -783,6 +818,14 @@ Do not state an unverified assumption as a feature.
 
 Before declaring the run complete, verify every applicable item below.
 
+**Scope for a multi-run project.** On a run that advances a long project without
+finishing it, the Implementation, Validation and Documentation items below are
+assessed against **the milestone this run completed**, not the whole project: that
+milestone's functionality is implemented, its tests pass, its demo works, and the
+README describes accurately what the project does today. The Repository intake and
+Repository state items always apply in full, and the project is not recorded as
+complete in `TASKS.json` until the definition of done is actually reached.
+
 ### Repository intake
 
 * [ ] `AGENT_RULES.md` was read completely.
@@ -801,10 +844,20 @@ Before declaring the run complete, verify every applicable item below.
 * [ ] Novelty confidence is High, Medium, or Low.
 * [ ] No universal novelty claim was made.
 
+### Selection
+
+* [ ] A hook sentence was written before implementation and recorded.
+* [ ] The project has a ten-second demo that needs no installation.
+* [ ] The project is outside the shape ban in `AGENT_RULES.md`.
+* [ ] For a long project: definition of done and milestone ladder exist in
+      `TASKS.json`, and milestone 1 was a working vertical slice.
+
 ### Implementation
 
-* [ ] Core functionality is implemented.
-* [ ] No essential TODO/stub remains.
+* [ ] Core functionality is implemented (for the current milestone, on a
+      multi-run project).
+* [ ] No essential TODO/stub remains within that scope.
+* [ ] The project is not left in pieces: the current demo runs and its tests pass.
 * [ ] Required dependencies are identified accurately.
 * [ ] Failure cases are handled appropriately.
 
@@ -823,6 +876,10 @@ Before declaring the run complete, verify every applicable item below.
 * [ ] README explains the material difference.
 * [ ] README documents usage.
 * [ ] README documents validation.
+* [ ] README shows the demo above the prose.
+* [ ] README describes only present behaviour, with a Status section naming what
+      is not built yet.
+* [ ] README contains no prohibited hype adjectives.
 * [ ] README states the license.
 * [ ] License file is present.
 

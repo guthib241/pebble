@@ -6,7 +6,9 @@ are the only check on your own quality and honesty — hold yourself to it.
 ## Operating rules
 
 1. **Complete work, not stubs.** Every cycle either advances the current project to
-   a real, working state, or finishes it.
+   a real, working state, or finishes it. A project may span many runs and take
+   months — see the long-projects section below — but no run may end with the
+   project in pieces.
 2. **Research before building.** Search GitHub, package registries, papers, and the
    web before starting anything new.
 3. **Novelty is a disclosed estimate, never a guarantee.** State confidence
@@ -20,6 +22,9 @@ are the only check on your own quality and honesty — hold yourself to it.
    the account owner creates separate repos manually when they want to.
 6. **Publish only when a project's checklist in TASKS.json is fully checked** —
    tests passing, README written, novelty report included. Not on a fixed clock.
+   This governs calling a project *done*, not committing: commit and push every
+   working milestone as you go, marked as the milestone it is. Shipping progress
+   is required; declaring an unfinished project finished is not.
 7. **Every README must let a stranger install and run it with no undocumented
    steps.**
 8. **Before ending a run, update PROGRESS.md and TASKS.json** so the next run
@@ -28,6 +33,84 @@ are the only check on your own quality and honesty — hold yourself to it.
    budget.** Keep runs efficient (don't re-read files you already have, don't
    re-run searches you already ran this session) so you don't crowd out the
    account owner's own use of Claude.
+
+## Long projects are allowed, and are the point
+
+A project may take months and span many runs. Nothing in these rules requires
+finishing inside one run, and a project is not too big merely because one run
+cannot complete it.
+
+This needs saying plainly because the opposite was assumed. Three runs each
+picked something completable in a day, and a one-day project is structurally
+incapable of being the kind of thing anyone remembers. The work that matters —
+a real video matting engine, a new training or inference technique, a language,
+a physics solver, an instrument, a dataset nobody has assembled — does not fit in
+a day and never did. Choosing only day-sized work was the single largest cap on
+this repository, and it is now lifted.
+
+**Aim for the thing that takes months.** Then make every run pay.
+
+### What a long project must have
+
+1. **A definition of done.** One paragraph describing the finished thing, written
+   at the start, in `TASKS.json`. Long is allowed; open-ended is not. "Keep
+   improving it" is not a definition of done.
+2. **A milestone ladder.** The path from nothing to done, broken into steps, each
+   one a *working* thing rather than a layer of scaffolding. Recorded in
+   `TASKS.json` with status per milestone, and revised when reality disagrees with
+   the plan — revising the ladder is expected; abandoning it silently is not.
+3. **A vertical slice first.** Milestone 1 must do the real thing badly, end to
+   end, on one real input. Not the parser. Not the config system. Not the plugin
+   architecture. The crude version of the actual result, working, with a demo you
+   can look at. If the idea is wrong, this is where you find out, and finding out
+   here is cheap.
+4. **Something that runs, at the end of every run.** Each run leaves the project
+   in a state where the current milestone's demo works and the tests pass. No run
+   ends with the project in pieces. Broken-but-committed is acceptable only inside
+   a run, never as its final state — and if a run ends mid-milestone, `PROGRESS.md`
+   says exactly which part is unfinished and what the next step is.
+5. **A demo per milestone.** Each milestone improves the ten-second demo, so the
+   project gets visibly better over time. A months-long project with nothing to
+   show until the end is indistinguishable from a months-long project that is
+   failing.
+
+### How to pick a big project
+
+Difficulty is not the same as size, and neither is the goal on its own. Prefer:
+
+- **Hard but decomposable** — the kind of hard where you can see the first step
+  even if you cannot see the last one.
+- **A result worth the time** — if it works, is it something people would
+  genuinely want? A green-screen keyer that beats what studios use is worth three
+  months. A more configurable version of an existing tool is not worth three days.
+- **Buildable here** — Gate B still applies. No project whose core depends on
+  infrastructure, credentials, datasets or hardware this environment cannot reach.
+  Check that before starting, not at milestone 4.
+- **New capability, not just new code** — techniques, methods, models,
+  representations, instruments. Something that can do what could not be done.
+
+The long project is the priority. A quick project is justified only when it
+unblocks the long one, and that is what Section 17 (missing capabilities) is for:
+build the missing piece as its own small project, then use it.
+
+### Honesty over a long project
+
+A months-long project is the easiest place in this repository to start lying,
+because for most of its life it is unfinished. So:
+
+- **The README describes what works today**, in the present tense, and nothing
+  else. Never the finished vision, never the roadmap written as capability.
+- **A Status section names what is not built yet**, explicitly. A reader must be
+  able to tell, without running it, what the current state does and does not do.
+- **Nothing is published as done until it is done.** A milestone completing is not
+  the project completing. `TASKS.json` distinguishes the two.
+- **Numbers are per-milestone and dated.** A benchmark from milestone 2 is
+  labelled as milestone 2's, and is not quietly carried forward as if it described
+  the current state.
+- **Abandoning is allowed; pretending is not.** If a project turns out to be the
+  wrong idea, write down what was learned and why it stopped, in `PROGRESS.md`, and
+  stop. A recorded dead end is a real contribution. A project quietly rotting
+  while runs drift elsewhere is not.
 
 ## The memorability standard — read this before selecting anything
 

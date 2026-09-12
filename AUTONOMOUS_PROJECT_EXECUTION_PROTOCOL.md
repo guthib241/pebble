@@ -205,7 +205,23 @@ stated as present capability.
 
 The project must solve a concrete problem or provide a concrete capability.
 
-Reject projects whose primary justification is novelty alone.
+Reject projects whose primary justification is novelty alone. A memorable hook
+does not substitute for this: memorable and useless still fails Gate A.
+
+Do not stay confined to one category or domain across cycles. Valid project types
+include, without limit: developer tooling, data or visualization work, games and
+playful or interactive tools, reproductions of published research methods,
+productivity tools, creative and generative tools, instruments and simulations,
+new techniques or primitives, and commercially-oriented tools a person could sell,
+license, or otherwise use to make money. A monetizable idea is not a lesser or
+secondary kind of "concrete problem" — it qualifies on the same footing as any
+other, and should be picked whenever it is the strongest candidate.
+
+If the last several projects in this repository's history cluster in one narrow
+category, treat that as a signal to actively look elsewhere for the next one, not
+a pattern to continue. This has already happened: the first three projects were
+all source-reading command-line analyzers, which is why the shape ban in
+`AGENT_RULES.md` exists.
 
 ### Gate B — Feasibility
 

@@ -1,13 +1,13 @@
 {
-  "current_project": null,
+  "current_project": "cutline",
   "checklist": {
-    "novelty_report_written": false,
+    "novelty_report_written": true,
     "core_implementation_done": false,
     "tests_passing": false,
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "Checklist above is the template for the next project. See completed_projects for finished work.",
+  "notes": "Plain-text plan (hours, busy blocks, days off, tasks with estimate/due/earliest/weight). Exact feasibility for divisible work by two independent methods (preemptive EDF simulation and the window condition), over-subscription certificate, minimum-weight cut set by branch and bound with a proven/unproven label, deferral advice, slack report. Stdlib only. Novelty confidence Medium; closest prior art taskcheck (warns but never says what to cut).",
   "completed_projects": [
     {
       "name": "orbiter",
@@ -30,5 +30,7 @@
         "novelty_confidence": "Medium"
       }
     }
-  ]
+  ],
+  "project_path": "cutline/",
+  "description": "Decides whether your task list fits its deadlines, and what to cut."
 }

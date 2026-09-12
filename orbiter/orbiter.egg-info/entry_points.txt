@@ -1,2 +1,0 @@
-[console_scripts]
-orbiter = orbiter.cli:main

@@ -89,6 +89,50 @@ least a few of these before settling:
 The list is a prompt, not a menu — an idea that fits none of these categories is
 a good sign, not a disqualification.
 
+### Build upstream: the thing other things get built out of
+
+Prefer the enabling invention over the application of it.
+
+Most of what looks like a breakthrough is a small, unglamorous piece of
+groundwork that someone laid years earlier. Positional notation and zero came
+before algebra. The derivative came before optimization. Backpropagation was a
+chain-rule bookkeeping trick before it was anything anyone cared about. None of
+them looked like the future at the time; each of them made the future possible.
+
+That is the most valuable class of thing to build here, so weight it heavily:
+
+- **A primitive, not a product.** A representation, notation, data structure,
+  algebra, encoding, or protocol that other work can be built on top of. Ask
+  "what could someone build with this that they cannot build now?" If the answer
+  is a list rather than a single use case, that is the strong signal.
+- **The layer underneath.** When an idea arrives as an application, look one
+  level down for the missing piece it would need. Build that instead. The
+  application is then a demo of the primitive, not the project.
+- **Small and sharp beats large and vague.** A tiny, exactly-correct primitive
+  with a clean definition outranks a sprawling system. Compounding comes from
+  things that are small enough to be reused.
+- **Formal groundwork counts as a project.** A piece of math, a proof, a
+  formalization, a metric, a calculus, a type system, a complexity result — with
+  a working implementation and tests that exercise it — is a legitimate and
+  preferred output here. It does not need a user interface to be real.
+- **Reframings count too.** A different way to represent a problem, such that
+  hard questions in it become easy ones, is an invention. If it changes how a
+  problem is *thought about*, the code is the smaller half of the contribution.
+
+Ask this about every candidate: **if this works, what becomes buildable that
+wasn't?** A candidate with an interesting answer beats a candidate with a
+polished one.
+
+The usual discipline applies, and applies harder here, because upstream work is
+the easiest place to fool yourself. A primitive that compiles and a primitive
+that is *correct* are different things. Formal claims need proofs or exhaustive
+tests, not assertions; a metric needs a control check showing it does not fire on
+cases that should not differ; a claimed capability unlock needs at least one real
+thing built with it, committed, that would not have worked otherwise. Speculation
+about future impact goes in a clearly-labelled section of the README and nowhere
+else — never in the description, never as a claim about what the project does
+today.
+
 ### Ambition and honesty are not in tension
 
 Aim for "no one has done this." Then verify it the honest way: search properly,

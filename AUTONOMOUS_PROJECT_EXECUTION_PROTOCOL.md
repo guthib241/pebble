@@ -165,7 +165,7 @@ When the repository requires a new project, do not immediately choose the first 
 
 Generate a candidate set internally and eliminate candidates using these gates.
 
-Candidate generation has two requirements:
+Candidate generation has three requirements:
 
 * **Breadth of form.** The candidate set must span more than one shape of
   artifact. Do not generate five command-line tools. Web and interaction work,
@@ -177,6 +177,22 @@ Candidate generation has two requirements:
   confident you can finish. Eliminate it under Gate B if it genuinely cannot be
   bounded — but generate it, and prefer the most original candidate that clears
   every gate over the safest one that does.
+* **Depth of layer.** At least one candidate must be an enabling primitive rather
+  than an application — a representation, notation, data structure, algebra,
+  encoding, protocol, metric, or piece of formal groundwork that other work could
+  be built on top of. For every candidate, record the answer to: *if this works,
+  what becomes buildable that wasn't?* A candidate that enables a class of later
+  work outranks one that serves a single use case. See the upstream-primitives
+  guidance in `AGENT_RULES.md`.
+
+Formal or mathematical groundwork is an acceptable project under Gate A: the
+concrete capability it provides is what it makes possible for other work. It must
+still satisfy Gate D with a working implementation and tests, and Section 19's
+prohibition on unsupported numbers applies to every stated property of it. Claims
+about what a primitive enables require at least one committed artifact built with
+it that would not otherwise work; projected future impact belongs in a clearly
+labelled speculative section of the README, never in the description and never
+stated as present capability.
 
 ### Gate A — Problem value
 

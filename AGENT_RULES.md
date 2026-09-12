@@ -29,6 +29,128 @@ are the only check on your own quality and honesty — hold yourself to it.
    re-run searches you already ran this session) so you don't crowd out the
    account owner's own use of Claude.
 
+## The memorability standard — read this before selecting anything
+
+Correct and forgettable is a failed run.
+
+Three projects into this repository, every one was a Python static analyzer that
+reads files, prints warnings and returns an exit code. Each was well built,
+honestly reported and genuinely correct. Nobody would remember any of them an
+hour after reading the README. That outcome is the specific failure this section
+exists to prevent — and the cause was not a lack of skill. It was the selection
+question. "Did someone already build this?" only ever finds safe gaps: things
+left unbuilt because nobody wanted them much. It never finds the thing worth
+building.
+
+Ask this instead, first, before any search:
+
+> **What is the moment someone understands what this does — and why would they
+> tell someone else about it?**
+
+If there is no such moment, the candidate is dead. It does not matter how novel,
+how rigorous, or how cleanly it would ship.
+
+### Gate: the hook sentence (write it before you build)
+
+Before implementation, write one sentence, in plain language, that a stranger
+would repeat to a friend. Put it at the top of `PROGRESS.md` for the run and in
+the project README.
+
+It must pass all four:
+
+1. **Understandable with no context.** No jargon, no category name, no acronym.
+2. **Surprising.** It contains something the reader did not know was possible, or
+   reframes something they thought was settled.
+3. **Concrete.** It names what actually happens, not a benefit. "Shows you which
+   of your commits nobody has ever read" beats "improves code review workflows."
+4. **Not a category label.** "A linter for X" and "a CLI tool that checks Y" both
+   fail. Those describe a shelf, not a thing.
+
+Cannot write that sentence? **Do not start.** Go back and generate more
+candidates. A weak hook sentence for an idea you have already grown attached to
+is the single most reliable sign that the idea is not the one.
+
+### Gate: it must be visible in ten seconds
+
+Every project must have one artifact a stranger can look at and immediately get
+it — before installing anything, before reading prose. In the README, above
+everything except the description and hook.
+
+Acceptable: a rendered image or animation, a recorded terminal session, a live
+page they can open, a playable thing, a diagram of a result, a before/after.
+An install command is not a demo. A wall of text is not a demo. A feature list is
+definitely not a demo.
+
+If the only way to understand the project is to install it and read the manual,
+it will not be remembered, no matter how good it is.
+
+### Gate: shape ban — no more of the same skeleton
+
+For the next several projects, do not build:
+
+- a linter, checker, analyzer, validator, or auditor that reads source files and
+  prints warnings;
+- anything whose primary interface is "run a command, read a report";
+- a project whose success condition is a non-zero exit code in CI.
+
+This is a deliberate, temporary prohibition on the shape this repository keeps
+producing, not a judgement on those tools. It stays in force until the repository
+holds projects in at least three genuinely different forms. Blocked shapes do not
+become acceptable by being renamed, wrapped in a different flag, or given a
+prettier output format.
+
+Go where the work cannot hide:
+
+- **Visual and interactive** — it moves, it renders, you can click it, it responds
+- **Playable** — a game, a toy, a simulation, an explorable explanation
+- **Alive** — it reacts to real input: time, sound, data arriving, a cursor, you
+- **A real dataset** — find one, do something to it nobody has done, show the
+  result as an image or an interactive thing rather than a table
+- **A new primitive** — see the upstream section; then demonstrate it visibly
+- **Genuinely strange** — the idea that sounds like a joke until it runs
+
+### Gate: ship the primitive, not the wrapper
+
+When a project contains a general engine inside a specific application, the
+engine is the project. Name it, document it, test it, give it the README — and
+let the application be one demo of it among several.
+
+This has already gone wrong once here, and the pattern is worth recognising: a
+run built a solver that proves a set of commitments cannot all be met and then
+computes the provably cheapest subset to drop, verified against exhaustive
+enumeration. That engine generalises to sprint planning, cloud budgets, course
+timetables, CI minutes — anything over-subscribed. It shipped as a day planner
+that reads one text file. The valuable thing was built and then hidden inside the
+narrow thing.
+
+When you notice the engine, stop and re-scope around it.
+
+### Hype is earned by what you show, never by what you assert
+
+Everything above is about choosing better work and showing it properly. None of
+it loosens a single honesty rule, and the temptation to inflate rises exactly
+when a project starts feeling exciting, so be explicit with yourself:
+
+- **Adjectives are not allowed to do the work.** No "revolutionary",
+  "game-changing", "blazing-fast", "the first", "finally". A README that needs
+  those is compensating for a demo that does not land. Fix the demo.
+- **Every number still comes from a committed run.** Rule 3, Section 19 and
+  Section 20 apply unchanged. A striking result needs a control check *before* it
+  appears anywhere, and an exciting project needs it more than a dull one, not
+  less.
+- **Novelty confidence is still a disclosed estimate.** Medium stays Medium
+  however good the idea feels. The banned phrasings in Section 5.1 stay banned.
+- **The hook sentence is a claim.** It must be literally true of what the code
+  does today. If it describes an aspiration, it is marketing, and it does not go
+  in.
+- **Broken and memorable is worth nothing.** Tests, evidence runs and control
+  checks are not in tension with any of this; they are what makes a surprising
+  result believable instead of dismissible. The rigor already in this repository
+  is its best feature. Keep all of it and aim it at better targets.
+
+The goal is a repository a stranger remembers the next day, having believed
+every word of it.
+
 ## Idea generation (see rule 2)
 
 Default to the most original thing you can actually finish. A competent,

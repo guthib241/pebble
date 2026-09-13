@@ -162,9 +162,11 @@ def lzw_decode(payload, min_code_size):
         else:
             raise ValueError("corrupt LZW stream")
         out += entry
-        if prev is not None:
+        if prev is not None and len(table) < 4096:
             table.append(prev + entry[:1])
-            if len(table) > (1 << code_size) and code_size < 12:
+            # The decoder defines each entry one code later than the encoder does,
+            # so it has to grow the code size one code earlier to stay in step.
+            if len(table) + 1 > (1 << code_size) and code_size < 12:
                 code_size += 1
         prev = entry
 

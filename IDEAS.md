@@ -467,6 +467,28 @@ confidence will not exceed Medium given the research above, and the README will 
    defeats the approach, that is Outcome D — written down as a failure, not relabelled
    as success.
 
+**Late find, recorded against my own interest (2026-09-13).** After the decision, a
+further search turned up C-IRIS: certified collision-free convex regions in a rational
+parameterisation of configuration space, via sums-of-squares, **already implemented and
+open source in Drake** ([arXiv:2302.12219](https://arxiv.org/pdf/2302.12219),
+[arXiv:2205.03690](https://arxiv.org/pdf/2205.03690),
+[arXiv:2410.12649](https://arxiv.org/pdf/2410.12649)). It uses the same tangent
+half-angle substitution this project intended to use. It targets robot manipulators,
+certifies free regions rather than impossibility, and depends on an SOS solver — but
+the "certified free space by exact arithmetic" part of the plan is not new and must not
+be presented as new. What survives: the **"no" answer** with a certificate a person can
+check, the smallest dimensional change that would fix it, and the everyday problem
+framing with no solver dependency. The confirmation re-read must decide whether that
+residue is enough. If it is not, drop the candidate rather than rewording it.
+
+Also found, and different problems rather than prior art: the
+[moving sofa problem](https://en.wikipedia.org/wiki/Moving_sofa_problem) asks for the
+largest shape that can turn a corner, and [SofaBounds](https://github.com/ykallus/SofaBounds)
+computes bounds for it. Demand evidence, for the README: professional movers do this by
+hand, measuring each narrow point and reasoning about the piece's diagonal against the
+door height, and moving-industry software addresses pricing and surveys rather than
+geometry.
+
 **Alternate names considered:** `jamb`, `shoehorn`, `wiggle`. `pivot` won on
 memorability; the collision with the common word is a known cost.
 

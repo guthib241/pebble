@@ -53,6 +53,46 @@ Web search, 2026-09-13. Each line is a query family and what it settled:
 10. Assembly and disassembly path planning → **commercial (Siemens NX) and research
     (Autodesk, SIGGRAPH Asia 2022)**; nothing open, exact and certifying.
 
+Four further searches were run after the decision, to get the novelty record for
+`pivot` most of the way done before next run needs it:
+
+11. Forums, package registries and GitHub for an existing implementation of the
+    everyday question → nothing usable found; what exists is the
+    [moving sofa problem](https://en.wikipedia.org/wiki/Moving_sofa_problem) (a
+    different question: the largest shape that fits, not whether *your* shape fits),
+    [SofaBounds](https://github.com/ykallus/SofaBounds) computing bounds for it with
+    CGAL and GMP, and student-style breadth-first searches over discretised states.
+12. Certified collision-free configuration space → **the most important find of the
+    run, and it cuts against the project.** C-IRIS certifies collision-free convex
+    regions in a *rational parameterisation* of configuration space using
+    sums-of-squares — the same tangent-half-angle trick `pivot` was going to use to
+    keep arithmetic exact — and it is **implemented and open source inside Drake**
+    ([arXiv:2302.12219](https://arxiv.org/pdf/2302.12219),
+    [arXiv:2205.03690](https://arxiv.org/pdf/2205.03690), and 2026 follow-up work,
+    [arXiv:2410.12649](https://arxiv.org/pdf/2410.12649)). It is aimed at robot
+    manipulators, certifies *free* regions rather than impossibility, and needs an SOS
+    solver, but it means the "certified free space by exact arithmetic" idea is not
+    itself new. What remains unclaimed after this search is narrower and must be stated
+    that way: the **"no" answer** — a checkable certificate that no motion exists,
+    with the pinch point and the smallest dimensional change that would fix it — for an
+    ordinary object in an ordinary floor plan, with no solver dependency.
+13. Professional moving practice → the procedure is done by hand and written up as
+    folklore: measure every doorway, hallway and stairwell at its narrowest point, then
+    reason about the piece's diagonal clearing the door height while its thickness
+    clears the width. Moving-industry software is about pricing and virtual surveys,
+    not geometry. This is the "still done by hand, repeatedly" signal, recorded rather
+    than assumed.
+14. Open-source planners generally → sampling planners (OMPL, Klampt) and collision
+    libraries; none answers "no path exists".
+
+**The question the confirmation re-read has to answer**, stated plainly so it cannot
+be skipped: after C-IRIS, is `pivot` still materially different, or is it an
+application of published and implemented work? My answer today is that the
+impossibility certificate and the minimal fix are the difference and the free-space
+side is not, so the project has to be built and claimed around the "no" answer. If the
+next run disagrees with that, the honest move is to drop it and go to section 5 of
+`IDEAS.md`, not to soften the wording.
+
 Environment checks: Python 3.11.15 and Node 22 present, PyPI reachable, no numpy,
 scipy, sympy, Pillow, matplotlib, cairo, pytest, z3 or shapely preinstalled, no ffmpeg
 or ImageMagick. A project that wants images or animation in this repository has to

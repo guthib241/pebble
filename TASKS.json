@@ -13,15 +13,27 @@
     {
       "id": 1,
       "title": "Vertical slice: reversible discs",
-      "status": "in_progress",
+      "status": "done",
       "what": "Discs under gravity in a box, integer fixed-point state, exact mirror reflection off walls, body-body elastic impulse, step() and unstep(). Round trip over 10,000 steps lands on the exact starting state. Animated GIF demo written by a hand-rolled encoder (no image libraries). Tests for round-trip exactness, determinism, wall involution, and an empty tape on a wall-only scene.",
-      "demo": "projects/ebb/demo/ (animated GIF: forward run, then the reverse run retracing it)"
+      "demo": "projects/ebb/demo/ (animated GIF: forward run, then the reverse run retracing it)",
+      "completed": "2026-09-13",
+      "evidence": {
+        "tests": "45 tests pass: python3 -m unittest discover -s tests -t . (from projects/ebb/), 3.3s, no dependencies",
+        "round_trips": "exact on drop/billiards/scatter/single at 10,000 steps and on drop at 100,000 steps, comparing the whole integer state",
+        "wall_rule": "exhaustive: 3,321 states, 3,321 distinct images, 0 collisions, all inverted exactly; the same enumeration without the half-unit offset finds 16 collisions and a test requires that",
+        "tape": "22-23 bits per contact event, nothing per frame; single-ball scene writes 0 bytes",
+        "controls": "determinism (identical states and tapes); elastic energy drift 0.042% over 10,000 steps; momentum conserved exactly across a contact built to be certain to occur; null control tape empty",
+        "install": "pip install . in a fresh virtualenv, then a 5,000-step round trip, exact",
+        "demo": "projects/ebb/demo/rewind.gif and billiards.gif, written by demo/make_demo.py which refuses to write if the round trip is not exact",
+        "reproduce": "python3 evidence/run_evidence.py > evidence/results.md"
+      },
+      "known_limitation": "Contact is resolved for every overlapping pair on every step, so bodies that settle into a pile re-resolve rather than rest: 0% of contact events are repeats of an already-overlapping pair in the no-gravity scene, 67.5% in the falling-balls scene, 92.0% in the 14-body scene. Milestone 2 replaces the rule."
     },
     {
       "id": 2,
       "title": "The reversible-contact core, stated and property-tested",
-      "status": "todo",
-      "what": "Write down the invariant (every step is a bijection; contact rules are self-inverse) and test it by property tests over randomly generated scenes. Shrink the residue tape from 'store the impulse' to 'store only the rounding correction'. Measure bits per contact. Add an exact-rational reference simulator as an independent control on the integer engine's physics.",
+      "status": "next",
+      "what": "Replace the contact rule with one that never lets bodies overlap in a stored state, by reflecting the relative position along the line of centres -- the same unfolding trick that already makes the walls reversible, and which works there precisely because 'inside the box' is an invariant of every valid state. The pair analogue needs 'no overlap' to be the invariant. Rounding along a non-axis-aligned normal is where the residue goes. Also: property tests over random scenes, the invariant written down explicitly, an exact-rational reference simulator as an independent control on the integer physics, and a smaller tape entry than the current one integer per contact.",
       "demo": "A measured table: residue bits per contact event, and the snapshot bytes avoided."
     },
     {
@@ -55,14 +67,14 @@
   ],
   "checklist": {
     "hook_sentence_written": true,
-    "demo_exists": false,
+    "demo_exists": true,
     "novelty_report_written": true,
     "core_implementation_done": false,
     "tests_passing": false,
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "ebb selected 2026-09-13 after a documented search (see projects/ebb/NOVELTY_REPORT.md) and recorded candidate rejections in IDEAS.md. Multi-run project: the checklist above tracks the whole project and must not be checked off per milestone. Milestone status lives in 'milestones'. Work is on branch claude/intelligent-mendel-ndp84t and still needs merging to main.",
+  "notes": "ebb selected 2026-09-13. Milestone 1 is done and verified; milestone 2 is next and its approach is written into the milestone entry. The project-level checklist tracks the WHOLE project: core_implementation_done and tests_passing stay false until the definition of done is reached, not when a milestone passes. Work is on branch claude/intelligent-mendel-ndp84t and still needs merging to main.",
   "completed_projects": [
     {
       "name": "backfire",

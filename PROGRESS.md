@@ -4,8 +4,8 @@
 steps, then run time backwards — every ball retraces its exact path to where it started,
 and no frames were saved to make that happen.*
 
-Status: project selected 2026-09-13 — **ebb**, in `projects/ebb/`. Milestone 1 of 6 in
-progress. Three earlier projects complete, in `projects/`.
+Status: project selected 2026-09-13 — **ebb**, in `projects/ebb/`. **Milestone 1 of 6 is
+done and verified**; milestone 2 is next. Three earlier projects complete, in `projects/`.
 Last updated: 2026-09-13
 
 > **Where the work is.** This run was given branch `claude/intelligent-mendel-ndp84t` and is
@@ -55,12 +55,53 @@ is written to a **residue tape**, and the size of that tape is a measured quanti
 project reports rather than a detail it hides. Dissipation (friction, restitution) is the same
 problem in a more honest form, and arrives at M4.
 
-### Milestone 1 — in progress this run
+### Milestone 1 — done, 2026-09-13
 
-Discs under gravity in a box; exact mirror reflection off walls; equal-mass elastic
-disc-disc impulse; `step()` and `unstep()`; a 10,000-step round trip landing on the exact
-starting state; an animated GIF written by a hand-rolled encoder, since no image library is
-installed. See "What the next run should know" for exact state.
+Discs under gravity in a box, exact mirror reflection off walls, equal-mass elastic
+disc-disc contact, `step()` and `unstep()` as exact inverses. 45 tests pass in 3.3 seconds
+with no dependencies (`python3 -m unittest discover -s tests -t .`, from `projects/ebb/`).
+Two animated GIFs in `projects/ebb/demo/`, written by a hand-rolled GIF89a encoder because
+no image library is installed here.
+
+Measured, and reproducible with `python3 evidence/run_evidence.py > evidence/results.md`:
+
+- Round trips exact on four scenes at 10,000 steps and on the falling-balls scene at
+  100,000 steps, comparing the whole integer state rather than a tolerance.
+- The wall rule enumerated exhaustively: 3,321 states, 3,321 distinct images, 0 collisions,
+  all inverted exactly.
+- Residue tape 22–23 bits per contact event, nothing per frame; a one-ball scene writes 0
+  bytes.
+- Controls: determinism (identical states and identical tapes), elastic energy drift 0.042%
+  over 10,000 steps, momentum exactly conserved across contact, and `pip install .` checked
+  in a fresh virtualenv followed by an exact 5,000-step round trip.
+
+**Two solved problems worth not re-deriving.** First, the obvious mirror rule for walls is
+not injective on an integer lattice — a body on the wall moving out and the same body
+moving in can land on the same state. Reflecting about the half-unit *just outside* the
+wall makes the three cases land in disjoint ranges of `x - v`, so the backward pass reads
+off what happened with nothing stored. A test enumerates the naive rule and requires it to
+collide, so the offset cannot be quietly "simplified" away. Second, contact divides by the
+squared distance between centres, and integer division loses a remainder; exactly one
+integer per contact goes on the tape — the relative normal speed before the exchange plus
+the one after, which in exact arithmetic would be zero.
+
+**The honest limitation.** Contact is resolved for every overlapping pair on every step, so
+bodies that settle into a pile re-resolve instead of resting: 0% of contact events are
+repeats of an already-overlapping pair in the no-gravity scene, 67.5% in the falling-balls
+scene, 92.0% in the 14-body scene. It is reversible and it is not good contact physics.
+
+### Milestone 2 — next, with the approach already worked out
+
+Replace the contact rule with one that never lets bodies overlap in a stored state, by
+reflecting the **relative** position along the line of centres. This is the same unfolding
+trick that already works for walls, and understanding *why* it works there is the key: it
+relies on "inside the box" being an invariant of every valid state, which makes the
+reflected and non-reflected images occupy disjoint ranges. The pair version needs "no
+overlap" to be the invariant in the same way. Rounding along a normal that is not
+axis-aligned is where the residue goes, and shrinking the tape entry below one integer per
+contact is part of the milestone. Also due: property tests over random scenes, the
+invariant written down explicitly, and an exact-rational reference simulator as an
+independent control on the integer physics.
 
 ## Completed projects
 
@@ -130,10 +171,9 @@ downloaded and read as extracted text, not just as abstracts.
 1. **ebb is in progress. Continue it — do not select anything new.** `TASKS.json`
    `current_project` is set and its checklist is not complete. Milestone status is in
    `TASKS.json` `milestones`.
-2. **Milestone 1 state**: see the section added at the end of this file when M1 landed —
-   it names the files, the tests, and the exact command to reproduce the demo. If that
-   section is absent, M1 did not finish and the folder holds only `NOVELTY_REPORT.md` and
-   `LICENSE.txt`.
+2. **Milestone 1 is done** — see the milestone sections above for what was built, what was
+   measured, and the two design problems already solved. Milestone 2's approach is written
+   out there too; start from it rather than re-deriving it.
 3. **The project-level checklist in `TASKS.json` tracks the whole project, not a milestone.**
    Do not tick `core_implementation_done` because a milestone is done.
 4. **Honesty constraint specific to this project**: the README must state the residue tape's

@@ -73,6 +73,35 @@ Hook attempt: "tells you why your two spreadsheets didn't line up."
 Prior art: Apify's CSV Anti-Join Finder, and the R package `joinspy`. Materially
 equivalent.
 
+### isospectral drums — rejected (2026-09-13)
+Hook attempt: "Two drums shaped completely differently that sound identical, note for
+note." Searched: arXiv ("Hearing shapes of drums", arXiv:1101.1239; "We can't hear the
+shape of a drum: revisited in 3D", arXiv:1701.05984), COMSOL model gallery, Driscoll's
+*Eigenmodes of Isospectral Drums*. Prior art:
+[COMSOL's Isospectral Drums model](https://www.comsol.com/model/isospectral-drums-119)
+(strikes the drum and computes the spectrum of modes that make up its sound) and
+Driscoll's published eigenmode computation of the Gordon-Webb-Wolpert pair. Same object,
+same demonstration, same audience. The mathematics is also 1992 and widely exposited, so
+the project would have been a re-presentation rather than a capability.
+
+### linkage synthesis from a drawn curve — rejected (2026-09-13)
+Hook attempt: "Give it your signature and it designs a machine of rods and pins that
+draws it." Searched: Kempe's universality theorem literature, "Synthesis of Linkages to
+Trace Plane Curves" (Springer), "Automated generation of Kempe linkages for algebraic
+curves and surfaces", "Elementary proofs of Kempe universality" (arXiv:1511.09002).
+Prior art: [A Practical Implementation of Kempe's Universality
+Theorem](https://laurahallock.org/files/projects_old/kempe_report.pdf) (working software
+that constrains a tracing node to a given algebraic curve and derives the rest of the
+linkage), plus the Liu & McCarthy designs with SageMath source published. Curve in,
+linkage out, already implemented.
+
+### Wallace-Bolyai-Gerwien dissection demo — rejected (2026-09-13)
+Hook attempt: "Cuts any shape into pieces that rearrange into any other shape of the same
+area." Prior art: [dmsm/scissors-congruence](https://github.com/dmsm/scissors-congruence)
+(interactive demonstration of exactly this) and [weitz.de/polygons/](https://weitz.de/polygons/)
+(draw an arbitrary polygon, watch it cut and rearranged into a rectangle). Materially
+equivalent, including the interaction.
+
 ---
 
 ## 3. Not hyped — passed the other rules, failed the hook
@@ -125,6 +154,69 @@ generalises to sprints, cloud budgets, timetables and CI minutes, and should hav
 been the project with the planner as one demo. Recorded as the worked example of
 the ship-the-primitive rule.
 
-_No project currently selected. The next entry here is the first one chosen under
-the full rule set, and it should be the best idea this repository can find rather
-than the first that qualifies._
+### ebb (selected 2026-09-13, `projects/ebb/`) — in progress
+Hook sentence, verbatim: *"Scatter a handful of balls for ten thousand steps, then run time
+backwards — every ball retraces its exact path to where it started, and no frames were saved
+to make that happen."*
+A 2D physics simulation whose every step is a bijection on integer state, so rewind is
+computed instead of remembered. Searched across bit-reversible integrators, reverse
+computation in parallel discrete-event simulation, deterministic game-physics engines, and
+the physics of frictional reversibility; ten query formulations; the two closest matches
+read at full text. Closest prior art: Jos Stam's *An Exact Bitwise Reversible Integrator*
+(arXiv:2207.07695 — integer reversibility, and zero occurrences of "collision" or "contact"
+in the paper) and Perumalla & Protopopescu's *Reversible Simulations of Elastic Collisions*
+(arXiv:1302.1126 — reversible collisions, but identical frictionless hard spheres, n ≤ 3 in
+2D). Deterministic engines such as Rapier and SG Physics 2D own the use case and rewind by
+storing frames. Novelty confidence Medium; full record in `projects/ebb/NOVELTY_REPORT.md`.
+Why it was chosen over the others above: it is the only candidate where the demo, the
+primitive and the open technical question are the same thing — if contact can be made
+invertible, rewind becomes free, and if it cannot, the project says so visibly.
+---
+
+## 5. Considered, viable, not selected this cycle
+
+A heading added 2026-09-13. These candidates are not rejected: nothing disqualified them.
+They cleared the gates as far as they were taken, and another candidate was chosen ahead of
+them in the same cycle. They are recorded in full so a future run can pick one up without
+repeating the search, and so the reason for *not* choosing them stays visible.
+
+### hinged-dissection compiler — viable, 2026-09-13
+Hook attempt (passes, in my judgement): "Cuts any shape into pieces joined by hinges that
+swing round to become any other shape of the same area."
+Searched: arXiv and Demaine's publication list ("Hinged Dissections Exist", Abbott, Abel,
+Charlton, Demaine, Demaine & Kominers; "Hinged Dissection of Polyominoes and Polyforms",
+Demaine, Demaine, Eppstein & Friedman, CCCG'99 / Computational Geometry), Eppstein's
+Geometry Junkyard hinge page, GitHub code search for hinged dissection implementations.
+**No public implementation was found** — the theorems are published and constructive, the
+software appears not to exist. The demo would be outstanding (one shape swinging into
+another).
+Why not selected: the published constructions reach astronomical piece counts, and the hard
+part — a continuous motion between the two configurations that never self-intersects — is
+the part a first milestone would have to fake or omit, which is exactly what the rules
+forbid. It needs a run that can afford to spend its first milestone establishing whether
+practical piece counts are reachable at all. Kept as a strong candidate, not a dead one.
+*If picked up*: start from the polyform result (midpoint cuts around each vertex), not the
+general theorem, and treat non-crossing motion as the make-or-break question.
+
+### every hour that never happened — viable but unsearched, 2026-09-13
+Hook attempt: "Shows you every hour in history that never happened, and every hour that
+happened twice."
+The IANA time zone database records every civil clock change on Earth since the 1830s, and
+`/usr/share/zoneinfo` is present in this environment, so the data is local and free. Two
+artifacts: a rendered picture of every local-time discontinuity in recorded history, and a
+corpus of adversarial timestamps (gaps, folds, sub-minute offsets, the day Samoa deleted)
+generated from real transitions rather than invented.
+Why not selected: **no prior-art search was run on it** — it was generated late and another
+candidate was chosen first. Do not treat it as cleared. Likely neighbours to check before
+building: tzdb visualisations, Hypothesis's datetime strategies, `dateutil`/`zoneinfo` test
+corpora, and the "falsehoods programmers believe about time" lineage.
+
+### re-scoping cutline's engine as the primitive it is — viable, considered again 2026-09-13
+Recorded in section 4 as the worked example of the ship-the-primitive rule, and reconsidered
+this cycle as a candidate in its own right: lift the certificate-and-cheapest-cut solver out
+of the day planner and ship it as the general thing, with the planner as one demo.
+Why not selected: still the same shape this repository already has three of — a command that
+reads a file and prints a verdict — and the shape ban is in force until the repository holds
+projects in at least three genuinely different forms. Worth doing, and it will be a better
+project once a run can give the certificate a visual form rather than a printout.
+

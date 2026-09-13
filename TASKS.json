@@ -1,17 +1,68 @@
 {
-  "current_project": null,
-  "definition_of_done": null,
-  "milestones": [],
+  "current_project": {
+    "name": "ebb",
+    "path": "projects/ebb/",
+    "selected": "2026-09-13",
+    "branch": "claude/intelligent-mendel-ndp84t",
+    "hook_sentence": "Scatter a handful of balls for ten thousand steps, then run time backwards — every ball retraces its exact path to where it started, and no frames were saved to make that happen.",
+    "description": "A 2D physics simulation that runs backwards bit-for-bit without stored frames.",
+    "why_this_one": "Every step is a bijection on integer state, so rewind is computed rather than remembered. Closest prior art owns half of it each: bit-reversible integrators have no contact (Stam 2022), reversible collision work is restricted frictionless hard spheres (Perumalla 2013), and deterministic game engines rewind by storing frames. Outside the shape ban: the artifact is a running simulation with animated demos, not a source reader printing warnings."
+  },
+  "definition_of_done": "ebb is done when a 2D rigid-body engine — discs and convex polygons, gravity, walls, body-body contact with restitution and friction, rotation, and resting contact so bodies can stack — runs entirely in integer fixed-point arithmetic with every step a bijection on the state, such that stepping backwards reproduces every earlier frame bit-for-bit. It must be verified by automated round-trip tests over at least 100,000 steps on a scene in which a tower of blocks is knocked over and comes to rest, with the reverse run landing on the exact starting state. The only storage permitted for reversal is a residue tape holding the information that rounding and dissipation destroy; its size must be measured in bits per contact event and reported against the bytes a snapshot-based rewind of the same scene would need, with an elastic scene as the control that leaves the tape empty. The repository must contain animated demos committed as files a stranger can view without installing anything, a browser page that scrubs any bundled scene forwards and backwards with no stored frames, a second implementation of the kernel cross-checked bit-for-bit against the first, a README describing only what works, and NOVELTY_REPORT.md. Anything beyond this — 3D, soft bodies, joints, performance work — is out of scope and does not block done.",
+  "milestones": [
+    {
+      "id": 1,
+      "title": "Vertical slice: reversible discs",
+      "status": "in_progress",
+      "what": "Discs under gravity in a box, integer fixed-point state, exact mirror reflection off walls, body-body elastic impulse, step() and unstep(). Round trip over 10,000 steps lands on the exact starting state. Animated GIF demo written by a hand-rolled encoder (no image libraries). Tests for round-trip exactness, determinism, wall involution, and an empty tape on a wall-only scene.",
+      "demo": "projects/ebb/demo/ (animated GIF: forward run, then the reverse run retracing it)"
+    },
+    {
+      "id": 2,
+      "title": "The reversible-contact core, stated and property-tested",
+      "status": "todo",
+      "what": "Write down the invariant (every step is a bijection; contact rules are self-inverse) and test it by property tests over randomly generated scenes. Shrink the residue tape from 'store the impulse' to 'store only the rounding correction'. Measure bits per contact. Add an exact-rational reference simulator as an independent control on the integer engine's physics.",
+      "demo": "A measured table: residue bits per contact event, and the snapshot bytes avoided."
+    },
+    {
+      "id": 3,
+      "title": "Rotation and convex polygons",
+      "status": "todo",
+      "what": "Angular state, boxes and convex polygons, contact with a rational normal, still bit-exactly reversible. Rotation is where reversibility usually breaks, so this is the milestone that can invalidate the idea.",
+      "demo": "A spinning box tumbling down a ramp, then un-tumbling."
+    },
+    {
+      "id": 4,
+      "title": "Resting contact, friction, and the tower",
+      "status": "todo",
+      "what": "Stacking and resting contact; restitution and friction made reversible by writing the destroyed information to the tape. Knock over a tower of blocks, let it settle, reverse, and land on the exact starting state over 100,000+ steps. Control: the same scene with friction and restitution off leaves the tape empty.",
+      "demo": "The tower demo, forward and reverse, plus the measured tape cost."
+    },
+    {
+      "id": 5,
+      "title": "Second implementation and the browser scrub",
+      "status": "todo",
+      "what": "Port the kernel to JavaScript using BigInt, cross-check bit-for-bit against the Python kernel on every bundled scene, and ship a page with a scrub bar that plays any scene in both directions with no stored frames.",
+      "demo": "An openable page where dragging the scrub bar backwards runs the physics backwards."
+    },
+    {
+      "id": 6,
+      "title": "Package, document, finish",
+      "status": "todo",
+      "what": "Install check from a clean virtualenv, full test suite green, README with the demo above the prose and a status section naming what is not built, evidence script regenerating every number in the README.",
+      "demo": "The finished README."
+    }
+  ],
   "checklist": {
-    "hook_sentence_written": false,
+    "hook_sentence_written": true,
     "demo_exists": false,
-    "novelty_report_written": false,
+    "novelty_report_written": true,
     "core_implementation_done": false,
     "tests_passing": false,
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "notes": "ebb selected 2026-09-13 after a documented search (see projects/ebb/NOVELTY_REPORT.md) and recorded candidate rejections in IDEAS.md. Multi-run project: the checklist above tracks the whole project and must not be checked off per milestone. Milestone status lives in 'milestones'. Work is on branch claude/intelligent-mendel-ndp84t and still needs merging to main.",
   "completed_projects": [
     {
       "name": "backfire",

@@ -459,16 +459,70 @@ physical-layer literature that does work below that line is RF-flavoured. The
 wired-embedded case, starting from sampled logic levels with no knowledge of which
 line is the clock, no bit rate, no encoding and no framing, and ending in a
 *runnable decoder*, is where the two bodies of work do not meet.
-**Live risks, unresolved:** (a) the gap may be an artefact of my search terms
-rather than the world -- `AGENT_RULES.md` warns that genuinely empty regions are
-rarer than they look, and the honest prior is that this is partly covered
-somewhere I did not look; (b) ground truth. Synthesised captures would make the
-evaluation circular, and `IDEA_DOMAINS.md` sets verifiability >= 4. The
-sigrok-dumps archive is public and labelled and is the obvious answer, but it was
-**not inspected this run** and the whole candidate depends on it being real and
-usable. That is the next concrete step.
+**Ground truth: resolved, and it is real.** Checked later in the same run.
+`sigrok-dumps` (https://github.com/sigrokproject/sigrok-dumps, mirror of
+git://sigrok.org/sigrok-dumps) is a corpus of **real** logic-analyser captures --
+not synthesised -- organised into **60+ protocol directories** (i2c, spi, uart,
+can, jtag, onewire, ps2, usb, dali, dcc, dmx512, flexray, sent, swd, swim,
+wiegand, morse, miller, graycode, nonstandard_eeproms, misc and many more), in
+sigrok's `.sr` session format, and **released into the public domain by their
+authors** unless noted otherwise. Public domain matters twice here: it satisfies
+the lawfully-obtained-artifacts constraint in the reverse-engineering section of
+`AGENT_RULES.md`, and it removes any terms-of-service question.
+
+**The evaluation design this makes possible**, which is the part that lifts
+verifiability: hold out the directory label, feed the system only raw samples, and
+require it to recover which line is the clock, the bit rate, the encoding and the
+framing with no knowledge of protocol identity. Score the recovered framing
+against sigrok's own reference decoder output for that capture. Evaluating on
+*known* protocols is not a contradiction of the unknown-protocol framing -- it is
+the only way to get ground truth, and it is sound precisely because the method is
+forbidden to use the identity.
+
+**Live risk that remains:** the gap may be an artefact of my search terms rather
+than the world. `AGENT_RULES.md` warns that genuinely empty regions are rarer than
+they look, and the honest prior is that some of this is covered somewhere I did
+not look. Another search round is warranted before committing, not after.
+
 Scores (hook 4, reach 4, demo-ability 4, originality 3, difficulty-worth-it 4,
-monetizability 3). Originality is a 3, not higher, because of the RF literature.
+monetizability 3; verifiability 4 after the corpus check). Originality stays 3,
+not higher, because of the RF blind-recovery literature. Under `IDEA_DOMAINS.md`
+section 3 this clears verifiability >= 4 but sits **below the novelty >= 4
+requirement**, and that is the single thing standing between it and selection.
+Resolving it means either finding the framing that makes it genuinely a 4, or
+dropping the candidate. Do not round a 3 up.
+
+### Red team on P1, written before any implementation
+
+*The closest existing thing.* sigrok's own decoder collection -- over a hundred
+hand-written decoders covering essentially every protocol in the corpus. Then the
+academic protocol-reverse-engineering field for message formats, and the RF blind
+demodulation and blind frame synchronisation literature for the physical layer.
+Auto-detecting which of UART/I2C/SPI a capture is, is patented and shipped.
+
+*Why a stranger would shrug.* "My logic analyser already decodes I2C." That
+objection is fatal to the wrong version of this project, and it has to be answered
+by the demo rather than by prose: the demo has to be a bus for which **no decoder
+exists**, where the tool produces a runnable one. On a known protocol this will
+always look like a worse version of a decoder someone already wrote by hand, and
+any demo on I2C is a demo of the wrong thing.
+
+*The part only interesting to its author.* The clock-recovery and encoding
+inference machinery. It is the intellectually satisfying half and a stranger does
+not care about it at all; they care whether a decoder came out and whether it
+works.
+
+*Answering the objections, honestly.* The first is answerable only by finding a
+genuinely undocumented capture to demo on. The `nonstandard_eeproms` and `misc`
+directories are the obvious place to look and **that check has not been done**. If
+no such capture can be found, the demo collapses to "reproduces decoders that
+already exist", the hook stops being literally true, and the candidate should be
+dropped rather than shipped with a quieter claim. The second objection is
+answerable by scope discipline: the deliverable is the emitted decoder and the
+inference machinery is the implementation. **The first objection is real and I
+cannot fully answer it yet** -- `AGENT_RULES.md` says an unanswered objection
+becomes the first thing a reader notices later, so it is recorded as open, not as
+settled.
 
 ### P7 — a representation for a circuit you only partly know
 Hook attempt: *"A wiring diagram that can say 'I cannot tell' about one specific
@@ -482,9 +536,23 @@ D3 demands calibrated per-net, per-component confidence and the ability to say
 a partially-known netlist -- existing formats assert connectivity as fact. A
 board reconstructed from photographs, from Gerbers, and from X-ray would each be
 partial evidence this could merge.
-**Not searched.** This is the highest-value unsearched entry in the pool and the
-first thing the next run should investigate, because it is the one candidate that
-answers "what becomes buildable?" with a list rather than a use case.
+**Searched once, 2026-09-13**: "representation for partially known netlist
+uncertainty per-net confidence probabilistic circuit reconstruction calibrated".
+**No materially equivalent prior art surfaced** -- but treat that as weak
+evidence, for one specific and recordable reason: **the terminology collides.**
+"Probabilistic circuit" is an established term for something entirely different,
+a tractable probabilistic model class in the sum-product-network family
+(https://arxiv.org/abs/2302.06544, and Van den Broeck's IJCAI-20 tutorial), and it
+swamps the query. The only genuinely adjacent hit -- probabilistic reconstruction
+of a network from partial knowledge -- is from gene regulatory networks
+(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3236852/), not electronics.
+A future search has to route around the collision: try "netlist confidence",
+"uncertain connectivity", "partial netlist extraction", "LVS with unknowns", and
+the PCB-reverse-engineering vocabulary rather than the machine-learning
+vocabulary. Until that is done this is unsearched in substance.
+It remains the highest-value open entry in the pool on the upstream-primitive
+rule, because it is the one candidate that answers "what becomes buildable?" with
+a list rather than a use case.
 **Known risk before searching:** it may collapse into "a netlist with confidence
 floats attached", which is a data schema, not an invention. What would make it
 real is the *evidence-combination algebra* -- what happens when two images
@@ -570,11 +638,37 @@ rule is pointing at something real.
 **Why nothing was selected.** The two candidates that scored best on the
 upstream-primitive rule -- P4 (canonical circuit fingerprint) and P3 (semantic
 netlist diff) -- both turned out to be occupied, one by a mature EDA field and one
-by a funded product using the same framing. The best survivor, P1, has an
-originality score of 3 and a ground-truth dependency that was not verified this
-run. Selecting it now would be choosing the best candidate on the current list,
-which `AGENT_RULES.md` explicitly forbids, rather than one I would be disappointed
-to lose.
+by a funded product using the same framing.
+
+P1 is the provisional front-runner and its ground-truth dependency was resolved
+favourably later in the run: `sigrok-dumps` is real, public domain, 60+ protocol
+directories of genuine captures, and supports a held-out evaluation that lifts
+verifiability to 4. **Two things still stand between it and selection**, and
+neither is a formality:
+
+1. **Novelty is a 3, and `IDEA_DOMAINS.md` section 3 requires >= 4.** The RF
+   blind-recovery literature is the reason. Either a framing is found that makes it
+   honestly a 4, or the candidate is dropped. Rounding a 3 up to clear a threshold
+   would be exactly the fabricated-score failure the rules warn about.
+2. **The red-team objection is unanswered.** The demo needs a capture of a bus with
+   no existing decoder. If every capture in the corpus already has a hand-written
+   sigrok decoder, the demo becomes "reproduces what exists", the hook stops being
+   literally true, and the candidate dies. Whether such a capture exists was not
+   checked.
+
+Selecting P1 now would be choosing the best candidate on the current list, which
+`AGENT_RULES.md` explicitly forbids, rather than one I would be disappointed to
+see someone else ship first. It is close. It is not there.
+
+**Pairwise comparison, top two.** P1 against P7, on "which would I be more upset
+to see someone else ship first": **P7**. A working representation for a
+partly-known circuit with a calibrated evidence algebra would be the thing other
+people's board-reconstruction work gets built out of, and P1 would be one of its
+consumers. P1 wins on demo-ability and on being nearly ready to start; P7 wins on
+the question the rules say does the most work. That is the strongest argument for
+spending the next run's search on P7 rather than starting P1 because it is
+available -- "you are choosing it because it is clearly finishable" is the listed
+signal of rushing, and P1 is the candidate that triggers it.
 
 **The honest structural observation, for the owner.** Every surviving candidate
 sits in electronics. That is a direct consequence of the filters rather than a

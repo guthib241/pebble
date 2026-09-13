@@ -107,13 +107,15 @@
       "demo_ability": 4,
       "originality": 3,
       "difficulty_worth_it": 4,
-      "monetizability": 3
+      "monetizability": 3,
+      "verifiability": 4
     },
-    "blocking_question": "Ground truth for P1. Synthesised captures make the evaluation circular and IDEA_DOMAINS.md requires verifiability >= 4. The public sigrok-dumps archive is the obvious source and was NOT inspected this run. P1 stands or falls on it.",
+    "blocking_question": "RESOLVED favourably: sigrok-dumps is real, public domain, 60+ protocol directories of genuine captures, and supports a held-out evaluation (hide the label; recover clock line, bit rate, encoding and framing from raw samples; score against sigrok's reference decoder). Verifiability is now 4. TWO NEW BLOCKERS on P1, neither a formality: (1) originality is 3 and IDEA_DOMAINS.md section 3 requires >= 4 -- find a framing that makes it honestly a 4 or drop it; do not round up. (2) The red-team objection is unanswered: the demo needs a bus with no existing decoder, and whether the corpus contains one was not checked. If it does not, the hook stops being literally true and P1 dies.",
     "next_steps": [
       "Re-read IDEAS.md section 5 cold before anything else - the mandatory gap-crossing check.",
-      "Inspect sigrok-dumps directly: does a labelled corpus of real captures exist, how large, how many protocols, usable as scored ground truth? This decides P1 and is cheap.",
-      "Search P7 (a representation for a partly-known circuit with an evidence-combination algebra and calibrated per-net confidence) - the highest-value unsearched entry.",
+      "Re-search P7 routing around the terminology collision: 'netlist confidence', 'uncertain connectivity', 'partial netlist extraction', 'LVS with unknowns', PCB-reverse-engineering vocabulary rather than ML vocabulary. Highest-value open question in the file.",
+      "Check whether sigrok-dumps/nonstandard_eeproms and misc hold a capture with no existing sigrok decoder. This decides whether P1's demo can exist, and therefore whether P1 survives. Do it before any more work on P1.",
+      "Run a second novelty round on P1 to settle whether originality is honestly 4 or stays 3. If it stays 3, drop it.",
       "Search ERC formalisation for P6/P12 (a type system for electrical connections); it survives only if the lattice and its soundness are the deliverable, else it is inside the shape ban.",
       "If none clears the bar, generate again. Do not settle."
     ],
@@ -129,7 +131,18 @@
       "IDEA_DOMAINS.md section 0.3 conflicts with notes/2026-09-13-external-repo-analysis.md: all ten of its proposed projects are agent-loop meta-tooling and are recorded as rejected. Say so if that reading is wrong.",
       "IDEA_DOMAINS.md section 5 'Action required' on LICENSE.txt is stale - the placeholders were filled in commit 3721576. Nothing is blocked.",
       "Every surviving candidate sits in electronics. That is the filters working as written (R6 removes D2/D5 in this container, R4 plus 0.3 remove D4, the shape ban removes the checker skeleton), not a preference. If a microcontroller or a logic analyser is actually available, D2 and D5 reopen immediately."
-    ]
+    ],
+    "pairwise_top_two": "P7 beats P1 on 'which would I be more upset to see someone else ship first'. P7 is the thing other board-reconstruction work would be built out of; P1 would be one of its consumers. P1 wins only on demo-ability and on being nearly ready to start, which is the listed signal of rushing. P7's search this run collided with terminology ('probabilistic circuit' is an established term for an unrelated model class) so in substance it is still unsearched.",
+    "ground_truth_corpus": {
+      "name": "sigrok-dumps",
+      "url": "https://github.com/sigrokproject/sigrok-dumps",
+      "upstream": "git://sigrok.org/sigrok-dumps",
+      "content": "real logic-analyser captures, not synthesised, in sigrok .sr session format",
+      "breadth": "60+ protocol directories: i2c spi uart can jtag onewire ps2 usb dali dcc dmx512 flexray sent swd swim wiegand morse miller graycode nonstandard_eeproms misc and more",
+      "licence": "released into the public domain by their authors unless noted otherwise",
+      "why_it_matters": "satisfies the lawfully-obtained-artifacts constraint in the reverse-engineering rules and removes any terms-of-service question; enables a held-out evaluation that lifts P1 verifiability to 4",
+      "verified": "2026-09-13, by fetching the repository listing directly"
+    }
   },
   "control_files": [
     "AGENT_RULES.md",

@@ -155,27 +155,62 @@ levels is where the two do not meet. Its originality scores 3, not higher, becau
 of that RF literature. Identifying a *known* protocol from a capture is dead —
 patented and implemented — so only the unknown-protocol framing survives.
 
-**The specific open question blocking the choice: ground truth for P1.**
-Synthesised captures would make the evaluation circular, and `IDEA_DOMAINS.md`
-sets verifiability ≥ 4. The public sigrok-dumps archive is the obvious source and
-**was not inspected this run**. The candidate stands or falls on it.
+**The ground-truth question was resolved later in the run, favourably.**
+`sigrok-dumps` (github.com/sigrokproject/sigrok-dumps) is real: a corpus of
+genuine logic-analyser captures, not synthesised, in 60+ protocol directories
+(i2c, spi, uart, can, jtag, onewire, dali, flexray, swd, morse, graycode,
+nonstandard_eeproms, misc and more), in sigrok's `.sr` format, **released into the
+public domain**. Public domain matters twice: it satisfies the
+lawfully-obtained-artifacts constraint in the reverse-engineering rules, and it
+removes any terms question. It supports a genuinely held-out evaluation — hide the
+directory label, require recovery of clock line, bit rate, encoding and framing
+from raw samples alone, score against sigrok's own reference decoder — which
+lifts P1's verifiability to a defensible 4.
+
+**Two things still block selecting P1, and neither is a formality:**
+
+1. **Novelty scores 3, and `IDEA_DOMAINS.md` §3 requires ≥ 4.** The RF
+   blind-recovery literature is why. Either a framing is found that makes it
+   honestly a 4, or the candidate is dropped. Rounding a 3 up to clear a threshold
+   is the fabricated-score failure the rules exist to prevent.
+2. **The red-team objection is unanswered.** Written out in full in `IDEAS.md`:
+   the demo needs a bus with no existing decoder. If every capture in the corpus
+   already has a hand-written sigrok decoder, the demo becomes "reproduces what
+   already exists", the hook stops being literally true, and the candidate dies.
+   Not checked.
+
+**Pairwise, on the question the rules say does the most work** — which would I be
+more upset to see someone else ship first — **P7 beats P1**. A working
+representation for a partly-known circuit, with a calibrated evidence-combination
+algebra, is the thing other people's board-reconstruction work would be built out
+of; P1 would be one of its consumers. P1 wins only on demo-ability and on being
+nearly ready to start, and "you are choosing it because it is clearly finishable"
+is the listed signal of rushing. P7's own search this run collided with
+terminology — "probabilistic circuit" is an established term for an unrelated
+model class and swamped the query — so in substance it is still unsearched.
 
 **Next concrete steps, in order:**
 
 1. Re-read `IDEAS.md` section 5 cold, before anything else. That is the mandatory
    gap-crossing check; an entry that no longer reads well was infatuation.
-2. Inspect sigrok-dumps directly — does a labelled corpus of real captures exist,
-   how many, how many distinct protocols, and is it usable as scored ground truth?
-   This decides P1 and is cheap.
-3. Search **P7** (a representation for a partly-known circuit, with an
-   evidence-combination algebra and calibrated per-net confidence). It is the
-   highest-value *unsearched* entry and the only remaining candidate that answers
-   "what becomes buildable?" with a list. Its known risk is collapsing into "a
-   netlist with confidence floats", which would fail Gate A.
-4. Search ERC formalisation for **P6/P12** (a type system for electrical
+2. Re-search **P7** with vocabulary that routes around the terminology collision:
+   "netlist confidence", "uncertain connectivity", "partial netlist extraction",
+   "LVS with unknowns", and PCB-reverse-engineering terms rather than
+   machine-learning ones. This is the highest-value open question in the file.
+   Its known risk: if it collapses into "a netlist with confidence floats
+   attached" it is a schema, not an invention, and fails Gate A. What would make
+   it real is the evidence-combination algebra and whether the confidences come
+   out *calibrated* against ground truth rather than asserted.
+3. Check whether `sigrok-dumps/nonstandard_eeproms` and `misc` contain a capture
+   with no existing sigrok decoder. This decides whether P1's demo can exist at
+   all, and therefore whether P1 survives. Cheap, and it should be done before any
+   more work on P1.
+4. Run a second novelty round on P1 to settle whether originality is honestly a 4
+   or stays a 3. If it stays a 3, drop it.
+5. Search ERC formalisation for **P6/P12** (a type system for electrical
    connections), which survives only if the lattice and its soundness are the
    deliverable and the checker is one demo — otherwise it is inside the shape ban.
-5. If none of these clears the bar, generate again. Do not settle.
+6. If none of these clears the bar, generate again. Do not settle.
 
 ### One structural observation for the owner
 

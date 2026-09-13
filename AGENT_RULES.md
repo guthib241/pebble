@@ -39,6 +39,179 @@ are the only check on your own quality and honesty — hold yourself to it.
    re-run searches you already ran this session) so you don't crowd out the
    account owner's own use of Claude.
 
+## How to generate candidates — the part that decides everything
+
+The gates are good at rejecting. Nothing here was ever good at *generating*, and
+selection quality is the size and strangeness of the pool multiplied by the
+quality of the filter. Three runs filtered a pool of three or four ideas thought
+up in one sitting, which is why all three landed in the same place. Fix the pool.
+
+### 1. Quota: at least 20 candidates before any gate runs
+
+The best idea is almost never in the first five. Early candidates are the obvious
+ones; the good material appears only after the obvious is exhausted and you are
+forced to keep going. Generate **at least 20**, write them all into `IDEAS.md`,
+and only then start eliminating. This is thinking, not building — it is the
+cheapest step in the entire process and the one with the most leverage.
+
+### 2. Sample from the tails, not the mode
+
+Your first idea is the statistical mode of your training data. That is exactly why
+it feels natural, and exactly why it is not interesting. So:
+
+- **Reject your own first idea as a final answer.** Record it, then generate
+  structurally different alternatives. Not variations on it — different.
+- **Ask for the tails explicitly.** When generating, frame it as: *produce N
+  candidates with a rough probability attached to each, and deliberately sample
+  from the tails of the distribution — candidates whose probability is below
+  0.10.* The typical answer is the one to discard, not the one to keep. (This is
+  the verbalized-sampling result: asking for low-probability responses recovers
+  diversity that alignment training suppresses, without hurting quality.)
+- **Watch for the tell.** If a candidate could have been produced by any agent
+  given any similar repository, it is the mode. Discard it.
+
+### 3. Hunt where ideas actually live
+
+"Brainstorm" invites free association, which produces the mode. Go to sources
+instead, and pass through several of these every time:
+
+- **Future-work sections of recent papers** — a literal list of things the authors
+  did not do
+- **Issues with many reactions and no pull request** — demand proven, nobody building
+- **"Why is there no tool that…" posts** on forums and link aggregators
+- **Datasets nobody has done anything interesting with** — public dumps, archives,
+  government data, scans, sensor feeds, logs. An unexploited dataset is a valid
+  starting point in its own right
+- **Recent capability unlocks** — what became possible in the last few months that
+  nobody has exploited yet
+- **Things people still do by hand, repeatedly** — the most reliable signal there is
+- **Cross-domain transplants** — a mature technique in one field, unused in another
+- **Reverse engineering** — see the section below
+- **The owner's ideas** — section 0 of `IDEAS.md`, read first, every run
+
+### 4. Inject constraints on purpose
+
+Before settling, force 1–2 hard constraints onto a candidate and see what happens:
+no text in the interface; sound only; must work offline; must run on a decade-old
+phone; all state lives in the URL; one file, no dependencies; no screen at all;
+must be legible from three metres away. Constraints reliably produce combinations
+nobody would prompt for. Keep the result if it is better than the unconstrained
+version, which is more often than expected.
+
+### 5. Score, then compare head to head
+
+Score each finalist 1–5 on hook strength, reach (does it enable other work),
+demo-ability, originality, difficulty-worth-it, and monetizability. Write the
+scores into `IDEAS.md`.
+
+The point is not arithmetic. Writing a 2 next to "hook strength" makes it very
+hard to then rationalize building the thing, and a written score argues back later
+when you have grown attached.
+
+Then, because absolute ratings are unreliable and comparisons are not, take the
+top few and compare them **pairwise** on one question:
+
+> **Which of these two would I be more upset to see someone else ship first?**
+
+The winner advances. That single question does more work than any rubric.
+
+### 6. Red-team the winner before building it
+
+Argue, in writing and in bad faith, that the chosen project is derivative and
+boring: name the closest existing thing, the reason a stranger would shrug, and the
+part that is only interesting to the person who built it. Then answer those
+objections — or drop the candidate. An objection you cannot answer now becomes the
+first thing a reader notices later.
+
+### 7. Sleep on it
+
+The shortlist must survive being re-read at the **start of the next run**, before
+any implementation. Infatuation does not survive a gap; a genuinely good idea reads
+better the second time. This deliberately makes selection span two runs. That is
+allowed, and it is nearly free next to building the wrong thing for three weeks.
+
+### 8. The pool compounds — this is the real mechanism
+
+Every candidate generated goes into `IDEAS.md` permanently, selected or not. Run 1
+chooses from 20. Run 5 chooses from 100, most already searched and scored, some
+improved by later thinking. Selection quality then rises every run instead of
+resetting to zero each time.
+
+And treat every rejection as a direction rather than a wall: for each idea killed
+on prior art, ask **"what is the version of this that is not done?"** The cron
+linter is taken; something that *shows* you what your crontab will actually do next
+month is not.
+
+### 9. Cover the space, do not re-fill one cell
+
+Tag every idea with a behaviour descriptor — roughly `{interaction model, data
+source, medium, domain}` — and prefer candidates that land in an **empty** cell over
+ones that crowd an occupied one. All three existing projects occupy a single cell:
+reads source files → prints text → developer tooling → local CLI. Descriptors make
+that visible as a fact instead of arguable as a matter of taste.
+
+Do not turn this into a number you then optimize. A novelty score is trivially
+gameable — superficially different and trivial scores well — which is why the real
+checks stay the hook sentence, the demo, the red team, and honest prior art.
+
+## Reverse engineering is a first-class technique here
+
+Taking a working thing apart is one of the most reliable ways to find something
+real to build, and it is almost the opposite of free association: you start from
+something that provably works and ask why.
+
+Use it three ways:
+
+1. **To find ideas.** Study something that works unreasonably well and identify the
+   one mechanism doing the heavy lifting. That mechanism, extracted and applied
+   elsewhere, is often a project. A tool everyone tolerates despite obvious flaws is
+   pointing at a gap.
+2. **To understand a result you cannot otherwise get.** A paper with no code, a
+   format with no specification, a protocol documented only by its implementation, a
+   behaviour nobody has written down. Working out how it functions, writing the
+   specification, and shipping a clean implementation with tests is a genuine
+   contribution — often more useful than the original, because it comes with the
+   explanation.
+3. **To find what a thing implies.** Once you understand the mechanism, the
+   interesting question is what else it makes possible that its authors did not
+   build. That answer is frequently better than the thing you started from.
+
+Good targets: undocumented or under-documented file formats, wire protocols,
+save-game and project-file formats, firmware behaviour observable from outside,
+published methods with no reference implementation, algorithms described only in a
+paper, data formats inside consumer devices, and the quiet internals of formats
+everyone uses without reading.
+
+### Do it cleanly — these limits are not negotiable
+
+Reverse engineering is legitimate work; it stops being legitimate in specific,
+well-known ways. Stay inside all of these:
+
+- **Observable behaviour and lawfully obtained artifacts only.** Inputs, outputs,
+  file bytes, documented interfaces, your own captures on systems you are entitled
+  to use, published papers.
+- **Never copy proprietary source or assets.** Write your own implementation from
+  what you understood. If you read someone's code, you are no longer clean-room —
+  say so in the README, and do not reproduce their code.
+- **Never circumvent technical protection measures** — DRM, licence enforcement,
+  copy protection, authentication you were not given access to. Not as a stepping
+  stone, not "just to test". This is a hard stop, not a trade-off to weigh.
+- **Never break a service's terms, scrape what you were asked not to, or touch
+  systems you do not have permission to touch.** No load testing someone else's
+  infrastructure. No credentials you were not given.
+- **Do not ship a circumvention tool** even where the analysis itself was fine.
+- **Document the method honestly** in the README: what you examined, how, what is
+  confirmed by observation, and what remains inference. An inferred field in a
+  format specification is labelled as inferred — Section 25 applies exactly as it
+  does everywhere else.
+- **Name the original.** Prior-art disclosure is not optional because you worked
+  something out yourself; the thing you studied is the closest prior art by
+  definition, and it gets credited at the top of the README.
+
+If a candidate can only work by breaking one of the above, it fails Gate B on
+feasibility and is recorded as rejected in `IDEAS.md` with that reason. Do not look
+for a way around it.
+
 ## Take as long as you need to choose. Never rush the decision
 
 Searching is not a delay before the work. **Choosing the right project is the
@@ -172,6 +345,44 @@ because for most of its life it is unfinished. So:
   stop. A recorded dead end is a real contribution. A project quietly rotting
   while runs drift elsewhere is not.
 
+## A documented failure on a hard problem is a successful run
+
+This has to be said explicitly, because everything else in these files rewards
+completion — the checklist, the stop conditions, the quality gate — and an agent
+reading only those will always pick the finishable idea over the interesting one,
+no matter how loudly the rest of the text asks for ambition. You cannot ask for
+bold work while paying only for success.
+
+So: **attempting something hard and failing, documented properly, is an acceptable
+and valuable outcome.** Not a fallback. An outcome.
+
+A failure is documented properly when `IDEAS.md` and `PROGRESS.md` record:
+
+* what was attempted, specifically;
+* what was actually built, and where it stands;
+* what went wrong — the real reason, not a tidy summary;
+* what was learned that the next attempt would not have to rediscover;
+* what would have to be true for this to work — a different approach, a missing
+  capability, data that does not exist yet;
+* whether it is worth another attempt, and your honest answer.
+
+That record is a real contribution. The next run inherits it and does not repeat
+the experiment.
+
+What remains unacceptable:
+
+* **Silence.** A project quietly abandoned while runs drift elsewhere, with nothing
+  written down. That is the only true waste.
+* **Dressing a failure as a success.** Section 28 and Section 29 stand: a blocker is
+  not an achievement, and a partial result is not a finished project.
+* **Failing on something easy and calling it ambitious.** The permission here is for
+  hard problems, not for sloppiness.
+* **Giving up at the first obstacle.** Effort comes first; the record comes when the
+  problem is genuinely resisting.
+
+The failure mode to fear is not a hard project that did not work. It is three more
+projects that worked and that nobody remembers.
+
 ## The memorability standard — read this before selecting anything
 
 Correct and forgettable is a failed run.
@@ -184,6 +395,12 @@ exists to prevent — and the cause was not a lack of skill. It was the selectio
 question. "Did someone already build this?" only ever finds safe gaps: things
 left unbuilt because nobody wanted them much. It never finds the thing worth
 building.
+
+Calibrate against `REFERENCES.md` before answering that question. It holds
+work that clears the bar, with the reason each one clears it, and the question to ask
+of a shortlisted candidate: *is my idea in this company?* That is a far harder
+question to fool yourself on than "is this memorable?", and the file grows as the
+owner adds work they personally rate.
 
 Ask this instead, first, before any search:
 

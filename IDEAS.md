@@ -22,12 +22,76 @@ be compared against the real code rather than against a description of it.
 * Include the date, the hook sentence attempt (even a failed one), what was
   searched, and the specific reason for the outcome. Links to prior art are
   required in section 2.
+* Include a behaviour descriptor — `{interaction model, data source, medium,
+  domain}` — so repeated cells are visible. All three existing projects share one:
+  reads source files, prints text, developer tooling, local CLI.
+* For finalists, include the 1-5 scores (hook, reach, demo-ability, originality,
+  difficulty-worth-it, monetizability) and the pairwise comparison result.
 * An idea may be **moved** between sections when something real changes — a hook
   is found, prior art turns out to be weaker than it looked, the environment gains
   a capability. Moving it means editing its entry and noting what changed and
   when. It does not mean deleting the history.
 * Never move an idea upward to justify building it. If the reason for the move is
   "I want to build this," that is not a reason.
+
+---
+
+## 0. The owner's ideas — read first, every run
+
+Ideas from the repository owner. They are not exempt from any gate: prior art,
+problem value, feasibility and the hook all apply exactly as they do to your own
+candidates. But they are considered **first**, and if you pass on one you record why
+here, in a sentence, so the owner can see your reasoning and push back.
+
+Treat a half-formed entry as a seed, not a specification. "Green screen but for X",
+a dataset someone noticed, a stray observation — the value is the direction. Your
+job is to find the buildable, surprising version of it.
+
+Owner: add anything here, any time, in any state. One line is enough.
+
+### Pebble Evolve — an evolutionary loop that breeds projects instead of picking one
+Added 2026-09-13, from an external analysis of this repository.
+
+The proposal: stop selecting one project per run. Instead keep a population, mutate
+it, score each child on correctness plus distance from everything already built plus
+a personal taste signal, and keep the surprising winners in an archive organised by
+behaviour descriptor — so the system covers the space of possible projects rather
+than converging on one. Related real work, all verified to exist: AlphaEvolve
+(DeepMind, 2025), FunSearch, OpenEvolve, and ShinkaEvolve (Sakana AI,
+arXiv:2509.19349, Apache-2.0, reports a state-of-the-art circle packing result from
+150 samples using parent sampling, code-novelty rejection sampling and bandit-based
+model-ensemble selection). Quality-diversity background: MAP-Elites and novelty
+search. Interestingness-as-filter background: OMNI and OMNI-EPIC.
+
+**Status: not yet evaluated.** It has not been through the gates and must not be
+started as though it had. Specific things to resolve first:
+
+* **Prior art is crowded.** Evolutionary LLM code search is an active, published,
+  open-source field. Anything resembling "an evolutionary loop over programs" fails
+  the material equivalence test on its own. The parts that looked unclaimed in the
+  original analysis are (a) applying this at the level of whole user-facing
+  projects rather than single algorithms or functions, and (b) a taste signal
+  personal to one owner rather than a generic interestingness model. Those two are
+  the claim to test, and they must be searched properly, not assumed.
+* **The taste model needs data that does not exist yet.** It requires a body of the
+  owner's own delight ratings. There are none. Until there are, that component
+  cannot be built and must not be described as though it could.
+* **Novelty scores are gameable.** The original proposal included a numeric novelty
+  threshold. Do not adopt that: a fabricated score violates Section 19, and
+  superficially-different-but-trivial output scores well on exactly this kind of
+  metric. The generation mechanics already in `AGENT_RULES.md` take the useful parts
+  — tail sampling, first-idea rejection, behaviour descriptors, pairwise comparison,
+  red-teaming — without inventing a number.
+* **Scope.** Implemented in full this is a product, not a project in this
+  repository's sense. A bounded first milestone would be a vertical slice: one
+  archive, one descriptor scheme, real candidates, and a visible result — not the
+  whole engine.
+
+Also from that analysis and already adopted into the rules, so not pending:
+verbalized sampling / tail sampling, rejecting your own first idea, constraint
+injection, cross-domain transfer, behaviour descriptors, and the red-team pass.
+
+### (add yours below)
 
 ---
 

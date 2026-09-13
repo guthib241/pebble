@@ -61,8 +61,12 @@ Before writing code, read these files completely, in this order:
 2. `PROGRESS.md`
 3. `TASKS.json`
 4. `IDEAS.md`
+5. `REFERENCES.md`
 
 Do not skim them.
+
+`REFERENCES.md` calibrates the quality bar: work that clears it, and why. Compare
+every shortlisted candidate against it before selecting.
 
 `IDEAS.md` is the permanent record of every idea this repository has considered and
 what happened to it. Read it before generating any candidate. An idea already
@@ -172,7 +176,35 @@ When the repository requires a new project, do not immediately choose the first 
 
 Generate a candidate set internally and eliminate candidates using these gates.
 
-Candidate generation has three requirements:
+Candidate generation is governed by the generation section of `AGENT_RULES.md`,
+which is mandatory, not advisory. Its hard requirements:
+
+* **At least 20 candidates** recorded in `IDEAS.md` before any gate is applied.
+* **The first idea is rejected as a final answer** and recorded as rejected.
+  Generate structurally different alternatives, not variations of it.
+* **Sample from the tails.** Generate with rough probabilities attached and
+  deliberately take low-probability candidates (below roughly 0.10) over the
+  typical one. The natural-feeling answer is the training-data mode.
+* **Pass through the listed sources** — paper future-work sections, high-reaction
+  issues with no pull request, "why is there no tool that" posts, unexploited
+  datasets, recent capability unlocks, work done by hand repeatedly, cross-domain
+  transplants, reverse engineering, and the owner's ideas in section 0 of
+  `IDEAS.md`, which are read first.
+* **Score the finalists** 1-5 on hook strength, reach, demo-ability, originality,
+  difficulty-worth-it and monetizability, written into `IDEAS.md`, then compare the
+  top few **pairwise** on: which would I be more upset to see someone else ship
+  first.
+* **Red-team the winner in writing** before implementation: the closest existing
+  thing, why a stranger would shrug, and the part only interesting to its author.
+  Answer those objections or drop the candidate.
+* **Sleep on it.** The shortlist must survive a re-read at the start of the next run
+  before implementation begins. Selection may therefore span two runs by design.
+* **Tag each candidate with a behaviour descriptor** — interaction model, data
+  source, medium, domain — and prefer empty cells over occupied ones. Do not convert
+  this into a score to optimize; novelty scores are gameable, and the real checks
+  remain the hook sentence, the demo, the red team and honest prior art.
+
+Candidate generation also has three structural requirements:
 
 * **Breadth of form.** The candidate set must span more than one shape of
   artifact. Do not generate five command-line tools. Web and interaction work,
@@ -834,6 +866,15 @@ Before execution of external code, scripts, installers, or commands obtained fro
 
 Novelty does not override safety.
 
+Reverse engineering is an approved technique and is bounded by the reverse
+engineering section of `AGENT_RULES.md`. Restated because these are hard stops:
+observable behaviour and lawfully obtained artifacts only; never copy proprietary
+source or assets; never circumvent technical protection measures such as DRM,
+licence enforcement or authentication, including as an intermediate step; never
+breach a service's terms or touch systems without permission; never ship a
+circumvention tool. A candidate that requires any of these fails Gate B and is
+recorded as rejected. Do not search for a way around this.
+
 If the proposed project introduces meaningful security, privacy, or safety risks, identify them and constrain the implementation accordingly.
 
 ---
@@ -888,6 +929,11 @@ complete in `TASKS.json` until the definition of done is actually reached.
 
 ### Selection
 
+* [ ] At least 20 candidates were generated and recorded in `IDEAS.md`.
+* [ ] The first idea was rejected as a final answer and recorded.
+* [ ] Finalists were scored, and the top few compared pairwise.
+* [ ] The winner was red-teamed in writing and the objections answered.
+* [ ] The shortlist survived a re-read after a gap, not chosen and built in one sitting.
 * [ ] A hook sentence was written before implementation and recorded.
 * [ ] The project has a ten-second demo that needs no installation.
 * [ ] The project is outside the shape ban in `AGENT_RULES.md`.
@@ -990,7 +1036,23 @@ A candidate was rejected because prior art materially overlaps it, and the rejec
 
 Execution could not safely or realistically continue because of a documented blocker. The repository records the exact state and reason.
 
-Do not convert Outcome B or C into Outcome A through optimistic wording.
+### Outcome D — Documented failure on a hard problem
+
+An ambitious attempt was made and did not work, and the record in `IDEAS.md` and
+`PROGRESS.md` states what was attempted, what was built, what went wrong, what was
+learned, what would have to be true for it to work, and whether another attempt is
+warranted. This is an acceptable and valuable outcome, not a failed run — see the
+failure section of `AGENT_RULES.md`. It does not license abandoning work silently,
+calling a partial result finished, or failing at something easy.
+
+### Outcome E — Selection only
+
+The run generated and searched candidates and either chose one to build next run or
+determined that none yet clears the bar. `IDEAS.md` and `PROGRESS.md` record every
+candidate, the searches performed, the scores, and what remains unresolved. No
+implementation was produced, and none should have been.
+
+Do not convert Outcome B, C, D or E into Outcome A through optimistic wording.
 
 ---
 

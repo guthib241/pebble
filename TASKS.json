@@ -11,7 +11,7 @@
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "notes": "No project started. Run 4 (2026-09-13) was a selection run: 34 candidates generated and recorded in IDEAS.md, five searched for prior art, four scored and compared pairwise, winner red-teamed in writing. The winner is under pending_selection below. It is NOT current_project yet: AGENT_RULES generation rule 7 requires the shortlist to survive a re-read at the start of the next run before implementation begins. Next run: re-read IDEAS.md section 4 cold, then either promote pending_selection into current_project (writing NOVELTY_REPORT.md first, per protocol section 12) or record why it reads worse and return to the pool in IDEAS.md section 5.",
   "completed_projects": [
     {
       "name": "backfire",
@@ -92,5 +92,91 @@
       "claude/optimistic-pasteur-metblz",
       "claude/clever-cannon-pmg737"
     ]
-  }
+  },
+  "pending_selection": {
+    "name": "pivot",
+    "selected": "2026-09-13",
+    "confirmed": false,
+    "confirm_first": "Re-read IDEAS.md section 4 before any implementation. Sleep-on-it rule.",
+    "hook_sentence": "Finds the way to turn your sofa through the door - or proves there isn't one, and names the centimetre that would fix it.",
+    "description": "Plans how to move furniture through tight spaces, or proves it cannot.",
+    "behaviour_descriptor": {
+      "interaction_model": "describe a space and an object, watch the move",
+      "data_source": "the user's own measurements",
+      "medium": "animation plus a checkable proof",
+      "domain": "everyday logistics and geometry"
+    },
+    "definition_of_done": "pivot is done when a person can describe a real space - a 2D floor plan, or a stairwell given as a handful of measurements - together with a real object, and get back one of exactly three answers, each carrying evidence they can check themselves. First: a motion, given as the sequence of positions and rotations that gets the object through, animated, and written out as instructions a person can follow, certified collision-free by exact arithmetic rather than by sampling. Second: a proof that no motion exists, showing the pinch point and the smallest dimensional change that would make it possible. Third: an explicit 'too tight to decide' when the geometry falls inside the solver's stated resolution limit - it never guesses. Done requires the 2D case fully certified, the 3D case working for box-shaped objects through stairwells with tilt, a demo that runs in a browser with no install, and a test suite that includes analytic controls (the closed-form longest-rod-around-a-corner result) and randomised differential tests against a brute-force checker. Not done until a stranger can run it on their own doorway from the README alone.",
+    "milestones": [
+      {
+        "id": 1,
+        "name": "vertical slice: rectangle through an L-corridor, in 2D",
+        "status": "not_started",
+        "working_artifact": "an animation of the turn, committed, plus the certified verdict",
+        "notes": "The real thing done badly, end to end, on one real input. Exact rational arithmetic. Control check: the closed-form longest rod that passes a right-angled corner between corridors of widths a and b."
+      },
+      {
+        "id": 2,
+        "name": "arbitrary polygonal object and arbitrary floor plan",
+        "status": "not_started",
+        "working_artifact": "same demo, now on a multi-room plan with doorways"
+      },
+      {
+        "id": 3,
+        "name": "the missing centimetre: minimal dimensional relaxation when blocked",
+        "status": "not_started",
+        "working_artifact": "pinch point rendered, with the number next to it",
+        "notes": "Prior art exists at concept level (minimum constraint removal / displacement) and must be credited, not claimed."
+      },
+      {
+        "id": 4,
+        "name": "choreography: the move as human instructions, and a no-install viewer",
+        "status": "not_started",
+        "working_artifact": "browser page that plays the move and lists the steps"
+      },
+      {
+        "id": 5,
+        "name": "three dimensions: boxes through stairwells, with tilt",
+        "status": "not_started",
+        "working_artifact": "animated 3D move or certified blockage, within stated limits"
+      },
+      {
+        "id": 6,
+        "name": "ship it: README with the demo above the prose, evidence runs, honest status",
+        "status": "not_started",
+        "working_artifact": "the finished folder, reproducible from a clean clone"
+      }
+    ],
+    "open_questions_for_milestone_1": [
+      "Certificate scheme for a free motion: exact clearance at sampled configurations plus a Lipschitz bound on point displacement along each segment, so a whole segment is certified rather than a set of poses.",
+      "Certificate scheme for blockage: a cover of configuration space by boxes each proven entirely colliding, plus separation of start and goal in the free-space graph. Termination is not guaranteed for near-degenerate geometry - that case must report 'too tight to decide' instead of guessing.",
+      "Keeping arithmetic exact under rotation: rational parameterisation of the rotation (tangent half-angle) keeps cos and sin rational, so the whole pipeline can stay in fractions.Verify this survives the clearance computation before committing to it.",
+      "Configuration-space representation and search order over (x, y, theta)."
+    ],
+    "closest_prior_art": {
+      "consumer": "Closed-form 'will my sofa fit' calculators; Smart Moving: Furniture helper (closed source, measurement-first).",
+      "research": "Yap et al. soft subdivision search, resolution-exact SE(2) planners (arXiv:1704.05123, arXiv:1903.09416); CAD-based exact piano-movers planning reported infeasible in practice (arXiv:1309.1588); motion-planning infeasibility proofs (arXiv:2406.04795, arXiv:2501.11434); minimum constraint removal and displacement (arXiv:2305.01272).",
+      "industrial": "Siemens NX assembly path planning; Autodesk 'Assemble Them All', SIGGRAPH Asia 2022.",
+      "open_source": "OMPL and other sampling planners, which cannot answer 'no'.",
+      "novelty_confidence_ceiling": "Medium. The research above is close enough that no higher rating is defensible, and the README must say so."
+    },
+    "alternates_if_rejected": "IDEAS.md section 5 holds fifteen ungated candidates; section 3 holds ten that failed only the hook."
+  },
+  "selection_runs": [
+    {
+      "run": 4,
+      "date": "2026-09-13",
+      "outcome": "E - selection only, no implementation",
+      "candidates_recorded": 34,
+      "prior_art_searches": 10,
+      "finalists_scored": [
+        "pivot",
+        "pop-up card compiler",
+        "recoverable secret phrase",
+        "inverse physics shot solver"
+      ],
+      "winner": "pivot",
+      "first_idea_rejected": "dissection engine - rejected as a first idea and independently on prior art"
+    }
+  ]
 }

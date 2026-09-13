@@ -11,7 +11,7 @@
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "notes": "No project selected. Selection is IN PROGRESS and deliberately spans runs (AGENT_RULES.md 'sleep on it'): the 2026-09-13 run generated 36 candidates, resolved 22, and selected none, which is protocol Outcome E and a successful run. Do NOT start from a blank page. Read IDEAS.md section 5 (the live pool) and section 6 (selection status), and follow the numbered next steps in the 2026-09-13 run record in PROGRESS.md. IDEA_DOMAINS.md is now a control file and must be read during intake: its R1-R7 filters apply before scoring and its section 0.3 rules out agent-loop meta-tooling as a project target. The checklist above remains the template for the next project; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D.",
   "completed_projects": [
     {
       "name": "backfire",
@@ -92,5 +92,52 @@
       "claude/optimistic-pasteur-metblz",
       "claude/clever-cannon-pmg737"
     ]
-  }
+  },
+  "selection_in_progress": {
+    "status": "no candidate has met the bar; selection continues next run",
+    "last_round": "2026-09-13",
+    "pool_size": 36,
+    "resolved": 22,
+    "standing": 14,
+    "quota_met": "yes - 20 candidate minimum cleared",
+    "leading_candidate": "P1 - recover an unknown wire protocol from raw logic captures and emit a runnable decoder",
+    "leading_candidate_scores": {
+      "hook": 4,
+      "reach": 4,
+      "demo_ability": 4,
+      "originality": 3,
+      "difficulty_worth_it": 4,
+      "monetizability": 3
+    },
+    "blocking_question": "Ground truth for P1. Synthesised captures make the evaluation circular and IDEA_DOMAINS.md requires verifiability >= 4. The public sigrok-dumps archive is the obvious source and was NOT inspected this run. P1 stands or falls on it.",
+    "next_steps": [
+      "Re-read IDEAS.md section 5 cold before anything else - the mandatory gap-crossing check.",
+      "Inspect sigrok-dumps directly: does a labelled corpus of real captures exist, how large, how many protocols, usable as scored ground truth? This decides P1 and is cheap.",
+      "Search P7 (a representation for a partly-known circuit with an evidence-combination algebra and calibrated per-net confidence) - the highest-value unsearched entry.",
+      "Search ERC formalisation for P6/P12 (a type system for electrical connections); it survives only if the lattice and its soundness are the deliverable, else it is inside the shape ban.",
+      "If none clears the bar, generate again. Do not settle."
+    ],
+    "killed_on_prior_art_this_round": [
+      "P2 Gerber-to-netlist recovery - Altium CAMtastic workflow, service industry, US 5781447",
+      "P3 semantic schematic diff - KiHub ships the same framing; open-source tools are image diffs",
+      "P4 canonical circuit-topology fingerprint - mature EDA (LVS, subgraph isomorphism, US 7441215)",
+      "P5 thermal field from Gerber copper - commercial tools, KiCad, Elmer/ParaView route; gap is UX only (R7)",
+      "P14 probeable explorable schematic - Falstad circuit simulator",
+      "P17 firmware blob structure recovery - binwalk, Ghidra, unblob"
+    ],
+    "owner_flags": [
+      "IDEA_DOMAINS.md section 0.3 conflicts with notes/2026-09-13-external-repo-analysis.md: all ten of its proposed projects are agent-loop meta-tooling and are recorded as rejected. Say so if that reading is wrong.",
+      "IDEA_DOMAINS.md section 5 'Action required' on LICENSE.txt is stale - the placeholders were filled in commit 3721576. Nothing is blocked.",
+      "Every surviving candidate sits in electronics. That is the filters working as written (R6 removes D2/D5 in this container, R4 plus 0.3 remove D4, the shape ban removes the checker skeleton), not a preference. If a microcontroller or a logic analyser is actually available, D2 and D5 reopen immediately."
+    ]
+  },
+  "control_files": [
+    "AGENT_RULES.md",
+    "AUTONOMOUS_PROJECT_EXECUTION_PROTOCOL.md",
+    "IDEA_DOMAINS.md",
+    "PROGRESS.md",
+    "TASKS.json",
+    "IDEAS.md",
+    "REFERENCES.md"
+  ]
 }

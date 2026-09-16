@@ -11,7 +11,7 @@
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "notes": "No project selected; selection is in progress and deliberately spans runs. current_project stays null until the leading candidate survives the cold re-read and the one open prior-art search is closed. See selection_in_progress below, IDEAS.md section 5, and PROGRESS.md. The checklist above is the template for the next project; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D.",
   "completed_projects": [
     {
       "name": "backfire",
@@ -91,6 +91,86 @@
       "claude/eloquent-newton-p3qht6",
       "claude/optimistic-pasteur-metblz",
       "claude/clever-cannon-pmg737"
+    ]
+  },
+  "selection_in_progress": {
+    "run_date": "2026-09-16",
+    "branch": "claude/intelligent-mendel-knoq8x",
+    "outcome": "E — selection only, no implementation, by design",
+    "candidates_generated": 26,
+    "where_recorded": "IDEAS.md section 5",
+    "owner_idea_considered_first": {
+      "name": "Pebble Evolve",
+      "decision": "passed on for this cycle",
+      "reason": "the distinguishing component (a taste signal) needs owner delight ratings that do not exist yet; no ten-second demo at milestone 1; the useful mechanics are already adopted into AGENT_RULES.md",
+      "what_would_change_it": "the owner rating ~50 candidates from IDEAS.md 1-5 on personal delight"
+    },
+    "rejected_on_prior_art_this_run": [
+      {
+        "name": "regex delta witnesses",
+        "prior_art": "greenery, interegular, RegexSolver"
+      },
+      {
+        "name": "PDF draft time-lapse",
+        "prior_art": "pdfresurrect",
+        "note": "also this run's first idea, rejected as a final answer per the generation rules"
+      },
+      {
+        "name": "barrier-grid / scanimation generator",
+        "prior_art": "animbar, Mightool scanimation generator, guevaracodina/barrier_grid_animation"
+      }
+    ],
+    "rejected_on_rules_this_run": [
+      {
+        "name": "despill / edge-detail green-screen keyer",
+        "gate": "B",
+        "reason": "the version that would beat existing tools needs learned matting; no GPU and no training data here"
+      },
+      {
+        "name": "explorable explanation 'of something'",
+        "gate": "A and D",
+        "reason": "names a form, not an idea"
+      }
+    ],
+    "leading_candidate": {
+      "name": "dovetail",
+      "status": "LEADING CANDIDATE, NOT SELECTED — must survive a cold re-read next run before any implementation",
+      "one_line": "Three-way merge for Blender .blend files.",
+      "proposed_hook_sentence": "Two artists edited the same 3D file at the same time — this merges both of their changes into one file that opens in Blender.",
+      "proposed_demo": "three renders side by side: A's change, B's change, and the merged file rendered by Blender itself",
+      "scores": {
+        "hook": 4,
+        "reach": 5,
+        "demo_ability": 4,
+        "originality": 4,
+        "difficulty_worth_it": 5,
+        "monetizability": 4
+      },
+      "closest_prior_art": "Blender PR #151266 blend_diff (diff only; upstream states merging is 'a significantly more complex problem'), blendiff on PyPI (diff only), ifcmerge (three-way merge, IFC not .blend), UnityYAMLMerge (three-way merge, YAML with stable IDs)",
+      "feasibility_verified": "bpy 5.0.1 installs and imports here; a script authored, saved, re-opened and CPU-rendered a .blend. Cycles-CPU only (no libEGL.so.1 for BLENDER_WORKBENCH). Saved .blend begins 28 b5 2f fd (Zstandard), so a parser must decompress before reaching SDNA.",
+      "open_question_blocking_selection": "the model-driven engineering literature on three-way merging of graph-structured models (EMF Compare, EMF Diff/Merge, academic model merging) has not been searched, and is the only remaining source that could materially overlap the algorithm",
+      "design_question_to_settle_before_milestone_1": "merge on the file structure directly (primitive; bpy used only as an independent oracle) versus merging by appending through bpy (a script, not a primitive)"
+    },
+    "fallback_candidate": {
+      "name": "driftwood",
+      "one_line": "An image format that degrades instead of dying when bytes are lost.",
+      "proposed_hook_sentence": "Delete a third of this file at random and the photograph is still there — just softer.",
+      "scores": {
+        "hook": 5,
+        "reach": 3,
+        "demo_ability": 5,
+        "originality": 2,
+        "difficulty_worth_it": 3,
+        "monetizability": 2
+      },
+      "honest_weakness": "originality 2 — joint source-channel coding, fountain codes and JPEG 2000 JPWL are 25 years old; the contribution would be packaging",
+      "prior_art_found": "RaptorQ/RFC 6330 implementations (OpenRQ, cberner/raptorq), JPEG 2000 error resilience and JPWL Part 11, PAR2 (separate recovery volumes, not embedded)"
+    },
+    "next_run_must": [
+      "re-read IDEAS.md section 5 cold before anything else and confirm or drop dovetail",
+      "close the EMF Compare / model-merging prior-art search and record the result either way",
+      "settle the direct-file-structure versus bpy-mediated design question with a short spike",
+      "only then write definition_of_done and milestones into TASKS.json and set current_project"
     ]
   }
 }

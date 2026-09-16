@@ -359,8 +359,12 @@ have not. Underneath the application it is a structural three-way merge over a
 self-describing binary object graph, which is the part that generalises (see #8
 and #16 for the two formats that would test that claim).
 
-**Prior art found, 2026-09-16** (searched: web, GitHub, PyPI, the Blender developer
-tracker, Blender Artists forum threads):
+**Prior art found, 2026-09-16.** Search scope, stated precisely: web search across
+several query formulations, GitHub, PyPI, and search-result summaries of the Blender
+developer tracker and Blender Artists forum threads. A direct fetch of
+`projects.blender.org` returned HTTP 403 from this environment, so **the PR contents
+below come from search-result summaries and have not been read firsthand** — the
+next run should try to read PR #151266 directly before relying on it further:
 
 | Dimension | dovetail | `blend_diff` (Blender PR #151266) | `blendiff` (PyPI) | `ifcmerge` | UnityYAMLMerge |
 |---|---|---|---|---|---|
@@ -369,9 +373,11 @@ tracker, Blender Artists forum threads):
 | Applies changes? | yes | **no** | no | yes | yes |
 | Format | compressed binary heap, pointer identity | same | same | text-ish IFC | YAML with stable file IDs |
 
-The decisive quote is upstream Blender's own, on PR #151266: the diff tool *"only
-allows seeing what has changed and does not allow applying or merging diffs, which
-is a significantly more complex problem in general."* Demand is documented on the
+The decisive line is upstream Blender's own, on PR #151266 — as reported in a
+search-result summary rather than read directly, per the scope note above: the diff
+tool *"only allows seeing what has changed and does not allow applying or merging
+diffs, which is a significantly more complex problem in general."* Treat it as
+strong but unverified until the page is read. Demand is documented on the
 Blender Artists forum and in collaboration guides, which uniformly answer "you
 cannot merge `.blend` files". Closest true prior art is `ifcmerge` — three-way
 merge, different format, and it requires all authoring to happen in a native-IFC

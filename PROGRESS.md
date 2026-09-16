@@ -98,11 +98,13 @@ run, and it is recorded as one rather than dressed up or apologised for.
   was excluded by hand.
 * This run's first idea (PDF draft time-lapse) was rejected as a final answer, as
   required, and then died independently on prior art.
-* Prior art searched across web search, GitHub, PyPI, the Blender developer tracker
-  and community forums. Four candidates were killed outright on it, each recorded
-  with links: regex delta (greenery, interegular, RegexSolver), PDF time-lapse
-  (pdfresurrect), barrier-grid animation (animbar, Mightool), and — on feasibility
-  here rather than prior art — the green-screen keyer.
+* Prior art searched across web search, GitHub and PyPI, plus search-result
+  summaries of the Blender developer tracker and community forums — a direct fetch
+  of `projects.blender.org` returned HTTP 403 here, so that source is second-hand
+  and is labelled as such in `IDEAS.md`. Four candidates were killed outright, each
+  recorded with links: regex delta (greenery, interegular, RegexSolver), PDF
+  time-lapse (pdfresurrect), barrier-grid animation (animbar, Mightool), and — on
+  feasibility here rather than prior art — the green-screen keyer.
 * Two finalists scored, compared pairwise, and the leader red-teamed in writing.
 
 **Leading candidate: `dovetail` — a three-way merge for Blender `.blend` files**
@@ -127,21 +129,24 @@ oracle for every merged file.
    this state: re-read `IDEAS.md` section 5 cold, before anything else, and ask
    whether `dovetail` still reads better the second time. If it does not, say so and
    go back to the pool — that is a successful outcome too.
-2. **Close the one open prior-art question.** Search the model-driven engineering
+2. **Read Blender PR #151266 directly if you can.** The quote that anchors
+   `dovetail`'s prior-art case came from a search-result summary; `projects.blender.org`
+   returned 403 to a direct fetch this run. Try an alternative route and confirm it.
+3. **Close the one open prior-art question.** Search the model-driven engineering
    literature on three-way merging of graph-structured models — EMF Compare, EMF
    Diff/Merge, and the academic work on model merging. Nothing has been searched
    there yet, and it is the only search that could still materially overlap
    `dovetail`'s algorithm. Record the result either way.
-3. **Settle one design question before milestone 1:** merge by operating on the file
+4. **Settle one design question before milestone 1:** merge by operating on the file
    structure directly (primitive, uses `bpy` only to verify) or by appending through
    `bpy` (a script, not a primitive). The rules point at the first; confirm it is
    achievable with a short spike that decompresses a real `.blend` and reads its
    `SDNA` block.
-4. **Only then** write the definition of done and the milestone ladder into
+5. **Only then** write the definition of done and the milestone ladder into
    `TASKS.json`, set `current_project`, and build milestone 1 as a vertical slice:
    one real merge of two real edits, verified by re-opening and rendering in
    Blender, with the three-render demo.
-5. If `dovetail` falls, `driftwood` is the recorded fallback and half its search is
+6. If `dovetail` falls, `driftwood` is the recorded fallback and half its search is
    already done. Its honest weakness is written down: originality 2, because the
    theory is 25 years old.
 

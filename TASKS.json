@@ -149,7 +149,8 @@
       "closest_prior_art": "Blender PR #151266 blend_diff (diff only; upstream states merging is 'a significantly more complex problem'), blendiff on PyPI (diff only), ifcmerge (three-way merge, IFC not .blend), UnityYAMLMerge (three-way merge, YAML with stable IDs)",
       "feasibility_verified": "bpy 5.0.1 installs and imports here; a script authored, saved, re-opened and CPU-rendered a .blend. Cycles-CPU only (no libEGL.so.1 for BLENDER_WORKBENCH). Saved .blend begins 28 b5 2f fd (Zstandard), so a parser must decompress before reaching SDNA.",
       "open_question_blocking_selection": "the model-driven engineering literature on three-way merging of graph-structured models (EMF Compare, EMF Diff/Merge, academic model merging) has not been searched, and is the only remaining source that could materially overlap the algorithm",
-      "design_question_to_settle_before_milestone_1": "merge on the file structure directly (primitive; bpy used only as an independent oracle) versus merging by appending through bpy (a script, not a primitive)"
+      "design_question_to_settle_before_milestone_1": "merge on the file structure directly (primitive; bpy used only as an independent oracle) versus merging by appending through bpy (a script, not a primitive)",
+      "prior_art_search_scope": "web search (multiple query formulations), GitHub, PyPI, and search-result summaries of the Blender developer tracker and Blender Artists forums. A direct fetch of projects.blender.org returned HTTP 403 in this environment, so the PR #151266 quote is second-hand and unverified."
     },
     "fallback_candidate": {
       "name": "driftwood",
@@ -168,6 +169,7 @@
     },
     "next_run_must": [
       "re-read IDEAS.md section 5 cold before anything else and confirm or drop dovetail",
+      "try to read Blender PR #151266 directly — the anchoring quote is currently second-hand (403 on direct fetch)",
       "close the EMF Compare / model-merging prior-art search and record the result either way",
       "settle the direct-file-structure versus bpy-mediated design question with a short spike",
       "only then write definition_of_done and milestones into TASKS.json and set current_project"

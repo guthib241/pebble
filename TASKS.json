@@ -2,6 +2,25 @@
   "current_project": null,
   "definition_of_done": null,
   "milestones": [],
+  "pending_selection": {
+    "status": "shortlisted, awaiting the sleep-on-it re-read — NOT selected, NOT started",
+    "candidate": "taper (provisional name)",
+    "recorded": "2026-09-17",
+    "where": "IDEAS.md section 3.5",
+    "hook_sentence": "Cut this file off anywhere you like and it still opens — as a shorter version of the same document.",
+    "one_line": "A document written into one HTML file in importance order, laid back out in reading order by CSS, so that every byte-prefix of the file is itself a coherent, shorter document.",
+    "runner_up": "decoder-drift (IDEAS.md section 3.5; carries an unresolved dual-use boundary)",
+    "candidates_generated_this_run": 28,
+    "eliminated": 26,
+    "blocking_questions": [
+      "Accessibility: CSS order divorces visual order from DOM order, so assistive technology follows importance order rather than reading order. Must be measured in a real browser and answered, mitigated, or accepted in writing.",
+      "Empirical: does a truncation landing inside a tag or attribute break the block containing it, in Chromium? Test before designing.",
+      "Scope: format-first (container plus decoder) or HTML-first (no decoder)? Milestone 1 should be HTML-first, because it fails fastest.",
+      "Prior art: the search done on 2026-09-17 is recorded in IDEAS.md and is explicitly not sufficient for a NOVELTY_REPORT. Complete it across the Section 6 ecosystems before selecting.",
+      "Calibration: REFERENCES.md asks whether the idea is in that company. It has the jq and Mother-of-all-Demos properties and lacks the Corridor one — it is not a pain felt daily by its builder. Push on that."
+    ],
+    "next_step": "Re-read IDEAS.md section 3.5 cold. If it holds, answer the blocking questions, complete the prior-art search, then write definition_of_done and the milestone ladder here and build milestone 1 as a vertical slice with a working demo."
+  },
   "checklist": {
     "hook_sentence_written": false,
     "demo_exists": false,
@@ -11,7 +30,7 @@
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "notes": "No project selected. Phase 1.5 is therefore satisfied by proceeding to Section 4 — but the selection run of 2026-09-17 has already done most of that work, and its result is in pending_selection below. current_project is deliberately left null rather than set to the leading candidate: setting it would make the next run's Phase 1.5 jump straight to implementation and skip the sleep-on-it re-read that AGENT_RULES.md requires. Read section 3.5 of IDEAS.md and the 'What the next run must do' list in PROGRESS.md before writing any code. Selection is not time-boxed: if the candidate reads worse on the second pass, reject it and generate more.",
   "completed_projects": [
     {
       "name": "backfire",

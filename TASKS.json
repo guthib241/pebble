@@ -11,7 +11,6 @@
     "one_line": "A document written into one HTML file in importance order, laid back out in reading order by CSS, so that every byte-prefix of the file is itself a coherent, shorter document.",
     "runner_up": "decoder-drift (IDEAS.md section 3.5; carries an unresolved dual-use boundary)",
     "candidates_generated_this_run": 28,
-    "eliminated": 26,
     "blocking_questions": [
       "Accessibility: CSS order divorces visual order from DOM order, so assistive technology follows importance order rather than reading order. Must be measured in a real browser and answered, mitigated, or accepted in writing.",
       "Empirical: does a truncation landing inside a tag or attribute break the block containing it, in Chromium? Test before designing.",
@@ -19,7 +18,8 @@
       "Prior art: the search done on 2026-09-17 is recorded in IDEAS.md and is explicitly not sufficient for a NOVELTY_REPORT. Complete it across the Section 6 ecosystems before selecting.",
       "Calibration: REFERENCES.md asks whether the idea is in that company. It has the jq and Mother-of-all-Demos properties and lacks the Corridor one — it is not a pain felt daily by its builder. Push on that."
     ],
-    "next_step": "Re-read IDEAS.md section 3.5 cold. If it holds, answer the blocking questions, complete the prior-art search, then write definition_of_done and the milestone ladder here and build milestone 1 as a vertical slice with a working demo."
+    "next_step": "Re-read IDEAS.md section 3.5 cold. If it holds, answer the blocking questions, complete the prior-art search, then write definition_of_done and the milestone ladder here and build milestone 1 as a vertical slice with a working demo.",
+    "tally": "28 candidates: 2 shortlisted, 12 rejected on the rules, 10 rejected on prior art, 2 kept as real-but-unhyped, 2 held rather than killed (C14 as a future demo of C24, C28 absorbed into C24). Counted from the entries in IDEAS.md, not estimated."
   },
   "checklist": {
     "hook_sentence_written": false,

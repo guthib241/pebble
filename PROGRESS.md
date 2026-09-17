@@ -9,8 +9,12 @@ Last updated: 2026-09-17
 
 This was Outcome E in the protocol's stop conditions — "the run generated and searched
 candidates and either chose one to build next run or determined that none yet clears
-the bar." 28 candidates were generated and recorded, 26 were eliminated, two are on the
-shortlist, and one of those two leads. `AGENT_RULES.md` requires the shortlist to
+the bar." 28 candidates were generated and recorded. The exact tally, verified against the
+entries in `IDEAS.md` rather than estimated: **2** shortlisted (C24, C25), **12**
+rejected on the rules (C1-C3, C6-C13, C15), **10** rejected on prior art (C4, C5,
+C16-C23), **2** kept as real-but-unhyped (C26, C27), and **2** held rather than killed
+— C14, which belongs as a demo of C24 if that proceeds, and C28, which was absorbed
+into C24 as one of its applications. One of the two shortlisted candidates leads. `AGENT_RULES.md` requires the shortlist to
 survive a re-read at the start of the following run before any code is written, so the
 decision deliberately spans two runs.
 

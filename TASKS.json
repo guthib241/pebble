@@ -33,7 +33,9 @@
     },
     "blocking_question": "Does any existing tool or paper infer pointer and container structure from a corpus of files - offsets resolved as edges, nesting recovered, byte coverage reported - as opposed to flat field boundaries within a message? Yes: C24 moves to IDEAS.md section 2 and C26 is promoted. No: C24 is selected, and milestone 1 must be the pointer case done badly end to end, not the flat-record case, which is taken.",
     "largest_search_gap": "github.com/jbirby/binary-format-reverser is indexed with a description overlapping C24 but returned HTTP 404 on the repository page and on the raw README for both main and master on 2026-09-18. Unverified. Resolve before selecting C24.",
-    "next_step": "Re-read IDEAS.md section 5, then run the four searches listed in PROGRESS.md section 3."
+    "next_step": "Re-read IDEAS.md section 5, then finish the open question: retry github.com/jbirby/binary-format-reverser via WebFetch, and decide. C24 is the project only if the pointer/coverage gap holds; otherwise promote C26.",
+    "blocking_question_partial_answer": "Three of the four searches were run the same day. Hierarchical format inference exists for network protocols (Empirical Software Engineering 2026) and pointer/structure recovery exists from program binaries (OSPREY S&P 2021, type inference from stripped binaries) - both require the messages or the program, which C24 assumes you do not have. No match found for inferring offset-as-edge structure and whole-file byte coverage from a corpus of files alone. Three query formulations finding nothing is weak evidence, not a verdict: the question stays open and the jbirby repository is still unresolved.",
+    "environment_limit": "GitHub project pages are readable with WebFetch but not with curl: the proxy binds raw GitHub access to guthib241/pebble and returns 403 otherwise, and the GitHub MCP tools are scoped to this repository. Plan prior-art inspection of GitHub projects around WebFetch."
   },
   "completed_projects": [
     {

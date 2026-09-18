@@ -53,14 +53,31 @@ Everything else about C24 is settled. If the answer is yes, C24 goes to section 
 project, and its milestone 1 must be the pointer case done badly end to end on one
 real format — **not** the flat-record case, which is taken.
 
-Searches to run (these have not been run; do not repeat the ones in section 4 below):
-"pointer inference binary format offset table recovery corpus"; "hierarchical
-structure inference file format nested chunks"; "byte coverage complete parse unknown
-format"; a direct look at NETPLIER; and one more attempt at
+**Three of those searches were run before this run stopped** — searching is not
+implementing, and the sleep-on-it gap protects against infatuation, not against facts.
+The partial answer, recorded in full under C24 in `IDEAS.md`, leans towards C24
+surviving: hierarchical inference now exists for network *protocols* (Empirical
+Software Engineering, 2026), and pointer and structure recovery exists from *program
+binaries* (OSPREY, S&P 2021, and the type-inference-from-stripped-binaries
+literature) — but both need something C24 assumes you do not have, namely the messages
+or the program. Nothing was found that infers offset-as-edge structure and whole-file
+byte coverage from a corpus of files alone. Three query formulations finding nothing is
+weak evidence, not a verdict, so the question stays open.
+
+Still to do (do not repeat the ones in section 4 below): one more attempt at
 `github.com/jbirby/binary-format-reverser`, which is indexed by search engines with a
 description that overlaps C24 but returned 404 on both the repository page and the raw
-README on `main` and `master` on 2026-09-18. That repository is the largest unresolved
-gap in this run's search, and its contents could change the verdict on their own.
+README on `main` and `master` on 2026-09-18. It is probably a genuine 404 rather than
+an access restriction, because `WebFetch` read another GitHub project page in the same
+run — so the repository may have been deleted, renamed or made private since it was
+indexed. It remains the largest unresolved gap, and its contents could change the
+verdict on their own.
+
+**Environment limit worth knowing for every future prior-art search:** GitHub project
+pages can be read with `WebFetch`, but not with `curl` — the proxy binds raw GitHub
+access to `guthib241/pebble` and returns 403 for anything else. The GitHub MCP tools
+are likewise scoped to this repository only. Plan prior-art inspection of GitHub
+projects around `WebFetch`, and expect no API access to other repositories.
 
 ### 4. Searches already performed — do not repeat these
 
@@ -72,12 +89,16 @@ gap in this run's search, and its contents could change the verdict on their own
 * automatically generating a Kaitai Struct spec from sample files
 * file-format RE tools with annotated hex views and differential analysis
 * GitHub: infer binary format from multiple samples, length field and checksum detection
+* pointer and offset-table recovery, hierarchical structure inference from corpora
+* NETPLIER, probabilistic field inference, nested structure limitations
+* byte coverage and complete parses of unknown formats
 * phonetic error-correcting codes, confusion matrices, PGP word list
 * uncertain and fuzzy historical date reasoning, interval propagation, EDTF
 * minimum-edit repair to a grammar, Aho-Peterson error-correcting parsers
 
 Directly inspected: BinaryInferno's repository, the RL-GRIT paper. Attempted and
-failed: `jbirby/binary-format-reverser` (404, twice, two branches).
+failed: `jbirby/binary-format-reverser` (404 on the project page and on the raw README
+for both `main` and `master`).
 
 ### 5. Why no code
 

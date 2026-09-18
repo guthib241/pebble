@@ -505,6 +505,40 @@ section 2 and C26 is promoted. If the answer is no, C24 needs a milestone ladder
 whose first rung is the pointer case done badly end to end — **not** the flat-record
 case, which is taken.
 
+**Partial answer to that question, same run (2026-09-18).** Three of the four searches
+were run before stopping, because resolving prior art is a factual matter that the
+sleep-on-it gap does not protect against — only implementation was withheld. Results:
+
+* Hierarchical format inference **does** now exist for network protocols: "Scalable
+  hierarchical protocol format inference via feature-heuristic message delimiter"
+  (Empirical Software Engineering, 2026,
+  [link](https://link.springer.com/article/10.1007/s10664-026-10814-6)). Still
+  messages, still no pointers into the artifact, still no re-serialisation.
+* Pointer and structure recovery **does** exist from program binaries — OSPREY
+  ([S&P 2021](https://yonghwi-kwon.github.io/data/osprey_sp21.pdf)) recovers variables
+  and data structures by probabilistic analysis of memory accesses, and there is a
+  large type-inference-from-stripped-binaries literature. Different input entirely:
+  these need the *program*, and the premise of C24 is that you have only the files.
+* [NetPlier](https://github.com/netplier-tool/NetPlier) (NDSS 2021) aligns messages by
+  multiple sequence alignment and infers the keyword field probabilistically. Flat,
+  message-level, no nesting or pointers.
+* No match found for inferring **offset-as-edge structure and whole-file byte coverage
+  from a corpus of files**. Searched: "pointer inference binary file format offset
+  table recovery hierarchical nested structure from sample corpus automatic";
+  "NETPLIER probabilistic field inference nested structure limitations"; "'byte
+  coverage' OR 'explain every byte' unknown file format inference complete parse
+  unclaimed bytes tool". Absence of evidence after three query formulations is weak
+  evidence of absence, and this is recorded as a partial answer, not a verdict.
+
+**On the unreachable repository.** `github.com/jbirby/binary-format-reverser` is
+probably a genuine 404 rather than an access restriction: `WebFetch` read
+`github.com/binaryinferno/binaryinferno` successfully in the same run, so GitHub
+project pages are reachable from here. A `curl` cross-check is not available — this
+environment's proxy binds raw GitHub access to `guthib241/pebble` and returns 403 for
+anything else, which is worth knowing for every future prior-art search: GitHub can be
+read through `WebFetch`, not through `curl`. The repository may have been deleted,
+renamed or made private after being indexed. Still unresolved, still the largest gap.
+
 **Red team, written before any decision.**
 
 * *The closest existing thing.* RL-GRIT, and whatever `jbirby/binary-format-reverser`

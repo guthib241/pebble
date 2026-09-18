@@ -11,7 +11,30 @@
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "notes": "No project selected. Selection is in progress and was deliberately left unfinished on 2026-09-18: a pool of 29 candidates was generated, searched and scored, and a shortlist with a provisional leader is recorded in section 5 of IDEAS.md. Per the sleep-on-it rule the shortlist must be re-read at the start of the next run before any implementation. One unresolved search decides the leader; it is stated in PROGRESS.md and in the selection_state block below. The checklist above remains the template for whatever is chosen; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D.",
+  "selection_state": {
+    "status": "in_progress",
+    "date": "2026-09-18",
+    "outcome_of_run": "E \u2014 selection only, no implementation, none warranted",
+    "candidates_recorded": 29,
+    "where": "IDEAS.md sections 1, 2, 3 and 5",
+    "owner_idea_verdict": "Pebble Evolve evaluated for the first time and passed on: the whole-projects gap is now claimed (EvoLattice, CodeEvolve, DEI, on top of AlphaEvolve, ShinkaEvolve, OpenEvolve), and the unclaimed part needs owner taste data that does not exist. Reasoning and a suggested cheap unblock are in section 0 of IDEAS.md for the owner to push back on.",
+    "provisional_order": [
+      "C24",
+      "C26",
+      "C25",
+      "C27"
+    ],
+    "provisional_leader": {
+      "id": "C24",
+      "working_name": "grain (not settled)",
+      "hook_attempt": "Give it a pile of files in a format nobody documented, and it hands back a parser that rebuilds every one of them byte for byte - and a picture of what every byte means.",
+      "status": "not selected; one open question can kill it"
+    },
+    "blocking_question": "Does any existing tool or paper infer pointer and container structure from a corpus of files - offsets resolved as edges, nesting recovered, byte coverage reported - as opposed to flat field boundaries within a message? Yes: C24 moves to IDEAS.md section 2 and C26 is promoted. No: C24 is selected, and milestone 1 must be the pointer case done badly end to end, not the flat-record case, which is taken.",
+    "largest_search_gap": "github.com/jbirby/binary-format-reverser is indexed with a description overlapping C24 but returned HTTP 404 on the repository page and on the raw README for both main and master on 2026-09-18. Unverified. Resolve before selecting C24.",
+    "next_step": "Re-read IDEAS.md section 5, then run the four searches listed in PROGRESS.md section 3."
+  },
   "completed_projects": [
     {
       "name": "backfire",

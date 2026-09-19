@@ -11,7 +11,7 @@
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates — and read IDEAS.md section 5 FIRST, before anything else, because a selection is already in progress and its shortlist must survive a re-read before anything is built.",
   "completed_projects": [
     {
       "name": "backfire",
@@ -92,5 +92,28 @@
       "claude/optimistic-pasteur-metblz",
       "claude/clever-cannon-pmg737"
     ]
+  },
+  "selection_in_progress": {
+    "status": "open — no candidate yet clears the bar",
+    "last_run": "2026-09-19",
+    "candidates_recorded": 25,
+    "where": "IDEAS.md section 5 holds the four surviving candidates with scores, the pairwise result, and the leader's red team.",
+    "settled_this_run": [
+      "shadow art — prior art: Mitra & Pauly 2009, ShadowArt-Revisited, ShadowDraw (CVPR 2026)",
+      "document un-shredding — prior art: UnShredder, JigsawNet, PairingNet, commercial Unshredder",
+      "barrier-grid / scanimation — prior art: animbar, kinegram, MIT FabObscura 2025",
+      "linkage synthesis from a drawn curve — prior art: Pyslvs-UI, pylinkage-editor, LInK, LINKS",
+      "GTFS transit fragility — prior art: G2Viz, GTFS2STN, graph-oriented GTFS literature",
+      "caustic projection — prior art: Schwartzburg et al. 2014, Rayform, Ferraro's implementation"
+    ],
+    "blocking_question": "Every surviving candidate is either packaging over a published mechanism, a reimplementation of a paper whose idea is not itself new, or has no hook. The pool lacks a candidate whose mechanism is the contribution.",
+    "next_steps": [
+      "Re-read IDEAS.md section 5 before anything else — the sleep-on-it gate.",
+      "Settle F2 in writing: what did Li et al. (2010) not build, and is that extension the project? If the answer is only 'a reference implementation', it fails Gate E.",
+      "Generate a second pool from the sources this run did not reach: paper future-work sections, high-reaction issues with no PR, unexploited public datasets.",
+      "Settle F1: has any shipped artifact delivered smooth proportional degradation under arbitrary byte loss? If yes, move F1 to IDEAS.md section 2."
+    ],
+    "produced_no_code": true,
+    "outcome": "Protocol Section 29, Outcome E — selection only."
   }
 }

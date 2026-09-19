@@ -1,8 +1,9 @@
 # Progress
 
-Status: no project in progress. Three projects complete. A new project has not yet
-been selected under the current rule set.
-Last updated: 2026-09-12
+Status: **selection in progress, no project selected.** Three projects complete. The
+2026-09-19 run generated and searched candidates and deliberately produced no code — a
+documented search and no decision yet, which the rules count as a successful run.
+Last updated: 2026-09-19
 
 ## Read this first
 
@@ -73,9 +74,77 @@ All three folders are now on `main` under `projects/`, so every future run start
 with the full back catalogue visible. The original branches are untouched and retain
 the detailed per-run history, including each project's own novelty search narrative.
 
+## Run 2026-09-19 — selection only, nothing built (Outcome E)
+
+No hook sentence for the run, because no project was selected. That is the finding, not
+an omission.
+
+**What was done.** Full intake of all five control files. `current_project` was null, so
+Phase 1.5 sent this run to Section 4. Twenty-five candidates were generated and every one
+was written into `IDEAS.md` under the heading matching its outcome. The generation rules
+were followed as written: the run's first idea (semantic diff and merge for binary
+formats) was rejected as a final answer and recorded as such; candidates were sampled
+from the tails rather than the obvious centre; the pool spans formats, fabrication,
+optics, data, typography, games and formal groundwork rather than five command-line
+tools; the owner's Pebble Evolve idea was read and considered first.
+
+**What was searched.** Web search across research literature, GitHub, open-source tools
+and product pages, using multiple query formulations per candidate. Six candidates were
+killed on directly inspected prior art and are now settled — do not re-search them:
+
+* shadow art — Mitra & Pauly 2009, ShadowArt-Revisited, ShadowDraw (CVPR 2026)
+* document un-shredding — RazvanRanca/UnShredder, JigsawNet, PairingNet, commercial Unshredder
+* barrier-grid / scanimation — animbar, kinegram, MIT FabObscura (2025)
+* linkage synthesis from a drawn curve — Pyslvs-UI, pylinkage-editor, LInK, LINKS
+* GTFS transit fragility — G2Viz, GTFS2STN, the graph-oriented GTFS literature
+* caustic projection — Schwartzburg et al. 2014, Rayform, Ferraro's open implementation
+
+Four more were settled on prior art already known without a fresh search (uncertainty
+spreadsheets, chart fonts, CRDTs, paper-as-storage, WFC pattern languages), and are
+recorded as informed rejections rather than searched ones, which `IDEAS.md` says plainly.
+
+**Where the decision stands.** Four candidates survived into `IDEAS.md` section 5, with
+scores and a pairwise comparison. The leader — an image format that degrades
+proportionally when an arbitrary fraction of its bytes is lost — was red-teamed in
+writing before any build, and **it failed its own red team**: the mechanism is unequal
+loss protection and progressive rateless coding, both published, so the contribution
+would be packaging plus a demo. The hook was stronger than the originality, which is
+exactly the trap `AGENT_RULES.md` warns about.
+
+**Honest conclusion: nothing on the list yet reaches the bar** — a candidate I would be
+genuinely disappointed to see someone else ship first. Per the rules, that means the list
+is too short, not that the standard should drop. No implementation was produced and none
+should have been.
+
+**The open question blocking the choice.** Every surviving candidate is either a
+packaging exercise over a published mechanism (F1, F4), a reimplementation of a paper
+whose idea is not itself new (F2), or has no hook yet (F3). What is missing from the pool
+is a candidate whose *mechanism* is the contribution, not its presentation.
+
+**Next concrete steps, in order, for the next run:**
+
+1. Re-read `IDEAS.md` section 5 first, before anything else — the sleep-on-it gate. A
+   candidate that reads worse the second time is dead; say so and move it out of section 5.
+2. Settle F2's open question in writing: what did Li et al. (2010) not build, and is that
+   extension the actual project? If the answer is only "a reference implementation," it
+   fails Gate E — record that and move it out of section 5.
+3. Generate a second pool from the sources this run did not reach: future-work sections of
+   recent papers, GitHub issues with many reactions and no pull request, and unexploited
+   public datasets. This run drew mostly on cross-domain transplants and constraint
+   injection, and those two veins are now thin.
+4. Settle F1's one open question — whether any shipped artifact delivers smooth
+   proportional degradation under arbitrary byte loss, or whether that is purely a
+   literature result. If it has shipped, move F1 to section 2.
+
+**What this run did not do**, stated plainly: it did not select a project, did not write
+a `NOVELTY_REPORT.md` (none is due — that is a per-project document, required before
+implementation of a selected project), and did not write any code.
+
 ## What the next run should know
 
-1. **No project is in progress.** `current_project` is null. Selection is the job.
+1. **No project is in progress.** `current_project` is null. Selection is the job, and
+   it is already underway — start from `IDEAS.md` section 5 and the four next steps
+   above, not from a blank page.
 2. **Selection is not time-boxed.** A run whose entire output is a documented search
    and one excellent decision is a successful run. Record it here and in `IDEAS.md`
    and stop. Do not implement something to make the run look productive.

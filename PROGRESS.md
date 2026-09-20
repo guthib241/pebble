@@ -121,6 +121,16 @@ three bands where the tension resolves — work past the point a hobby project s
 a resource that does not exist, and a vantage point few people occupy — and the next
 wave is to be generated inside them rather than by free association.
 
+### What this run did not do, and why
+
+No finalist scores and no pairwise comparison appear in `IDEAS.md` for this run.
+That is not an omission: scoring applies to finalists, and no candidate reached the
+finalist stage — the four that were strong enough to score died on prior art before
+scoring would have meant anything. Scoring and the pairwise "which would I be more
+upset to see someone else ship first" comparison resume the moment W2 or wave three
+puts two candidates side by side. No red-team pass appears either, for the same
+reason: there is no winner to argue against yet.
+
 ### What is unresolved
 
 Whether **W2** — a cited, source-linked record of what clocks actually read before

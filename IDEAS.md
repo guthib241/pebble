@@ -192,3 +192,71 @@ the ship-the-primitive rule.
 _No project currently selected. The next entry here is the first one chosen under
 the full rule set, and it should be the best idea this repository can find rather
 than the first that qualifies._
+
+---
+
+## 5. Live pool — generated, outcome not yet resolved
+
+Candidates generated but not yet resolved to one of the sections above. An entry
+leaves this section the moment it resolves, and is rewritten under the heading that
+matches its outcome. Nothing is deleted on the way out.
+
+Each entry records: date generated, hook attempt, behaviour descriptor
+`{interaction model, data source, medium, domain}`, the rough probability that this
+is the candidate a language model would produce first (low is what we are hunting —
+the tail, not the mode), and the enabling question: *if this works, what becomes
+buildable that wasn't?*
+
+### Pool generated 2026-09-20 (run: `claude/intelligent-mendel-eju50j`)
+
+Generated before any gate was applied, per the quota rule. 27 candidates. The first
+idea generated was **C1**, and it is rejected as a final answer on principle before
+any of its merits were considered; it stays recorded.
+
+**Sources passed through this round:** the owner's section 0; the repository's own
+back catalogue and the unshipped primitive noted in `PROGRESS.md`; published-method
+reproduction (papers whose method has no clean open implementation); undocumented
+and under-documented binary formats; public datasets nobody has done much with
+(OSM history, Wiktionary, RouteViews BGP, public room-impulse-response corpora,
+GPS trace dumps); recent capability unlocks (WebGPU/WASM in browsers, cheap
+eigen-solvers, splat representations); things done by hand repeatedly; and
+cross-domain transplants (acoustics → geometry, automata → developer tooling,
+spectral theory → play).
+
+| # | Candidate | Hook attempt | Descriptor | p(mode) |
+|---|-----------|--------------|------------|---------|
+| C1 | **cutline-core** — extract cutline's infeasibility-certificate + minimal-cut solver as a standalone primitive with several demos | "Proves your plan is impossible, then tells you the single cheapest thing to drop." | text in → text out, own prior code, CLI, scheduling | 0.35 |
+| C2 | **live unit propagation** — units flowing through an expression as you type (orbiter's hook, fixed) | "Watch milliseconds turn into seconds as you type the expression." | live editor, source text, web, developer tooling | 0.25 |
+| C3 | **retry fan-out animation** — backfire's call-graph multiplication, animated | "One click, thirty requests: watch your retries multiply down the call graph." | animation, source text, web, developer tooling | 0.20 |
+| C4 | **crontab futures** — render what a crontab will actually do next month, DST and all | "Shows you the month your crontab is actually going to have." | calendar render, config text, web, ops | 0.30 |
+| C5 | **echo-to-geometry** — recover a room's walls from one impulse response across a few microphones | "Clap once in an empty room and it draws you the walls." | audio in → geometry out, public RIR corpora, visual, acoustics | 0.03 |
+| C6 | **isospectral drums** — draw a shape, hear it ring; meet the two different shapes that ring identically | "Draw any shape and hear it ring — then meet two different shapes nobody can tell apart by ear." | playable canvas, computed eigenmodes, web+audio, spectral geometry | 0.04 |
+| C7 | **hinting VM, visible** — the TrueType bytecode inside a glyph, stepped and animated at 9px | "Every letter on your screen runs a tiny program that decides where its edges land." | stepper/explorable, font binaries, web, typography | 0.05 |
+| C8 | **regex disagreement witnesses** — given two regexes, produce the exact strings where they differ | "Paste two regular expressions; it hands you the strings where they disagree." | two inputs → witness list, user input, web/library, automata | 0.08 |
+| C9 | **shape grep for time series** — a pattern language for "rises, plateaus, then spikes" | "Grep, but the pattern is the shape of the line." | query language, numeric series, library, data | 0.07 |
+| C10 | **traffic light inference** — recover signal cycle length and offset from anonymous GPS traces | "From a pile of anonymous GPS tracks, it works out how long each light stays red." | inference → map animation, public GPS traces, visual, transport | 0.05 |
+| C11 | **severed streets** — every connection a city has lost, mined from OSM edit history | "Shows you every street in your city that used to connect and no longer does." | map animation, OSM history, visual, cities | 0.04 |
+| C12 | **etymology descent** — watch a word travel across languages and centuries as a graph | "Type a word and watch it walk back through every language it passed through." | explorable graph, Wiktionary dumps, web, linguistics | 0.06 |
+| C13 | **greppable compression** — a log codec you can search without decompressing | "Search a compressed log without decompressing it." | codec + query, log data, library, systems | 0.06 |
+| C14 | **semantic database merge** — three-way merge for SQLite with real conflict detection | "Merge two copies of a database the way you merge two copies of a file." | merge tool, db files, CLI/library, data | 0.10 |
+| C15 | **knitting notation** — one notation compiling to chart, machine file, and written pattern | "One line of notation becomes a chart, a written pattern, and a file a machine can knit." | compiler, notation, visual + machine, textiles | 0.03 |
+| C16 | **splat type** — glyphs represented as Gaussian splats rather than outlines | "A typeface made of blurs that stays sharp at every size." | renderer, font outlines, visual, typography | 0.02 |
+| C17 | **open-instance puzzle game** — every level is a genuinely unsolved combinatorial instance | "Every level you beat is a record nobody has beaten." | playable game, open problem instances, web, human computation | 0.03 |
+| C18 | **routing weather** — the internet's global routing churn, as sound | "Listen to the internet's routing tables the way you'd listen to weather." | sonification, RouteViews BGP archives, audio, networks | 0.03 |
+| C19 | **filesystem undo** — reconstruct and reverse what a program did to your disk, from its syscall trace | "Undo what that install script did, step by step, after the fact." | replay/inspect, syscall traces, CLI+visual, systems | 0.04 |
+| C20 | **guaranteed plots** — graph any function with mathematically proven pixels, using interval arithmetic | "A graph where every pixel is proven, not sampled." | plotter, user formula, visual, numerics | 0.05 |
+| C21 | **rigid-body typography** — a layout engine where letters are physical objects with mass | "Type a sentence and watch the words fall into place." | simulation, text, web animation, typography | 0.02 |
+| C22 | **what the program saw** — reconstruct a program's picture of the world from its syscalls, animated | "A film of what your program thought the world looked like." | animation, syscall traces, visual, systems | 0.03 |
+| C23 | **format archaeology** — pick one under-documented consumer binary format, specify it, ship a clean reader | "Reads the file format nobody wrote down, and shows you what is inside it." | reader + spec, device files, visual, reverse engineering | 0.05 |
+| C24 | **schedule algebra** — a small formal calculus of commitments, with checkable certificates | "An algebra where 'this plan cannot work' is something you can prove and check by hand." | formal system + library, none, library, formal methods | 0.15 |
+| C25 | **typed instrument** — an instrument whose timbre is the phonetics of what you type | "Type a word and hear the word, not a note." | playable instrument, typed text, audio, music | 0.04 |
+| C26 | **GPS from first principles** — compute a real fix from real ephemeris, step by visible step | "Watch four satellites argue their way to your exact position." | explorable, public ephemeris, web, navigation | 0.06 |
+| C27 | **watch it heal** — scratch a disc, watch Reed–Solomon put the bytes back | "Scratch the disc and watch the missing bytes come back." | playable, own data, web, coding theory | 0.05 |
+
+**Constraint injection applied to the leaders** (per the generation rules): C5 under
+"one microphone only, no array" becomes a materially harder and more interesting
+problem; C6 under "sound only, no picture" becomes an ear-training toy; C8 under
+"no text output, only examples" becomes the witness table that is now its whole
+interface; C7 under "must run with no font files shipped" points at reading the
+system's own fonts.
+

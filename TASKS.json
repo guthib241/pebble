@@ -11,7 +11,7 @@
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "notes": "No project selected. Selection is in progress and spanning runs by design. The checklist above is the template for the next project; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Read IDEAS.md sections 0 and 5 before generating any candidate: 27 candidates are already pooled, seven are settled rejections with verified prior art, and five more carry named leads that must be searched rather than re-generated.",
   "completed_projects": [
     {
       "name": "backfire",
@@ -92,5 +92,26 @@
       "claude/optimistic-pasteur-metblz",
       "claude/clever-cannon-pmg737"
     ]
+  },
+  "selection_state": {
+    "status": "in_progress",
+    "last_run": "2026-09-20",
+    "branch": "claude/intelligent-mendel-eju50j",
+    "outcome_of_last_run": "Outcome E - selection only. No implementation produced, and none should have been. 27 candidates generated and recorded before any gate; seven rejected on prior art with the closest match inspected directly; one rejected on honesty with no prior art found; one candidate left standing.",
+    "candidates_pooled": 27,
+    "verified_rejections": 7,
+    "leading_candidate": {
+      "id": "W2",
+      "working_name": "local time before 1970, with citations",
+      "hook_attempt": "Tells you what a clock in this town actually read in 1911, and shows you the law that changed it.",
+      "status": "partially searched; not selected; not approved for implementation",
+      "why_it_survived": "The tz database's own documentation states it does not attempt accurate pre-1970 civil time, that most pre-1970 entries come from uncited sources, and that zones differing only before 1970 are merged into a file it calls less reliable. The gap is documented by the incumbent.",
+      "open_risks": [
+        "Section 6 search is incomplete - github.com/dfl/tz_history and the genealogy, historical-GIS and historical-astronomy communities have not been searched.",
+        "Gate B is unsettled - whether primary sources for a chosen region and period can be lawfully obtained and read in this environment. Settle before committing, not at milestone four.",
+        "Scope honesty - much pre-1970 information was lost or never recorded, so a world-scale promise would repeat the C11 failure mode. Bound it to one region and period."
+      ]
+    },
+    "do_not_start_implementation_until": "W2 survives a proper Section 6 search and Gate B, or is rejected and wave three is generated in the three bands named in IDEAS.md."
   }
 }

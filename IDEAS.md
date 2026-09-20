@@ -463,12 +463,54 @@ below). Three were searched and rejected; the rest are recorded unsearched.
 | W1 | reflowing mathematical typesetting | "Long equations that fold to fit your phone, the way sentences do." | → §2, MathJax v4 |
 | W7 | puzzles with a uniqueness proof, graded by derivation length | "Every puzzle comes with a proof there is exactly one answer." | → §2, AAAI 2007 |
 | W10 | digital joins for fragmentary manuscripts | "Shows you which two scraps came off the same page eight centuries ago." | → §2, IJCV 2010 + Gate B |
-| W2 | **local time before 1970, with citations** | "Tells you what a clock in this town actually read in 1911, and shows you the law that changed it." | unsearched — leads: tzdb's own pre-1970 disclaimer and the 2021–22 zone-merging controversy |
+| W2 | **local time before 1970, with citations** | "Tells you what a clock in this town actually read in 1911, and shows you the law that changed it." | **leading candidate for the next run** — partially searched, see below |
 | W4 | dependency resolution explained by minimal conflict certificates | "Tells you the smallest set of requirements that cannot all be true." | unsearched — strong lead: PubGrub already does derivation-tree explanations |
 | W5 | machine knitting or brick builds from a 3D mesh | "Hand it a model, get something a machine can actually make." | unsearched — leads: CMU autoknit, legolization research |
 | W6 | a movement notation a computer can animate | "Write down a dance the way you write down a tune." | unsearched — leads: Labanotation editors |
 | W8 | heavy compute over a large public dataset with no server | "Query a hundred gigabytes from a page with nothing behind it." | unsearched — strong lead: DuckDB-WASM, hyparquet, HTTP range requests |
 | W9 | OEIS searched by growth and shape rather than by terms | "Find the sequence you cannot remember any terms of." | unsearched — lead: OEIS SuperSeeker |
+
+### W2, the one candidate left standing — partially searched, 2026-09-20
+
+The only entry from either wave that got stronger when searched, so it is where the
+next run starts. What the search established, from the incumbent's own
+documentation:
+
+* The tz database states plainly that it "is not designed for and does not suffice
+  for applications requiring accurate handling of all past times everywhere",
+  because recording pre-1970 civil timekeeping "would take far too much effort and
+  guesswork".
+* It states that its pre-1970 entries "cover only a tiny sliver of how clocks
+  actually behaved", and that most of them "come from unreliable sources, often
+  astrology books that lack citations and whose compilers evidently invented entries
+  when the true facts are unknown".
+* Zones differing only before 1970 have been merged into links since tzdata-2021b,
+  with the losing zone moved to `backzone`, a file the project itself describes as
+  "less reliable" and not necessarily following its own guidelines.
+* Source: [Theory and pragmatics of the tz code and
+  data](https://data.iana.org/time-zones/tzdb-2022b/theory.html) and the
+  [backzone file](https://data.iana.org/time-zones/tzdb/backzone).
+
+So the gap is not inferred — it is documented by the authority on the subject, in
+the form of a disclaimer. There is no cited, source-linked record of what clocks
+actually read before standard time, and the reason is effort, not disinterest.
+
+That cuts both ways, and the next run must not skip the second half: the same
+document says much of the information was lost or never recorded. A project that
+promises the whole world's historical local time would be promising something the
+sources cannot support — the C11 failure mode exactly. The bounded version is one
+region and one period where primary sources are digitised and lawfully
+bulk-obtainable, producing a cited record, the method, and a visible artifact —
+plausibly a map of a country's clocks fragmenting into local mean times and then
+snapping into zones, which is a ten-second demo that needs no explanation.
+
+**Before any of that, next run must search it properly.** It has had one search, and
+one search is not Section 6. Specifically: `github.com/dfl/tz_history` appeared in
+the results and has not been looked at; so have historical-GIS time projects, the
+`backzone` maintainers' own sourcing threads, and whatever exists in the genealogy
+and historical-astronomy communities, who feel this problem most. Then Gate B, which
+is the real risk: whether the primary sources for the chosen region can actually be
+obtained and read in this environment.
 
 ### The finding this run paid for
 

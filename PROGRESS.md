@@ -1,8 +1,10 @@
 # Progress
 
-Status: no project in progress. Three projects complete. A new project has not yet
-been selected under the current rule set.
-Last updated: 2026-09-12
+Status: **selecting**. No project in progress, and none selected. Three projects
+complete. Selection is deliberately spanning runs, which the rules permit and this
+run used properly: 27 candidates generated and gated, seven rejected on verified
+prior art, one candidate left standing and partially searched.
+Last updated: 2026-09-20
 
 ## Read this first
 
@@ -73,9 +75,86 @@ All three folders are now on `main` under `projects/`, so every future run start
 with the full back catalogue visible. The original branches are untouched and retain
 the detailed per-run history, including each project's own novelty search narrative.
 
+## Run of 2026-09-20 — selection only, no implementation (Outcome E)
+
+No code was written, and none should have been. Selection has not converged, and the
+rules are explicit that manufacturing an implementation to make a run look
+productive is the failure mode to avoid. What the run produced instead is in
+`IDEAS.md`: a 27-candidate pool, a second wave generated after the first one failed,
+seven verified rejections with their closest prior art inspected directly, five
+unsearched leads recorded so they are never re-generated blind, and one candidate
+that survived.
+
+### What was searched, so no run repeats it
+
+Nine searches, each with several query formulations, across academic literature,
+GitHub and package ecosystems, live web tools, and vendor documentation. Rejected on
+prior art, with the closest match inspected directly in every case:
+
+1. **Room geometry from acoustic echoes** — PNAS 2013, ICASSP 2016, EchoScan
+   (TASLP 2024, code released), dEchorate, pyroomacoustics.
+2. **Isospectral drums** — eigendrum.com, which ships the isospectral pair as a
+   preset. Fetched and read directly.
+3. **TrueType hinting stepped in a browser** — FontLab TTH Debugger. Fetched and
+   read directly; it is the candidate exactly, in the same medium.
+4. **Regex disagreement witnesses** — gruhn's RegExp Equivalence Checker.
+5. **Reflowing mathematical typesetting** — MathJax v4 shipped automatic line
+   breaking; `breqn` before it.
+6. **Puzzle generation with a uniqueness proof and graded difficulty** — AAAI 2007
+   framework, plus standard practice in puzzle generators.
+7. **Digital joins for manuscript fragments** — IJCV 2010 through 2026; also fails
+   Gate B here on corpus access and compute.
+
+One candidate was rejected with **no** prior art found, on honesty rather than
+novelty: mining OpenStreetMap history for streets a city has lost would mostly
+detect map corrections, not physical change, so the hook would have been a false
+statement about what the code observes.
+
+### The finding, which is the run's real output
+
+All four of the strongest first-wave candidates already existed, and three of them
+existed as the whole idea including its surprise. That is structural, not bad luck:
+Gate F selects for ideas whose appeal is legible on description, and legible-on-
+description is exactly what everyone else can see too. Gate F and Gate C pull
+against each other, and nothing in the rules said so before. `IDEAS.md` records the
+three bands where the tension resolves — work past the point a hobby project stops,
+a resource that does not exist, and a vantage point few people occupy — and the next
+wave is to be generated inside them rather than by free association.
+
+### What is unresolved
+
+Whether **W2** — a cited, source-linked record of what clocks actually read before
+standard time — survives a proper search and Gate B. It is the only candidate that
+got *stronger* when searched: the tz database's own documentation says it does not
+attempt accurate pre-1970 civil time, that most of its pre-1970 entries come from
+uncited sources including astrology books, and that zones differing only before 1970
+are now merged away into a file it calls less reliable. The gap is documented by the
+incumbent. The risk is equally documented and must not be waved past: much of the
+information was lost or never recorded, so the honest project is one bounded region
+and period, not the world.
+
+### Next concrete steps, in order
+
+1. Re-read `IDEAS.md` sections 5 and 0 — the sleep-on-it re-read. What must survive
+   the gap here is the *finding* and the W2 lead, not a shortlist, because nothing
+   was shortlisted.
+2. Search W2 properly under Section 6: `github.com/dfl/tz_history` (seen in results,
+   not yet examined), historical-GIS and genealogy tooling, historical-astronomy
+   software, the tz mailing list's own sourcing threads, and any cited historical
+   time dataset. Then settle Gate B: pick a candidate region and period and confirm
+   its primary sources can actually be obtained and read in this environment,
+   **before** committing, not at milestone four.
+3. If W2 survives, write its hook sentence, definition of done, and milestone
+   ladder into `TASKS.json` with a vertical slice as milestone 1 — one town, one
+   decade, one cited transition, drawn. If it does not survive, record the rejection
+   and generate wave three inside the three bands.
+4. Do not re-search the five recorded leads (C9, C10, C12, C13, C20) from scratch —
+   `IDEAS.md` names the specific prior art to check for each.
+
 ## What the next run should know
 
-1. **No project is in progress.** `current_project` is null. Selection is the job.
+1. **No project is in progress.** `current_project` is null. Selection is the job,
+   and it is already underway — start from the run log above, not from a blank page.
 2. **Selection is not time-boxed.** A run whose entire output is a documented search
    and one excellent decision is a successful run. Record it here and in `IDEAS.md`
    and stop. Do not implement something to make the run look productive.

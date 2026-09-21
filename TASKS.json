@@ -11,7 +11,7 @@
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "notes": "No project in progress. A project was SELECTED on 2026-09-21 and is recorded in pending_selection below and in IDEAS.md section 4. It is deliberately not started: the generation rules require the shortlist to survive a cold re-read at the start of the next run before implementation. Next run: re-read IDEAS.md section 4 first, confirm or reject, then write NOVELTY_REPORT.md and fill in current_project, definition_of_done and milestones before writing code. Read IDEAS.md (now 32 further candidates) before generating anything new.",
   "completed_projects": [
     {
       "name": "backfire",
@@ -91,6 +91,45 @@
       "claude/eloquent-newton-p3qht6",
       "claude/optimistic-pasteur-metblz",
       "claude/clever-cannon-pmg737"
+    ]
+  },
+  "pending_selection": {
+    "proposed_name": "comping",
+    "selected": "2026-09-21",
+    "status": "awaiting sleep-on-it confirmation at the start of the next run; no code written",
+    "hook_sentence": "Two people edited the same song. This works out what each of them changed, combines both, and plays you the one bar where they actually disagree.",
+    "what_it_is": "A three-way merge for symbolic music, and underneath it a merge algebra for timelines: given a common ancestor and two edited versions, derive each side's edits in musical terms, produce a merged result, and flag only genuine collisions. Text and XML merges fail here because they reconcile tags rather than time.",
+    "behaviour_descriptor": "see and hear it | two edited files plus their ancestor | interactive visual + audio | music and version control",
+    "closest_prior_art_found": [
+      "musicdiff (github.com/gregchapman-dev/musicdiff) - diff and visualisation of two scores for OMR evaluation; inspected directly, no merge by design",
+      "'A diff procedure for music score files', DLfM 2019 - research diff",
+      "Mongeau-Sankoff melodic edit distance and polyphonic alignment work - similarity measure, not an edit script or merge",
+      "GitDaw - converts Ableton .als to JSON for git text merge; no model of musical time",
+      "CRDT collaborative score editors - real-time convergence, not ancestor-based asynchronous merge"
+    ],
+    "proposed_milestones": [
+      "M1 vertical slice: dependency-free MIDI reader, timed-event model, merge of note add/delete/velocity with unchanged timing, one HTML page with piano rolls and playback",
+      "M2 time interaction: edits that insert or remove musical time and move later material; overlapping-region conflicts, rendered and auditionable A/B",
+      "M3 alignment without a trustworthy ancestor: recognise moved or transposed sections as moved; flagged as the rung most likely to fail",
+      "M4 real files: multiple tracks, tempo maps, controller curves, round-trip preservation of bytes not understood",
+      "M5 second binding: same core against subtitles or an edit decision list, as evidence the primitive generalises; git merge driver as a thin adapter",
+      "M6 evidence pack: property tests, exhaustive small-case verification, fuzzing against an oracle, and controls (disjoint edits never conflict, identical edits never conflict, re-runs byte-identical)"
+    ],
+    "open_questions": [
+      "confirm the name is free in this space",
+      "exact scope of M1",
+      "write the MIDI parser here rather than take a dependency (likely yes)"
+    ],
+    "red_team_objection_not_fully_answered": "whether musically-aware alignment without a reliable ancestor (M3) reaches a quality worth claiming; if not, the project stands on M1, M2, M4 with the limitation stated"
+  },
+  "last_run": {
+    "date": "2026-09-21",
+    "outcome": "E - selection only",
+    "candidates_generated": 32,
+    "implementation": "none, intentionally",
+    "recorded_in": [
+      "IDEAS.md sections 0-5",
+      "PROGRESS.md"
     ]
   }
 }

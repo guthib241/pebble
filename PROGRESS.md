@@ -8,9 +8,10 @@ Last updated: 2026-09-22
 
 ## Run 2026-09-22 — what happened
 
-Intake, then Section 4 selection from a pool of 24 candidates. Four were searched
-properly, three of those were rejected on prior art with links, and one was
-provisionally selected and red-teamed. Everything is recorded in `IDEAS.md`: the
+Intake, then Section 4 selection from a pool of 24 candidates. Five were searched:
+three were rejected on prior art with links, one was filed as not hyped, and one was
+provisionally selected, red-teamed, and then corrected after its closest prior art was
+read in full. Everything is recorded in `IDEAS.md`: the
 full pool with probabilities and behaviour descriptors is section 5, and every
 candidate with a settled outcome also has a full entry in sections 1 to 4.
 

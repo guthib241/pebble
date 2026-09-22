@@ -11,7 +11,32 @@
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "pending_selection": {
+    "status": "provisional - not confirmed, no implementation exists",
+    "date": "2026-09-22",
+    "working_name": null,
+    "name_shortlist": [
+      "quire",
+      "galley",
+      "forme",
+      "signature"
+    ],
+    "hook_sentence_provisional": "Lays out a book so no figure drifts away from the sentence that mentions it, and proves no other arrangement scores better under the rules you set.",
+    "summary": "A standalone engine that decides all page breaks and float placements globally, minimising a stated editable cost (figure-to-mention distance, widows, orphans, page fill, spread balance), where shipping systems decide greedily page by page. The engine is the project; a book renderer and an interactive page grid with draggable, pinnable figures are its demos.",
+    "closest_prior_art": "Mittelbach, 'A general framework for globally optimized pagination' (Computational Intelligence 2019; DocEng 2016 best paper) - the method this would implement, stated by its author to remain an unreleased prototype. Also Bruggemann-Klein, Klein & Wohlfeil, 'On the Pagination of Complex Documents'; Plass 1981 for NP-hardness; lua-widow-control for widows and orphans only.",
+    "blocking_before_implementation": [
+      "Re-read IDEAS.md section 4 after the gap (sleep-on-it gate) and confirm or discard.",
+      "Close the open searches: PyPI, npm, crates.io, CTAN, GitHub code search.",
+      "Inspect the Mittelbach 2019 and Bruggemann-Klein papers directly for the exact cost model and coverage.",
+      "Check whether Mittelbach's prototype has been released since 2019 (TUGboat, CTAN, LaTeX3 news).",
+      "Read what Patoline, SILE, Typst and Vivliostyle do at page-break time, from source or docs.",
+      "Write NOVELTY_REPORT.md; confidence capped at Medium because the method is published.",
+      "Fix the name, then write definition_of_done and the milestone ladder into this file."
+    ],
+    "proposed_milestone_1": "Vertical slice: one real document, end to end - global page breaking with float placement under a crude cost model, rendered as a page-thumbnail grid beside the greedy baseline from the same engine, with exactness checked against exhaustive enumeration on small instances. Proposed only; not a commitment until the ladder is written.",
+    "gate_b_environment_check": "Verified 2026-09-22: pip installs work (fontTools 4.65.0, pyphen); real fonts under /usr/share/fonts; Chromium and ffmpeg under /opt/pw-browsers for rendering and animation; no TeX installed, so the control is a greedy page breaker inside the same engine rather than a LaTeX comparison."
+  },
+  "notes": "No project selected yet. A candidate was provisionally selected on 2026-09-22 and is recorded in pending_selection below and in IDEAS.md section 4; it is NOT confirmed. The sleep-on-it rule requires the next run to re-read that entry before any code, and to return it to the pool if it reads flat. current_project stays null until the open searches close, NOVELTY_REPORT.md is written, and definition_of_done plus milestones are filled in here. Read IDEAS.md before generating any new candidate: the pool from 2026-09-22 is in section 5 and several candidates there are still open and unsearched.",
   "completed_projects": [
     {
       "name": "backfire",

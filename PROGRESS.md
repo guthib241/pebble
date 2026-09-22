@@ -69,8 +69,36 @@ been.
   incremental modes already in webcola/ELK → hook too weak, filed under not hyped.
 * optimal pagination, float placement, NP-hardness, and whether an implementation
   exists → Mittelbach 2019, Brüggemann-Klein et al., Plass 1981; no standalone
-  open-source global pagination engine surfaced; prototype never released.
+  open-source global pagination engine surfaced.
 * Typst and Quarto issue trackers for figure-placement demand → four open threads.
+* registries: npm (found `paged-with-floats`, a CSS Page Floats polyfill that places a
+  float on its anchor's page and defers to the next when it does not fit — greedy, and
+  a good comparison target), crates.io (`rustyfi-*`, a Rust port of SATySFi), CTAN
+  (local float helpers only). PyPI was only name-probed, so it stays open.
+* whether Mittelbach's prototype was ever released → no evidence of a release; the
+  LaTeX project's published output since 2020 is tagged PDF and accessibility work.
+
+## Primary sources read directly this run
+
+Both are open copies on the author's own site, and reading them changed the entry:
+
+* `latex-project.org/publications/2019-FMi-coin12165-final.pdf` (43 pages) — the
+  globally optimised pagination framework. **Its base algorithm does not handle
+  floats**, which a search summary had wrongly suggested it did; the entry in `IDEAS.md`
+  is corrected. Its abstract states the gap plainly: all systems to date use greedy
+  pagination, and no prototype "ever made it into a generally usable and publicly
+  available system."
+* `latex-project.org/publications/2017-09-FMi-doceng2017-effective-floating-strategies-slides.pdf`
+  — DocEng 2017, the float half, and the closer prior art of the two. It already models
+  call-out/float constraints (a float must follow its call-out; same column, page or
+  spread or later; confined to a subsection; visible from the call-out), absolute versus
+  preference rules, and the O(n^c) candidate-placement blow-up.
+
+Consequence: tying a figure to its mention is **not** a new idea and must never be
+claimed as one. Originality for the candidate was lowered from 4 to 3 the same day, and
+the open question for the next run is written at the end of the `IDEAS.md` entry: whether
+the first public implementation, plus an exactness check and an interactive explainer, is
+enough for Gate E. If the answer is no, the candidate returns to the pool.
 
 ## Environment facts verified this run (Gate B)
 

@@ -367,10 +367,36 @@ open implementation of that method is the piece all of those are missing.
 
 **Prior art found so far (2026-09-22, search incomplete — see below):**
 * [Mittelbach, *A general framework for globally optimized pagination*](https://onlinelibrary.wiley.com/doi/10.1111/coin.12165)
-  (Computational Intelligence 2019; the DocEng 2016 version won best paper) — the
-  closest prior art by a wide margin, and the method this would implement. It handles
-  float placement inside the optimisation with a flexible constraint model. Mittelbach
-  states the work remains **at prototype stage**, unreleased, pending time and funding.
+  (Computational Intelligence 2019; the DocEng 2016 version won the ACM best paper
+  award) — the closest prior art by a wide margin, and the method this would
+  implement. **Read directly** on 2026-09-22, from the author's open copy at
+  `latex-project.org/publications/2019-FMi-coin12165-final.pdf` (43 pages).
+  Correcting what a search summary had suggested: **the algorithm in this paper does
+  not handle floats.** Its own words: "The base algorithm outlined in this paper does
+  not handle additional auxiliary input streams such as floats (which of course raises
+  the complexity further)." It is a Knuth/Plass-style global-fit page breaker, O(n) for
+  fixed spread structure and O(n²) otherwise, whose contribution includes two sources of
+  added flexibility — spread height variations and paragraph variants at different line
+  counts. It also states the gap this candidate would fill, in the abstract: "for
+  macro-typography there has been no (successful) attempt to provide a globally
+  optimized page layout: All systems to date (including TeX) use greedy algorithms for
+  pagination... none of them have been made widely available to the research community
+  or ever made it into a generally usable and publicly available system." That was
+  written for the 2018 acceptance; no release has been found since.
+* [Mittelbach, *Effective Float Strategies*](https://www.latex-project.org/publications/2017-09-FMi-doceng2017-effective-floating-strategies-slides.pdf)
+  (DocEng 2017; slides read directly on 2026-09-22) — **the closest prior art on the
+  float half, and closer than the 2019 paper.** It extends the same dynamic program
+  with float placement: candidate placements added as active nodes per spread, absolute
+  rules versus preference rules, and explicit call-out/float constraints including "a
+  float must appear after its call-out", same column, page or spread or later, confined
+  to its subsection, or "must be visible from the call-out". It reports the search-space
+  problem honestly — the number of candidate placements is O(n^c) with c roughly the
+  number of floats per spread, "so this will get unmanageable fast". Any claim that
+  tying a figure to its mention is a new idea is therefore false, and must not be made.
+* The 2019 conclusion doubles as a future-work list, and is worth mining on its own
+  terms: float handling belongs in comparable extensions rather than the base algorithm;
+  better ways to limit the search space are wanted; and column balancing is unsupported
+  because the algorithm assumes fixed column heights filled sequentially.
 * [Brüggemann-Klein, Klein & Wohlfeil, *On the Pagination of Complex Documents*](https://link.springer.com/chapter/10.1007/3-540-36477-3_5)
   — dynamic-programming pagination, globally optimal page-break sequences avoiding
   widows and orphans.
@@ -379,9 +405,19 @@ open implementation of that method is the piece all of those are missing.
 * [lua-widow-control](https://tug.org/TUGboat/tb43-1/tb133chernoff-widows.html) and
   Mittelbach's `widows-and-orphans` package — shipping, but widows and orphans only,
   no float optimisation.
-* Shipping systems: TeX/LaTeX (greedy page builder plus a local float algorithm),
-  Typst, SILE, Patoline, InDesign, Prince, Vivliostyle, Speedata. None found so far
-  performs global optimisation over float placement.
+* Shipping systems: TeX/LaTeX (greedy page builder plus a local float algorithm, with
+  `fewerfloatpages` and Mittelbach's 2000 TUGboat float algorithm as heuristic
+  improvements), Typst, SILE, Patoline, InDesign, Prince, Vivliostyle, Speedata. None
+  found so far performs global optimisation over float placement.
+* Registry sweep, 2026-09-22. npm: **[paged-with-floats](https://github.com/fiduswriter/paged-with-floats)**
+  (0.10.0) is the closest shipping code found — a Paged Media and CSS Page Floats
+  polyfill that places a float at the top or bottom of the page holding its anchor and
+  "defers to the next page" when it does not fit. That is the greedy, local behaviour,
+  in the browser; it is a candidate renderer and comparison target rather than a
+  competitor on mechanism. crates.io: the `rustyfi-*` family is a Rust port of SATySFi
+  with "line and page breaking", not global float optimisation. CTAN: searches for
+  pagination, float and optimal return local float-placement helpers only. PyPI: only
+  name probes were done, so PyPI remains a genuine gap in the search.
 * Demand, unmet and public: Typst issues
   [#5558](https://github.com/typst/typst/issues/5558) ("with many figures, figures get
   pushed quite far from where they are first mentioned"),
@@ -390,9 +426,26 @@ open implementation of that method is the piece all of those are missing.
   discussion [#8801](https://github.com/orgs/quarto-dev/discussions/8801).
 
 **Scores** (hook, reach, demo-ability, originality, difficulty-worth-it,
-monetizability): **4, 5, 5, 4, 5, 4**. Originality is 4 rather than 5 because the
-optimisation method is published; what is unbuilt is the public implementation, the
-verification layer and the interaction.
+monetizability): **4, 5, 5, 3, 4, 4**. Originality was first written as 4 and lowered
+to 3 the same day, after reading the two papers directly: both halves of the method,
+page breaking and float placement with call-out constraints, are published. What is
+unbuilt is the public implementation, the exactness verification, and the interaction.
+Difficulty-worth-it went 5 to 4 for the same reason — the algorithm design is largely
+given; the hard parts left are the search-space blow-up the author flags and making it
+work outside TeX.
+
+**The question the next run has to answer, sharpened by that reading:** is "the first
+public implementation of a published method, plus an exactness check and an interactive
+explainer" enough for Gate E? My current answer is yes, on the condition that the
+project leads with the parts that are genuinely absent — a document model and engine
+not welded to TeX, optimality verified against exhaustive enumeration, per-break
+explanations, and interactive re-pagination under pinning — and treats the port itself
+as groundwork rather than as the contribution. `AGENT_RULES.md` explicitly counts a
+published method with no reference implementation as legitimate work, and the
+`REFERENCES.md` standard (ffmpeg, SQLite, jq) rewards exactly this kind of
+unglamorous, foundational code. If the next run disagrees on that reading, the
+candidate goes back to the pool and the search continues, and that is a correct
+outcome rather than a wasted decision.
 
 **Pairwise — "which would I be more upset to see someone else ship first?"**
 * vs retroactive data structures (#1): pagination. Someone shipping a retroactive
@@ -425,13 +478,22 @@ verification layer and the interaction.
    against a greedy baseline must hold line-breaking, fonts and content fixed and vary
    only the page-break strategy.
 
-**Must close before implementation begins (novelty report is not complete):**
-* registry searches: PyPI, npm, crates.io, CTAN, plus GitHub code search;
-* direct inspection of the Mittelbach 2019 and Brüggemann-Klein papers for the exact
-  cost model and what each does and does not cover;
-* whether Mittelbach's prototype has been released since 2019 (TUGboat, CTAN, LaTeX3 news);
-* what Patoline, SILE, Typst and Vivliostyle actually do at page-break time, read from
-  their source or docs rather than assumed;
+**Closed on 2026-09-22, after the entry was first written:**
+* registries: npm, crates.io and CTAN swept (findings above); Mittelbach 2019 and the
+  DocEng 2017 float slides read directly from the author's open copies; release status
+  checked — no evidence of a release, and the LaTeX project's published effort since
+  2020 has gone to tagged PDF and accessibility instead.
+
+**Still open before implementation begins (the novelty report is not complete):**
+* PyPI searched properly, and GitHub code search beyond the line-breaking results
+  (`bramstein/typeset` and relatives are line breaking, not pagination);
+* the DocEng 2017 float paper itself, not only its slides, and Brüggemann-Klein et al.;
+* what Patoline, SILE, Typst and Vivliostyle do at page-break time, read from source or
+  docs rather than assumed;
+* the other pagination literature the 2019 paper cites, which was not chased this run:
+  Ciancarini et al. (high-quality pagination for publishing, 2012), Piccoli et al.
+  (optimal pagination for customized magazines, 2012), Hassan & Hunter (Knuth-Plass
+  revisited, 2015), Hailpern et al. (2014), Holkner (2006);
 * name selection (`quire`, `galley`, `forme`, `signature` are the current shortlist);
 * definition of done and the milestone ladder, written into `TASKS.json` before any code.
 

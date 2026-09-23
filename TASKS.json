@@ -11,7 +11,38 @@
     "readme_written": false,
     "control_check_passed": false
   },
-  "notes": "No project selected. The checklist above is the template for the next one; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Selection is not time-boxed: a run that only searches and decides is a successful run. Read IDEAS.md before generating candidates.",
+  "notes": "No project selected. Run of 2026-09-23 was a selection run (Outcome E): 30 candidates generated and recorded in IDEAS.md, 8 searches run, 4 candidates killed on prior art with links, 1 provisional winner shortlisted in IDEAS.md section 5. Nothing is selected and nothing may be built from that shortlist until it survives a cold re-read at the start of the next run, per the sleep-on-it rule. The checklist above is the template for the next project; for a multi-run project, fill in definition_of_done and milestones before implementation starts, per Gate D. Read IDEAS.md before generating any new candidate.",
+  "selection_in_progress": {
+    "status": "shortlisted, not selected",
+    "run_date": "2026-09-23",
+    "outcome": "E - selection only, per Section 29",
+    "candidates_recorded_this_run": 30,
+    "idea_entries_total_in_ideas_md": 37,
+    "provisional_winner": "drag the answer",
+    "provisional_hook_sentence": "Grab the answer and drag it, and the numbers that produced it rearrange themselves to agree.",
+    "where": "IDEAS.md section 5",
+    "killed_on_prior_art_this_run": [
+      "fold-and-cut one-cut solver",
+      "linkage that traces a curve you drew",
+      "minimal-conflict explainer for over-constrained CAD sketches",
+      "gears generated from two drawn curves"
+    ],
+    "blocking_question": "Does any shipped tool already offer continuous dragging of any variable in a general nonlinear model with least-change semantics? Acausal modelling tools are the sharpest risk. One search was run and found the academic lineage and Goal Seek but no such tool; that is not enough.",
+    "next_run_must": [
+      "Re-read IDEAS.md section 5 cold before anything else and say plainly whether it still holds.",
+      "If it holds, finish the prior-art search named in that entry.",
+      "Only then write NOVELTY_REPORT.md, definition_of_done and a milestone ladder.",
+      "Milestone 1 must be a vertical slice: the exposure-triangle demo, draggable, in a browser.",
+      "If it dies, move it to IDEAS.md section 2 with links and return to generation."
+    ]
+  },
+  "environment_capabilities": {
+    "checked": "2026-09-23",
+    "present": "Python 3.11.15; Node 22.22.2 / npm 10.9.7; gcc, g++, make; cargo; go; Playwright browser bundle at /opt/pw-browsers with Chromium, headless shell and ffmpeg",
+    "absent": "numpy, scipy, Pillow (installable); no GPU detected",
+    "resources": "4 CPUs, 15 GB RAM, ~30 GB free disk",
+    "consequence": "Interactive and visual projects are demo-able here: a browser page can be driven and screenshotted, and ffmpeg can turn frames into an animation. The ten-second-demo requirement does not force text output."
+  },
   "completed_projects": [
     {
       "name": "backfire",
